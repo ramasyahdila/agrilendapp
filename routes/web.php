@@ -54,6 +54,7 @@ Route::get('/pilihaktor', function () {
 
 // Register Poktan
 Route::get('/registerpoktan', [PoktanController::class, 'register'])->name('registerpoktan');
+Route::post('/registerpoktan', [PoktanController::class, 'store'])->name('poktan.store');
 
 // Register Pemerintah
 Route::get('/registerpemerintah', [PemerintahController::class, 'register'])->name('registerpemerintah');

@@ -23,64 +23,106 @@
         </div>
     </header>
     <div class="flex h-auto z-0 pt-16">
-        <div class="w-1/3 h-full bg-cover bg-center" style="background-image: url(img/LoginPage.jpg)"></div>
+        <div class="w-1/3 h-full bg-cover bg-center" style="background-image: url('{{ asset('img/LoginPage.jpg') }}')"></div>
         <div class="w-2/3 flex h-full items-center justify-center bg-green-400">
             <!-- Gambar kanan bawah -->
             <div class="absolute -bottom-96 right-0 z-0">
-                <img src="img/Daun.png" alt="Gambar Kanan Bawah" class="w-80h-80">
+                <img src="{{ asset('img/Daun.png') }}" alt="Gambar Kanan Bawah" class="w-80 h-80">
             </div>
             <div class="w-2/3 bg-transparent p-8 m-auto rounded-lg z-10">
                 <h2 class="text-4xl font-bold mb-4 text-center text-white mb-8">Silahkan isi form registrasi berikut</h2>
                 <hr class="border-2 border-white mb-8"></hr>
-                <form action="" method="post" class="flex flex-col items-center">
-                    <a href="#" class="bg-transparent border-dashed border-4 border-white rounded-md w-80 h-40 mb-8 flex flex-col items-center justify-center">
-                        <i class="fas fa-image text-4xl mb-2 text-white"></i>
-                        <span class="text-white">Upload Foto Anda</span>
-                    </a>
+
+                 <!-- Menampilkan pesan sukses -->
+                 @if(session('success'))
+                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                     <strong class="font-bold">Sukses!</strong>
+                     <span class="block sm:inline">{{ session('success') }}</span>
+                     <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                         <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                             <title>Close</title>
+                             <path d="M14.348 5.652a1 1 0 011.414 1.414L11.414 11l4.348 4.348a1 1 0 01-1.414 1.414L10 12.414l-4.348 4.348a1 1 0 01-1.414-1.414L8.586 11 4.24 6.652a1 1 0 111.414-1.414L10 9.586l4.348-4.348z"/>
+                         </svg>
+                     </span>
+                 </div>
+             @endif
+
+             <!-- Menampilkan pesan error -->
+             @if ($errors->any())
+                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                     <strong class="font-bold">Terjadi kesalahan!</strong>
+                     <span class="block sm:inline">Silakan periksa inputan anda.</span>
+                     <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                         <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                             <title>Close</title>
+                             <path d="M14.348 5.652a1 1 0 011.414 1.414L11.414 11l4.348 4.348a1 1 0 01-1.414 1.414L10 12.414l-4.348 4.348a1 1 0 01-1.414-1.414L8.586 11 4.24 6.652a1 1 0 111.414-1.414L10 9.586l4.348-4.348z"/>
+                         </svg>
+                     </span>
+                     <ul class="mt-3 list-disc list-inside text-sm text-red-600">
+                         @foreach ($errors->all() as $error)
+                             <li>{{ $error }}</li>
+                         @endforeach
+                     </ul>
+                 </div>
+             @endif
+
+                <form action="{{ route('poktan.store') }}" method="post" enctype="multipart/form-data" class="flex flex-col items-center">
+                    @csrf
                     <div class="mb-4 w-full">
-                        <label for="password" class="block text-white font-bold mb-2">Username Poktan</label>
-                        <input type="text" id="nama_poktan" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis Nama Poktan Anda">
+                        <label for="foto" class="block text-white font-bold mb-2">Upload Foto Anda</label>
+                        <input type="file" id="foto" name="foto" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4 w-full">
-                        <label for="password" class="block text-white font-bold mb-2">Nama Poktan</label>
-                        <input type="text" id="nama_poktan" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis Nama Poktan Anda">
+                        <label for="username_poktan" class="block text-white font-bold mb-2">Username Poktan</label>
+                        <input type="text" id="username_poktan" name="username_poktan" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan username poktan">
+                    </div>
+                    <div class="mb-4 w-full">
+                        <label for="nama_poktan" class="block text-white font-bold mb-2">Nama Poktan</label>
+                        <input type="text" id="nama_poktan" name="nama_poktan" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan nama poktan">
                     </div>
                     <div class="mb-4 w-full">
                         <label for="alamat_poktan" class="block text-white font-bold mb-2">Alamat Poktan</label>
-                        <input type="text" id="alamat_poktan" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis alammat anda">
+                        <input type="text" id="alamat_poktan" name="alamat_poktan" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan alamat poktan">
                     </div>
                     <div class="mb-4 w-full">
-                        <label for="password" class="block text-white font-bold mb-2">No. Telepon</label>
-                        <input type="int" id="no_telp" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis nomor telepon anda">
+                        <label for="no_telp" class="block text-white font-bold mb-2">No. Telepon</label>
+                        <input type="text" id="no_telp" name="no_telp" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan nomor telepon">
                     </div>
                     <div class="mb-4 w-full">
-                        <label for="password" class="block text-white font-bold mb-2">Nama Desa</label>
-                        <select id="id_kota" name="id_kota" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <option value="">Pilih Kota</option>
+                        <label for="id_desa" class="block text-white font-bold mb-2">Nama Desa</label>
+                        <select id="id_desa" name="id_desa" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="">Pilih Desa</option>
                             @foreach($data_desa as $desa)
-                                <option value="{{ $desa->id_desa }}">{{ $desa->desa }}</option> <!-- Ubah sesuai dengan struktur kolom tabel -->
+                                <option value="{{ $desa->id_desa }}">{{ $desa->desa }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-4 w-full">
-                        <label for="password" class="block text-white font-bold mb-2">Nama Pemerintah</label>
-                        <input type="int" id="no_telp" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis nomor telepon anda">
+                        <label for="id_pemerintah" class="block text-white font-bold mb-2">Nama Pemerintah</label>
+                        <select id="id_pemerintah" name="id_pemerintah" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="">Pilih Pemerintah</option>
+                            @foreach($data_pemerintah as $pemerintah)
+                                <option value="{{ $pemerintah->id_pemerintah }}">{{ $pemerintah->username_pemerintah }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-4 w-full">
                         <label for="password" class="block text-white font-bold mb-2">Password</label>
-                        <input type="password" id="password" class="shadow-lg appearance-none border mb-8 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan password">
+                        <input type="password" id="password" name="password" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan password">
                     </div>
-
+                    <div class="mb-4 w-full">
+                        <label for="password_confirmation" class="block text-white font-bold mb-2">Konfirmasi Password</label>
+                        <input type="password" id="password_confirmation" name="password_confirmation" class="shadow-lg appearance-none border mb-8 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Konfirmasi password">
+                    </div>
                     <div class="flex">
                         <div class="flex space-x-4 justify-between ">
                             <a class="w-72 bg-red-600 hover:bg-blue-green text-center text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-lg"
                             type="button" href="{{ route('landingpage') }}">
                                 Batal
                             </a>
-                            <a class="w-72 bg-green-600 hover:bg-blue-green text-center text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-lg"
-                            type="button" href="{{ route('poktan.sidebarpoktan') }}">
-                                Masuk
-                            </a>
+                            <button class="w-72 bg-green-600 hover:bg-blue-green text-center text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-lg" type="submit">
+                                Daftar
+                            </button>
                         </div>
                     </div>
                 </form>
