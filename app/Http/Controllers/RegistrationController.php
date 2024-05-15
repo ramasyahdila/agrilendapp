@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataAkunPetani; // Jika Anda menggunakan model di dalam controller

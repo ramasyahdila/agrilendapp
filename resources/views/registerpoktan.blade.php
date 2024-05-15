@@ -19,7 +19,7 @@
 <body class="flex flex-col h-screen">
     <header class="fixed h-16 w-full bg-white shadow-lg z-10">
         <div class="mx-4 h-full flex justify-between p-2">
-            <img src="{{ asset('img/AgrilendLogo.png') }}" alt="Logo" class="w-auto h-auto">     
+            <img src="{{ asset('img/AgrilendLogo.png') }}" alt="Logo" class="w-auto h-auto">
         </div>
     </header>
     <div class="flex h-auto z-0 pt-16">
@@ -42,7 +42,7 @@
                         <input type="text" id="nama_poktan" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis Nama Poktan Anda">
                     </div>
                     <div class="mb-4 w-full">
-                        <label for="password" class="block text-white font-bold mb-2">Username Poktan</label>
+                        <label for="password" class="block text-white font-bold mb-2">Nama Poktan</label>
                         <input type="text" id="nama_poktan" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis Nama Poktan Anda">
                     </div>
                     <div class="mb-4 w-full">
@@ -55,11 +55,12 @@
                     </div>
                     <div class="mb-4 w-full">
                         <label for="password" class="block text-white font-bold mb-2">Nama Desa</label>
-                        <input type="int" id="no_telp" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis nomor telepon anda">
-                    </div>
-                    <div class="mb-4 w-full">
-                        <label for="password" class="block text-white font-bold mb-2">Nama Pemerintah</label>
-                        <input type="int" id="no_telp" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tulis nomor telepon anda">
+                        <select id="id_kota" name="id_kota" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="">Pilih Kota</option>
+                            @foreach($data_desa as $desa)
+                                <option value="{{ $desa->id_desa }}">{{ $desa->desa }}</option> <!-- Ubah sesuai dengan struktur kolom tabel -->
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-4 w-full">
                         <label for="password" class="block text-white font-bold mb-2">Nama Pemerintah</label>
@@ -76,7 +77,7 @@
                             type="button" href="{{ route('landingpage') }}">
                                 Batal
                             </a>
-                            <a class="w-72 bg-green-600 hover:bg-blue-green text-center text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-lg" 
+                            <a class="w-72 bg-green-600 hover:bg-blue-green text-center text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline shadow-lg"
                             type="button" href="{{ route('poktan.sidebarpoktan') }}">
                                 Masuk
                             </a>
