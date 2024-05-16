@@ -25,31 +25,60 @@ Route::get('/landingpage', function () {
 })->name('landingpage');
 
 // Halaman Login
-Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+Route::group(['middleware' => ['auth:petani']], function () {
+    Route::get('/dashboard/petani', function() {
+        return view('layout.sidebarpetani'); // Ganti dengan view dashboard petani
+    })->name('dashboard.petani');
+    // Peminjaman
+    Route::get('/dashboard/Peminjaman', function () {
+        return view('layout/Peminjaman');
+    })->name('layout.Peminjaman');
+
+    // Form Tambah
+    Route::get('/dashboard/FormTambah', function () {
+        return view('layout/FormTambah');
+    })->name('layout.FormTambah');
+
+    // Profil Petani
+    Route::get('/dashboard/profilpetani', function () {
+        return view('layout/profilpetani');
+    })->name('layout.profilpetani');
+
+    // Edit Profil Petani
+    Route::get('/dashboard/editprofilpetani', function () {
+        return view('layout/editprofilpetani');
+    })->name('layout.editprofilpetani');
+});
+
+Route::group(['middleware' => ['auth:poktan']], function () {
+    Route::get('/dashboard/poktan', function() {
+        return view('poktan.sidebarpoktan'); // Ganti dengan view dashboard poktan
+    })->name('dashboard.poktan');
+});
+
+Route::group(['middleware' => ['auth:pemerintah']], function () {
+    Route::get('/dashboard/pemerintah', function() {
+        return view('layout.sidebarpetani'); // Ganti dengan view dashboard pemerintah
+    })->name('dashboard.pemerintah');
+});
+
 
 // Route::get('/login', function () {
 //     return view('login');
 // })->name('login');
 
-// Halaman Register
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
 
 // Sidebar Petani
-Route::get('layout/sidebarpetani', function () {
-    return view('layout/sidebarpetani');
-})->name('layout.sidebarpetani');
+// Route::get('layout/sidebarpetani', function () {
+//     return view('layout/sidebarpetani');
+// })->name('layout.sidebarpetani');
 
-// Peminjaman
-Route::get('layout/Peminjaman', function () {
-    return view('layout/Peminjaman');
-})->name('layout.Peminjaman');
 
-// Form Tambah
-Route::get('layout/FormTambah', function () {
-    return view('layout/FormTambah');
-})->name('layout.FormTambah');
 
 // Pilih Aktor
 Route::get('/pilihaktor', function () {
@@ -64,15 +93,11 @@ Route::post('/registerpoktan', [PoktanController::class, 'store'])->name('poktan
 Route::get('/registerpemerintah', [PemerintahController::class, 'register'])->name('registerpemerintah');
 Route::post('/registerpemerintah', [PemerintahController::class, 'store'])->name('register.store');
 
-// Profil Petani
-Route::get('layout/profilpetani', function () {
-    return view('layout/profilpetani');
-})->name('layout.profilpetani');
+// Register routes using RegistrationController
+Route::get('/register', [PetaniController::class, 'register'])->name('register');
+Route::post('/register', [PetaniController::class, 'store'])->name('petani.store');
 
-// Edit Profil Petani
-Route::get('layout/editprofilpetani', function () {
-    return view('layout/editprofilpetani');
-})->name('layout.editprofilpetani');
+
 
 // Sidebar Poktan
 Route::get('poktan/sidebarpoktan', function () {
@@ -94,8 +119,6 @@ Route::get('poktan/editprofilpoktan', function () {
     return view('poktan/editprofilpoktan');
 })->name('poktan.editprofilpoktan');
 
-// Register routes using RegistrationController
-Route::get('/register', [PetaniController::class, 'register'])->name('register');
-Route::post('/register', [PetaniController::class, 'store'])->name('petani.store');
+
 
 // Route::post('/register', [RegistrationController::class, 'register'])->name('register.submit');

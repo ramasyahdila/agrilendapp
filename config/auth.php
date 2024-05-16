@@ -40,6 +40,21 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'petani' => [
+            'driver' => 'session',
+            'provider' => 'petanis',
+        ],
+
+        'poktan' => [
+            'driver' => 'session',
+            'provider' => 'poktans',
+        ],
+
+        'pemerintah' => [
+            'driver' => 'session',
+            'provider' => 'pemerintahs',
+        ],
     ],
 
     /*
@@ -65,11 +80,27 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'petanis' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\DataAkunPetani::class,
+        ],
+
+        'poktans' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\DataAkunPoktan::class,
+        ],
+
+        'pemerintahs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\DataAkunPemerintah::class,
+        ],
+    ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-    ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------
