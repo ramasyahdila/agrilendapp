@@ -5,6 +5,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\PemerintahController;
 use App\Http\Controllers\PoktanController;
 use App\Http\Controllers\PetaniController;
+use App\Http\Controllers\LoginController;
 
 
 /*
@@ -24,9 +25,11 @@ Route::get('/landingpage', function () {
 })->name('landingpage');
 
 // Halaman Login
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+
+// Route::get('/login', function () {
+//     return view('login');
+// })->name('login');
 
 // Halaman Register
 Route::get('/register', function () {

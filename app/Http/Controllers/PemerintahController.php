@@ -47,7 +47,7 @@ class PemerintahController extends Controller
     $pemerintah->save();
 
     // Redirect dengan pesan sukses
-    return redirect()->route('registerpemerintah')->with('success', 'Registrasi berhasil!');
+    return redirect()->route('login')->with('success', 'Registrasi Pemerintah berhasil!');
 }
 
 

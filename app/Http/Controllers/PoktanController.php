@@ -49,6 +49,6 @@ class PoktanController extends Controller
         $poktan->foto_profil = $path;
         $poktan->save();
 
-        return redirect()->route('registerpoktan')->with('success', 'Registrasi Poktan berhasil!');
+        return redirect()->route('login')->with('success', 'Registrasi Poktan berhasil!');
     }
 }

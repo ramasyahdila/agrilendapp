@@ -28,16 +28,16 @@ class PetaniController extends Controller
             'nik' => 'required|string|max:16|unique:data_akun_petani,nik',
             'pekerjaan' => 'required|string|max:255',
             'alamat_petani' => 'required|string|max:255',
-            'no_tlp' => 'required|string|max:15',
+            'no_telp' => 'required|string|max:15',
             'id_desa' => 'required|exists:data_desa,id_desa',
             'id_poktan' => 'required|exists:data_akun_poktan,id_poktan',
             'password' => 'required|string|min:6|confirmed',
-            'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Proses penyimpanan file gambar
-        if ($request->hasFile('foto_profil')) {
-            $fotoPath = $request->file('foto_profil')->store('fotos', 'public');
+        if ($request->hasFile('foto')) {
+            $fotoPath = $request->file('foto')->store('fotos', 'public');
         } else {
             return redirect()->back()->withErrors(['foto_profil' => 'File foto harus diunggah.']);
         }
@@ -50,7 +50,7 @@ class PetaniController extends Controller
         $petani->nik = $request->input('nik');
         $petani->pekerjaan = $request->input('pekerjaan');
         $petani->alamat_petani = $request->input('alamat_petani');
-        $petani->no_tlp = $request->input('no_tlp');
+        $petani->no_tlp = $request->input('no_telp');
         $petani->id_desa = $request->input('id_desa');
         $petani->id_poktan = $request->input('id_poktan');
         $petani->password = Hash::make($request->input('password'));
@@ -58,6 +58,6 @@ class PetaniController extends Controller
 
         $petani->save();
 
-        return redirect()->route('register')->with('success', 'Registrasi berhasil!');
+        return redirect()->route('login')->with('success', 'Registrasi Petani berhasil!');
     }
 }
