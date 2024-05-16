@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\PemerintahController;
 use App\Http\Controllers\PoktanController;
+use App\Http\Controllers\PetaniController;
 
 
 /*
@@ -91,5 +92,7 @@ Route::get('poktan/editprofilpoktan', function () {
 })->name('poktan.editprofilpoktan');
 
 // Register routes using RegistrationController
-Route::get('/register', [RegistrationController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegistrationController::class, 'register'])->name('register.submit');
+Route::get('/register', [PetaniController::class, 'register'])->name('register');
+Route::post('/register', [PetaniController::class, 'store'])->name('petani.store');
+
+// Route::post('/register', [RegistrationController::class, 'register'])->name('register.submit');

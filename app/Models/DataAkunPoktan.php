@@ -30,4 +30,9 @@ class DataAkunPoktan extends Model
     {
         return $this->belongsTo(DataDesa::class, 'id_desa', 'id_desa');
     }
+
+    public function DataAkunPemerintah()
+    {
+        return $this->belongsTo(DataAkunPemerintah::class, 'id_pemerintah', 'id_pemerintah');
+    }
 }
