@@ -33,15 +33,9 @@
                 <hr class="border-2 border-white mb-8">
 
                 @if(session('success'))
-                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4 alert-dismiss" role="alert">
                         <strong class="font-bold">Sukses!</strong>
                         <span class="block sm:inline">{{ session('success') }}</span>
-                        <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                            <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <title>Close</title>
-                                <path d="M14.348 5.652a1 1 0 011.414 1.414L11.414 11l4.348 4.348a1 1 0 01-1.414 1.414L10 12.414l-4.348 4.348a1 1 0 01-1.414-1.414L8.586 11 4.24 6.652a1 1 0 111.414-1.414L10 9.586l4.348-4.348z"/>
-                            </svg>
-                        </span>
                     </div>
                 @endif
 
@@ -91,5 +85,10 @@
             </div>
         </div>
     </div>
+    <script>
+         setTimeout(function() {
+            document.querySelector('.alert-dismiss').style.display = 'none';
+        }, 3000);
+    </script>
 </body>
 </html>

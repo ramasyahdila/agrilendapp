@@ -83,55 +83,73 @@
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
         <div class="flex flex-col -full">
-        <div class="flex w-full">
-            <div class="flex flex-col mt-8 mx-24 w-full justify-center items-center">
-                <a href="#" class="flex flex-col w-96 h-48 bg-transparent rounded-lg border-4 border-dashed border-green-400 items-center justify-center">
-                    <i class="fas fa-image text-4xl mb-2 text-green-500"></i>
-                    <span class="text-green-500 text-2xl font-semibold">Upload Foto Anda</span>
-                </a>
+            <div class="flex w-full">
+                <div class="flex flex-col mt-8 mx-24 w-full justify-center items-center">
+                    <img src="{{ asset('storage/' . $akunPetani->foto_profil) }}" class="w-96 h-48 bg-transparent rounded-lg border-4 border-dashed border-green-400 object-cover" alt="Foto Profil">
+                </div>
             </div>
         </div>
         <div class="flex h-full w-auto mt-16 ml-64">
             <div class="flex flex-col mx-24 w-full items-right">
+                @if(session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4 alert-dismiss" role="alert">
+                        <strong class="font-bold">Sukses!</strong>
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>
+                @endif
                 <form class="w-full">
+                  <!-- Nama -->
                     <div class="flex mb-8">
                         <label for="nama_petani" class="block text-gray-900 font-bold w-1/3">Nama</label>
-                        <input type="text" id="nama_petani" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Siapa Gituu">
+                        <input type="text" id="nama_petani" name="nama_petani" value="{{ $akunPetani->nama_petani }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Nama Lengkap">
                     </div>
+                    <!-- Tempat Tanggal Lahir -->
                     <div class="flex mb-8">
                         <label for="ttl_petani" class="block text-gray-900 font-bold w-1/3">Tempat Tanggal Lahir</label>
-                        <input type="text" id="ttl_petani" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Poktan@gmail.com">
+                        <input type="text" id="ttl_petani" name="ttl_petani" value="{{ $akunPetani->ttl_petani }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Tempat, Tanggal Lahir">
                     </div>
+                    <div class="flex mb-8">
+                        <label for="no_tlp" class="block text-gray-900 font-bold w-1/3">No telepon</label>
+                        <input type="text" id="no_tlp" name="no_tlp" value="{{ $akunPetani->no_tlp }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="No tlp">
+                    </div>
+                    <!-- NIK -->
                     <div class="flex mb-8">
                         <label for="nik" class="block text-gray-900 font-bold w-1/3">NIK</label>
-                        <input type="text" id="nik" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Poktan Melati">
+                        <input type="text" id="nik" name="nik" value="{{ $akunPetani->nik }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Nomor Induk Kependudukan">
                     </div>
+                    <!-- Pekerjaan -->
                     <div class="flex mb-8">
                         <label for="pekerjaan" class="block text-gray-900 font-bold w-1/3">Pekerjaan</label>
-                        <input type="text" id="pekerjaan" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Jl. Melati No.05 Lumajang">
+                        <input type="text" id="pekerjaan" name="pekerjaan" value="{{ $akunPetani->pekerjaan }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Pekerjaan">
                     </div>
+                    <!-- Alamat -->
                     <div class="flex mb-8">
                         <label for="alamat_petani" class="block text-gray-900 font-bold w-1/3">Alamat</label>
-                        <input type="text" id="alamat_petani" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="08234578xxx">
+                        <input type="text" id="alamat_petani" name="alamat_petani" value="{{ $akunPetani->alamat_petani }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Alamat Lengkap">
                     </div>
+                    <!-- Nama Desa -->
                     <div class="flex mb-8">
-                        <label for="id_desa" class="block text-gray-900 font-bold w-1/3">ID Desa</label>
-                        <input type="int" id="Id_desa" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Jl. Melati No.05 Lumajang">
+                        <label for="nama_desa" class="block text-gray-900 font-bold w-1/3">Nama Desa</label>
+                        <input type="text" id="nama_desa" name="nama_desa" value="{{ $dataDesa->desa }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Nama Desa">
                     </div>
+                    <!-- Nama Poktan -->
                     <div class="flex mb-8">
-                        <label for="id_poktan" class="block text-gray-900 font-bold w-1/3">ID Poktan</label>
-                        <input type="int" id="Id_poktan" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Jl. Melati No.05 Lumajang">
-                    </div>
-                    <div class="flex mb-8">
-                        <label for="password" class="block text-gray-900 font-bold w-1/3">Password</label>
-                        <input type="password" id="password" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Jl. Melati No.05 Lumajang">
+                        <label for="nama_poktan" class="block text-gray-900 font-bold w-1/3">Nama Poktan</label>
+                        <input type="text" id="nama_poktan" name="nama_poktan" value="{{ $dataPoktan->nama_poktan }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Nama Poktan">
                     </div>
                 </form>
                 <div class="text-right object-right mb-8">
-                    <a type="submit" class="py-3 rounded-xl shadow px-8 bg-green-400 text-white font-bold" style="z-index: 5;" href="{{ route('layout.editprofilpetani') }}">Edit Profile</a>
+                    <a class="py-3 rounded-xl shadow px-8 bg-green-400 text-white font-bold" style="z-index: 5;" href="{{ route('layout.editprofilpetani') }}">Edit Profile</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Mencari elemen dengan kelas 'alert-dismiss' dan menyembunyikannya setelah 3 detik
+        setTimeout(function() {
+            document.querySelector('.alert-dismiss').style.display = 'none';
+        }, 3000);
+    </script>
 </body>
 </html>

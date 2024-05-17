@@ -15,16 +15,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
     <title>@yield('title')</title>
-    
+
 </head>
 <body class="flex h-screen">
     <aside class="fixed top-0 left-0 w-64 h-full" aria-label="Sidenav">
         <div class="overflow-y-auto py-5 h-full bg-green-400 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <img src="{{ asset('img/AgrilendLogo.png') }}" alt="Logo" class="w-auto h-auto">     
+            <img src="{{ asset('img/AgrilendLogo.png') }}" alt="Logo" class="w-auto h-auto">
             <hr class="mt-6 border-2 border-green-50"></hr>
             <ul class="space-y-2 mt-8 sidebar-link">
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.sidebarpetani') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.sidebarpoktan') }}">
                 <i class="fa-solid fa-home ml-3 mr-3"></i>
                 <span>Beranda</span>
                 </a>
@@ -54,10 +54,13 @@
                 </a>
             </li>
             <li>
-                <a class="flex bg-red-400 items-center p-2 text-base font-normal text-white dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group" href="#">
-                <i class="fa-solid fa-arrow-right-from-bracket ml-3 mr-4"></i>
-                <span>Logout</span>
-                </a>
+                <form action="{{ route('logout') }}" method="POST" class="flex items-center">
+                    @csrf
+                    <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
+                        <i class="fa-solid fa-arrow-right-from-bracket ml-3 mr-4"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
             </li>
             <li class="flex h-44"></li>
             <hr></hr>
@@ -69,7 +72,7 @@
                         <h2 class="text-sm text-gray-600 font-semibold">Petani</h1>
                     </div>
                 </a>
-                
+
             </li>
             </ul>
         </div>
@@ -124,7 +127,7 @@
                     <div class="relative w-2/6 p-4 bg-fill bg-center z-0" style="background-image: url('{{ asset('img/Logo1x1.png') }}')">
                         <img src="{{ asset('img/Rectangle 13.png') }}" class="absolute object-top z-10">
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -141,7 +144,7 @@
             });
         });
     </script>
-    
-    
+
+
 </body>
 </html>

@@ -68,10 +68,15 @@
 
                 <form action="{{ route('poktan.store') }}" method="post" enctype="multipart/form-data" class="flex flex-col items-center">
                     @csrf
-                    <div class="mb-4 w-full">
-                        <label for="foto" class="block text-white font-bold mb-2">Upload Foto Anda</label>
-                        <input type="file" id="foto" name="foto" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <div class="bg-transparent border-dashed border-4 border-white rounded-md w-80 h-40 mb-8 flex flex-col items-center justify-center upload-link cursor-pointer">
+                        <!-- Preview gambar yang diunggah -->
+                        <img src="#" alt="Preview" class="image-preview  hidden">
+                        <i class="fas fa-image text-4xl mb-2 text-white"></i>
+                        <span class="text-white">Upload Foto Anda</span>
                     </div>
+
+                    <input type="file" id="foto" name="foto" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden">
+
                     <div class="mb-4 w-full">
                         <label for="username_poktan" class="block text-white font-bold mb-2">Username Poktan</label>
                         <input type="text" id="username_poktan" name="username_poktan" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan username poktan">
@@ -129,5 +134,30 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+             document.querySelector('.upload-link').addEventListener('click', function() {
+                document.querySelector('#foto').click();
+            });
+            // Event listener untuk input file
+            document.querySelector('#foto').addEventListener('change', function() {
+            var input = this;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var imgPath = e.target.result;
+                    // Menampilkan gambar yang diunggah
+                    var imagePreview = document.querySelector('.image-preview');
+                    imagePreview.src = imgPath;
+                    // Mengganti ikon dan teks pada tautan "Upload Foto Anda"
+                    document.querySelector('.upload-link').innerHTML = `
+                        <img src="${imgPath}" class="w-full h-full object-cover">
+                    `;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+        });
+    </script>
 </body>
 </html>
