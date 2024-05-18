@@ -49,29 +49,26 @@ Route::group(['middleware' => ['auth:petani']], function () {
 });
 
 Route::group(['middleware' => ['auth:poktan']], function () {
+
     Route::get('/dashboard/poktan', function() {
         return view('poktan.sidebarpoktan'); // Ganti dengan view dashboard poktan
     })->name('dashboard.poktan');
 
     // Sidebar Poktan
-    Route::get('/dashboard/sidebarpoktan', function () {
+    Route::get('/dashboard/poktan', function () {
         return view('poktan/sidebarpoktan');
     })->name('poktan.sidebarpoktan');
 
     // Peminjaman Poktan
-    Route::get('/dashboard/peminjaman', function () {
-        return view('poktan/peminjaman');
-    })->name('poktan.peminjaman');
+    Route::get('/dashboard/peminjaman', [PoktanController::class, 'peminjaman'])->name('poktan.peminjaman');
 
     // Profil Poktan
-    Route::get('/dashboard/profilpoktan', function () {
-        return view('poktan/profilpoktan');
-    })->name('poktan.profilpoktan');
+    Route::get('/dashboard/profilpoktan', [PoktanController::class, 'profilPoktan'])->name('poktan.profilpoktan');
 
     // Edit Profil Poktan
-    Route::get('/dashboard/editprofilpoktan', function () {
-        return view('poktan/editprofilpoktan');
-    })->name('poktan.editprofilpoktan');
+    Route::get('/dashboard/editprofilpoktan', [PoktanController::class, 'editProfilPoktan'])->name('layout.editprofilpoktan');
+    Route::post('/dashboard/editprofilpoktan', [PoktanController::class, 'updatePoktan'])->name('update.profilpoktan');
+
 });
 
 Route::group(['middleware' => ['auth:pemerintah']], function () {

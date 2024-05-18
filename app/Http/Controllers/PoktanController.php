@@ -35,7 +35,7 @@ class PoktanController extends Controller
 
         $path = null;
         if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('public/foto_poktan');
+            $path = $request->file('foto')->store('foto_poktan','public');
         }
 
         $poktan = new DataAkunPoktan();
@@ -50,5 +50,67 @@ class PoktanController extends Controller
         $poktan->save();
 
         return redirect()->route('login')->with('success', 'Registrasi Poktan berhasil!');
+    }
+    public function peminjaman()
+    {
+        return view('poktan.peminjaman');
+    }
+
+    public function profilPoktan()
+    {
+        $dataPoktan = DataAkunPoktan::findOrFail(auth()->id());
+        $dataPemerintah = DataAkunPemerintah::findOrFail($dataPoktan->id_pemerintah);
+
+        return view('poktan.profilpoktan', [
+            'dataPoktan'=>$dataPoktan,
+            'dataPemerintah'=>$dataPemerintah,
+        ]);
+    }
+
+    public function editProfilPoktan()
+    {
+        $dataPoktan = DataAkunPoktan::findOrFail(auth()->id());
+        $dataPemerintah = DataAkunPemerintah::findOrFail($dataPoktan->id_pemerintah);
+
+
+        return view('poktan.editprofilpoktan', [
+            'dataPoktan'=>$dataPoktan,
+            'dataPemerintah'=>$dataPemerintah,
+        ]);
+    }
+
+    public function updatePoktan(Request $request)
+    {
+    // Validasi input
+    $request->validate([
+        'nama_poktan' => 'required|string|max:255',
+        'alamat_poktan' => 'required|string|max:255',
+        'no_telp' => 'required|string|max:15',
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    // Mendapatkan data akun petani yang sedang login
+    $poktan = DataAkunPoktan::findOrFail(auth()->id());
+
+    // Memperbarui data petani dengan input yang diterima
+    $poktan->nama_poktan = $request->input('nama_poktan');
+    $poktan->alamat_poktan = $request->input('alamat_poktan');
+    $poktan->no_tlp = $request->input('no_telp');
+
+    // Jika foto baru diunggah, maka simpan foto yang baru
+    if ($request->hasFile('foto')) {
+        // Hapus foto lama jika ada
+        Storage::disk('public')->delete($poktan->foto_profil);
+
+        // Simpan foto baru
+        $fotoPath = $request->file('foto')->store('foto_poktan', 'public');
+        $poktan->foto_profil = $fotoPath;
+    }
+
+    // Simpan perubahan ke database
+    $poktan->save();
+
+    // Redirect ke halaman profil petani dengan pesan sukses
+    return redirect()->route('poktan.profilpoktan')->with('success', 'Profil berhasil diperbarui.');
     }
 }

@@ -37,7 +37,7 @@ class LoginController extends Controller
             case 'poktan':
                 if (Auth::guard('poktan')->attempt(['username_poktan' => $credentials['username'], 'password' => $credentials['password']])) {
                     $request->session()->regenerate();
-                    return redirect()->intended(route('dashboard.poktan'));
+                    return redirect()->intended(route('poktan.sidebarpoktan'));
                 }
                 break;
             case 'pemerintah':
