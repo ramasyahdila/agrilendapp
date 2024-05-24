@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('bunga')->nullable(false);
             $table->integer('jml_diterima')->nullable(false);
             $table->date('tgl_pinjam')->nullable(false);
-            $table->date('tgl_kembali')->nullable(false);
+            $table->date('tenggat_kembali')->nullable(false);
 
             $table->foreign('id_petani')->on('data_akun_petani')->references('id_petani');
             $table->foreign('id_status_pengajuan')->on('data_status_pengajuan_modal')->references('id_status_pengajuan');

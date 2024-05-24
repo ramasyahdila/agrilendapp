@@ -20,6 +20,6 @@ class DataPengajuanModal extends Model
         'bunga',
         'jml_diterima',
         'tgl_pinjam',
-        'tgl_kembali',
+        'tenggat_kembali',
     ];
 }

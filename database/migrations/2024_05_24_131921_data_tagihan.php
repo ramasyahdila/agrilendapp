@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_tagihan')->autoIncrement();
             $table->integer('jml_kembali')->nullable(false);
             $table->integer('jml_pinjam')->nullable(false);
-            $table->date('tenggat_kembali')->nullable(false);
             $table->unsignedBigInteger('id_petani')->nullable(false);
             $table->unsignedBigInteger('id_pengajuan')->nullable(false);
             $table->unsignedBigInteger('id_status_tagihan')->nullable(false);
