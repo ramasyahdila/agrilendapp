@@ -78,7 +78,7 @@
         </div>
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
-        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto mb-2">
+        <div class="px-8 flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto mb-2">
             <h1 class="text-3xl font-bold text-green-400 mb-4">Peminjaman</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>

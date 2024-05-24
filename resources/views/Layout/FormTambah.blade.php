@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,6 +18,9 @@
 
 </head>
 <body class="flex h-screen">
+    @isset($errors)
+        <script>console.log({{ $errors->first() }}); console.log('ok')</script>
+    @endisset
 <aside class="fixed top-0 left-0 w-64 h-full" aria-label="Sidenav">
         <div class="overflow-y-auto py-5 h-full bg-green-400 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <img src="{{ asset('img/AgrilendLogo.png') }}" alt="Logo" class="w-auto h-auto">
@@ -78,7 +81,7 @@
         </div>
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
-        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto">
+        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto">
             <h1 class="text-3xl font-bold text-green-400 mb-4">Form Pengajuan Modal</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
@@ -94,23 +97,23 @@
                             <div class="flex items-center mb-5">
                                 <label for="jml_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Peminjaman</label>
                                 <p class="mr-4">:</p>
-                                <select id="jml_pinjam" name="jml_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
-                                    <option value="500000">500.000</option>
+                                <select id="jml_pinjam" onchange="jumlahPeminjamanClick(this)" name="jml_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                    <option value="500000" >500.000</option>
                                     <option value="1000000">1.000.000</option>
                                 </select>
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="jumlah_diterima" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Diterima</label>
+                                <label for="jml_diterima" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Diterima</label>
                                 <p class="mr-4">:</p>
                                 <select id="jml_diterima" name="jml_diterima" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
-                                    <option value="500000">500.000</option>
-                                    <option value="1000000">1.000.000</option>
+                                    <option value="441000">441.000</option>
+                                    <option value="906000">906.000</option>
                                 </select>
                             </div>
                             <div class="flex items-center mb-5">
                                 <label for="bunga" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Bunga</label>
                                 <p class="mr-4">:</p>
-                                <input type="number" id="bunga" name="bunga" placeholder="Masukan Bunga" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input type="text" readonly id="bunga" name="bunga" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
                                 <label for="tgl_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Pinjam</label>
@@ -133,7 +136,7 @@
             </div>
         </div>
     </div>
-
+<script src="{{ asset('script.js') }}"></script>
 
 </body>
 </html>

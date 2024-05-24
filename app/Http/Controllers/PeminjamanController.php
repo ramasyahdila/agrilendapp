@@ -13,7 +13,7 @@ class PeminjamanController extends Controller
     public function showPeminjaman()
     {
         // Ambil semua data peminjaman modal dari database
-        $peminjaman = PeminjamanModal::with('status')->get();
+        $peminjaman = PeminjamanModal::with('status')->where('id_petani',auth()->id())->get();
         
         // Mengirim data ke view layout.Peminjaman
         return view('layout.Peminjaman', ['peminjaman' => $peminjaman]);
@@ -23,24 +23,13 @@ class PeminjamanController extends Controller
     {
         // Validasi input
         $request->validate([
-            'jml_pinjam' => 'required|integer|min:500000',
-            'jml_diterima' => [
-                'required',
-                'integer',
-                'min:0',
-                function ($attribute, $value, $fail) use ($request) {
-                    // Validasi bahwa jumlah diterima sama dengan jumlah pinjaman
-                    $jml_pinjam = $request->input('jml_pinjam');
-                    if ($value !== $jml_pinjam) {
-                        $fail('Jumlah yang diterima harus sama dengan jumlah pinjaman.');
-                    }
-                },
-            ],
-            'bunga' => 'required|numeric|min:0',
+            'jml_pinjam' => 'required',
+            'jml_diterima' => 'required',
+            'bunga' => 'required',
             'tgl_pinjam' => 'required|date',
             'tenggat_kembali' => 'required|date|after:tgl_pinjam',
         ]);
-
+        
         // Mendapatkan data akun petani yang sedang login
         $petani = DataAkunPetani::findOrFail(auth()->id());
 
@@ -48,7 +37,7 @@ class PeminjamanController extends Controller
         $peminjaman = new PeminjamanModal();
         $peminjaman->id_petani = $petani->id_petani;
         $peminjaman->jml_pinjam = $request->input('jml_pinjam');
-        $peminjaman->bunga = $request->input('bunga');
+        $peminjaman->bunga = str_replace('.','',$request->input('bunga'));
         $peminjaman->jml_diterima = $request->input('jml_diterima'); // Menghitung jumlah diterima
         $peminjaman->tgl_pinjam = $request->input('tgl_pinjam');
         $peminjaman->tenggat_kembali = $request->input('tenggat_kembali');

@@ -18,9 +18,6 @@ class PeminjamanModal extends Model
         'tgl_pinjam',
         'tenggat_kembali',
         'id_status_pengajuan',
-        'created_at',
-        'updated_at'
-
     ]; // Attribut yang dapat diisi secara massal
 
     // Relasi dengan model DataAkunPetani
@@ -33,5 +30,5 @@ class PeminjamanModal extends Model
         return $this->belongsTo(StatusPengajuanModal::class, 'id_status_pengajuan');
     }
     // Aktifkan timestamp
-    public $timestamps = true;
+    public $timestamps = false;
 }

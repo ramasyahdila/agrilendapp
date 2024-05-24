@@ -33,61 +33,30 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::group(['middleware' => ['auth:petani']], function () {
-    Route::get('/dashboard/petani', function() {
-        return view('layout.sidebarpetani'); // Ganti dengan view dashboard petani
-    })->name('dashboard.petani');
-     // Peminjaman
-     Route::get('/dashboard/Peminjaman', [PeminjamanController::class, 'showPeminjaman'])->name('layout.Peminjaman');
-
-     // Form Tambah
-     Route::get('/dashboard/FormTambah', [PetaniController::class, 'showFormTambah'])->name('layout.FormTambah');
-
-     //Form Lihat Pengajuan
-     Route::get('/dashboard/LihatPeminjaman', [PeminjamanController::class, 'showFormLihatPengajuan'])->name('layout.LihatPeminjaman');
-
-     // Profil Petani
-     Route::get('/dashboard/profilpetani', [PetaniController::class, 'showProfilPetani'])->name('layout.profilpetani');
-
-     // Edit Profil Petani
-     Route::get('/dashboard/editprofilpetani', [PetaniController::class, 'showEditProfilPetani'])->name('layout.editprofilpetani');
-     Route::post('/dashboard/editprofilpetani', [PetaniController::class, 'updatePetani'])->name('update.profilpetani');
-
-     //pengajuan modal
-    // Definisi rute untuk menyimpan data peminjaman
+    Route::get('/dashboard/petani', function() {return view('layout.sidebarpetani');})->name('dashboard.petani');
+    Route::get('/dashboard/Peminjaman', [PeminjamanController::class, 'showPeminjaman'])->name('layout.Peminjaman');
+    Route::get('/dashboard/FormTambah', [PetaniController::class, 'showFormTambah'])->name('layout.FormTambah');
+    Route::get('/dashboard/LihatPeminjaman', [PeminjamanController::class, 'showFormLihatPengajuan'])->name('layout.LihatPeminjaman');
+    Route::get('/dashboard/profilpetani', [PetaniController::class, 'showProfilPetani'])->name('layout.profilpetani');
+    Route::get('/dashboard/editprofilpetani', [PetaniController::class, 'showEditProfilPetani'])->name('layout.editprofilpetani');
+    Route::post('/dashboard/editprofilpetani', [PetaniController::class, 'updatePetani'])->name('update.profilpetani');
+    Route::get('/dashboard/peminjaman', [PoktanController::class, 'peminjaman'])->name('poktan.peminjaman');
     Route::post('/store-peminjaman', [PeminjamanController::class, 'store'])->name('store.peminjaman');
-
     Route::delete('/peminjaman/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
-
     Route::get('/peminjaman/{id}/detail', [PeminjamanController::class, 'showDetailPetani'])->name('peminjamanpetani.detail');
-
     Route::get('/peminjaman/{id}/ubah', [PeminjamanController::class, 'showUbah'])->name('peminjaman.ubah');
-
     Route::post('/peminjaman/{id}', [PeminjamanController::class, 'update'])->name('update.peminjaman');
 });
 
 Route::group(['middleware' => ['auth:poktan']], function () {
 
-    Route::get('/dashboard/poktan', function() {
-        return view('poktan.sidebarpoktan'); // Ganti dengan view dashboard poktan
-    })->name('dashboard.poktan');
-
-    // Sidebar Poktan
-    Route::get('/dashboard/poktan', function () {
-        return view('poktan/sidebarpoktan');
-    })->name('poktan.sidebarpoktan');
-
-    // Peminjaman Poktan
+    Route::get('/dashboard/poktan', function() {return view('poktan.sidebarpoktan');})->name('dashboard.poktan');
+    Route::get('/dashboard/poktan', function () {return view('poktan/sidebarpoktan');})->name('poktan.sidebarpoktan');
     Route::get('/dashboard/peminjaman', [PoktanController::class, 'peminjaman'])->name('poktan.peminjaman');
-
-    // Profil Poktan
     Route::get('/dashboard/profilpoktan', [PoktanController::class, 'profilPoktan'])->name('poktan.profilpoktan');
-
-    // Edit Profil Poktan
     Route::get('/dashboard/editprofilpoktan', [PoktanController::class, 'editProfilPoktan'])->name('layout.editprofilpoktan');
     Route::post('/dashboard/editprofilpoktan', [PoktanController::class, 'updatePoktan'])->name('update.profilpoktan');
-
     Route::get('/peminjamanpoktan/{id}/detail', [KonfirmasiPeminjamanController::class, 'showDetailPoktan'])->name('peminjaman.detail');
-
     Route::post('/peminjaman/{id}/konfirmasi', [KonfirmasiPeminjamanController::class, 'konfirmasi'])->name('peminjaman.konfirmasi');
     Route::post('/peminjaman/{id}/tolak', [KonfirmasiPeminjamanController::class, 'tolak'])->name('peminjaman.tolak');
 });
@@ -115,23 +84,9 @@ Route::group(['middleware' => ['auth:pemerintah']], function () {
 Route::get('/pilihaktor', function () {
     return view('/pilihaktor');
 })->name('pilihaktor');
-
-// Register Poktan
 Route::get('/registerpoktan', [PoktanController::class, 'register'])->name('registerpoktan');
 Route::post('/registerpoktan', [PoktanController::class, 'store'])->name('poktan.store');
-
-// Register Pemerintah
 Route::get('/registerpemerintah', [PemerintahController::class, 'register'])->name('registerpemerintah');
 Route::post('/registerpemerintah', [PemerintahController::class, 'store'])->name('register.store');
-
-// Register routes using RegistrationController
 Route::get('/register', [PetaniController::class, 'register'])->name('register');
 Route::post('/register', [PetaniController::class, 'store'])->name('petani.store');
-
-
-
-
-
-
-
-// Route::post('/register', [RegistrationController::class, 'register'])->name('register.submit');

@@ -23,13 +23,5 @@ class DataStatusLaporanSeeder extends Seeder
             'id_status_laporan' => 2,
             'status_laporan' => 'Terkonfirmasi',
         ]);
-        DataStatusLaporan::insert([
-            'id_status_laporan' => 3,
-            'status_laporan' => 'Sudah Diterima',
-        ]);
-        DataStatusLaporan::insert([
-            'id_status_laporan' => 4,
-            'status_laporan' => 'Ditolak',
-        ]);
     }
 }

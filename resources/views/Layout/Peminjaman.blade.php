@@ -78,7 +78,7 @@
         </div>
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
-        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto mb-2">
+        <div class="px-8 flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto mb-2">
             <h1 class="text-3xl font-bold text-green-400 mb-4">Peminjaman</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
@@ -98,13 +98,15 @@
                 <div class="flex flex-col text-right ">
                     <h2 class="text-black font-bold text-2xl mb-8">{{ $peminjaman->updated_at }}</h2>
                     <div class="flex">
-                        <form action="{{ route('peminjaman.destroy', $peminjaman->id_pengajuan) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-center justify-center items-center h-auto w-32 bg-red-400 text-white px-8 py-2 rounded-md mr-4">Delete</button>
-                        </form>
-                        <a class="text-center justify-center items-center h-auto w-32 bg-green-400 text-white px-8 py-2 rounded-md mr-4"
-                        href="{{ route('peminjaman.ubah', ['id' => $peminjaman->id_pengajuan]) }}">Ubah</a>
+                        @if ($peminjaman->status->status_pengajuan == 'Belum Dikonfirmasi')
+                            <form action="{{ route('peminjaman.destroy', $peminjaman->id_pengajuan) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-center justify-center items-center h-auto w-32 bg-red-400 text-white px-8 py-2 rounded-md mr-4">Delete</button>
+                            </form>
+                            <a class="text-center justify-center items-center h-auto w-32 bg-green-400 text-white px-8 py-2 rounded-md mr-4"
+                            href="{{ route('peminjaman.ubah', ['id' => $peminjaman->id_pengajuan]) }}">Ubah</a>
+                        @endif
                         <a class="text-center justify-center h-auto w-32 bg-transparent text-green-400 px-8 py-2 rounded-md border-4 border-green-400"
                         href="{{ route('peminjamanpetani.detail', ['id' => $peminjaman->id_pengajuan]) }}">Lihat</a>
                     </div>
