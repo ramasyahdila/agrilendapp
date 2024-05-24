@@ -56,7 +56,7 @@
             <li>
                 <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                     @csrf
-                    <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
+                    <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white w-full dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
                         <i class="fa-solid fa-arrow-right-from-bracket ml-3 mr-4"></i>
                         <span>Logout</span>
                     </button>
@@ -82,35 +82,29 @@
             <h1 class="text-3xl font-bold text-green-400 mb-4">Peminjaman</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
-        <div class="px-8 py-0 mt-4 mr-4 ml-64 flex flex-col w-auto h-auto">
-            <div class="h-auto w-full bg-green-100 flex items-center justify-between px-16 py-8 rounded-2xl">
-                <div class="mr-4 flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 -960 960 960" width="80">
-                        <path
-                            d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80H240Zm280-560v-160H240v640h480v-440H560q-17 0-28.5-11.5T520-640ZM240-800v200-200 640-640Z" />
-                    </svg>
-                    <div class="flex flex-col ml-8">
-                        <h2 class="text-black font-bold text-2xl mb-2">Pengajuan Modal</h2>
-                        <h2 class="text-black font-bold text-lg">Nama</h2>
-                        <h2 class="text-black font-regular text-lg">Status</h2>
+        <div class="py-0 mt-4  flex flex-col w-auto h-auto">
+            @foreach ($peminjaman as $peminjaman)
+                <div class="px-8 py-0 mt-4 mr-4 ml-64 flex flex-col w-auto h-auto">
+                    <div class="h-auto w-full bg-green-100 flex items-center justify-between px-16 py-8 rounded-2xl">
+                        <div class="mr-4 flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 -960 960 960" width="80">
+                                <path
+                                    d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80H240Zm280-560v-160H240v640h480v-440H560q-17 0-28.5-11.5T520-640ZM240-800v200-200 640-640Z" />
+                            </svg>
+                            <div class="flex flex-col ml-8">
+                                <h2 class="text-black font-bold text-2xl mb-2">Pengajuan Modal {{ $peminjaman->id_petani }}{{ $loop->iteration }}</h2>
+                                <h2 class="text-black font-regular text-lg">Status: {{ $peminjaman->status->status_pengajuan }}</h2>
+                            </div>
+                        </div>
+                        <div class="flex flex-col text-right ">
+                            <h2 class="text-black font-bold text-2xl mb-8">{{ $peminjaman->updated_at }}</h2>
+                                <a class="text-center justify-center h-auto w-32 bg-transparent text-green-400 px-8 py-2 rounded-md border-4 border-green-400"
+                                href="{{ route('peminjaman.detail', ['id' => $peminjaman->id_pengajuan]) }}">Lihat</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="flex flex-col text-right ">
-                    <h2 class="text-black font-bold text-2xl mb-8">Waktu</h2>
-                    <div class="flex">
-                        <a class="text-center justify-center items-center h-auto w-32 bg-red-400 text-white px-8 py-2 rounded-md mr-4">Delete</a>
-                        <a class="text-center justify-center items-center h-auto w-32 bg-green-400 text-white px-8 py-2 rounded-md mr-4">Ubah</a>
-                        <a class="text-center justify-center h-auto w-32 bg-transparent text-green-400 px-8 py-2 rounded-md border-4 border-green-400">Lihat</a>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-end mt-4">
-                    <a href="{{ route('layout.FormTambah') }}">
-                        <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
-                            + Buat
-                        </button>
-                    </a>
-                </div>
+            @endforeach
         </div>
     </div>
         </div>

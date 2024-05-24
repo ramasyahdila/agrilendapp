@@ -44,19 +44,25 @@
             <li class="mb-4">
                 <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
                     <i class="fa-solid fa-bell ml-3 mr-5"></i>
-                    <span>Notifikasi</span>
+                    <span>Laporan</span>
                 </a>
             </li>
             <li>
                 <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
                     <i class="fa-solid fa-gear ml-3 mr-4"></i>
-                    <span>Pengaturan</span>
+                    <span>Pemerintah</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
+                    <i class="fa-solid fa-gear ml-3 mr-4"></i>
+                    <span>Petani</span>
                 </a>
             </li>
             <li>
                 <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                     @csrf
-                    <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
+                    <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white w-full dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
                         <i class="fa-solid fa-arrow-right-from-bracket ml-3 mr-4"></i>
                         <span>Logout</span>
                     </button>

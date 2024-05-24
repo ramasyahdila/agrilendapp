@@ -18,7 +18,7 @@
 
 </head>
 <body class="flex h-screen">
-<aside class="fixed top-0 left-0 w-64 h-full" aria-label="Sidenav">
+    <aside class="fixed top-0 left-0 w-64 h-full" aria-label="Sidenav">
         <div class="overflow-y-auto py-5 h-full bg-green-400 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <img src="{{ asset('img/AgrilendLogo.png') }}" alt="Logo" class="w-auto h-auto">
             <hr class="mt-6 border-2 border-green-50"></hr>
@@ -68,8 +68,8 @@
                 <a class="flex items-center p-2 rounded-full mx-4 mt-4 bg-green-50 h-18 text-base font-normal text-white dark:text-white group" href="{{ route('layout.profilpetani') }}">
                     <img src="{{ asset('img/Rama.jpg') }}" class="h-14 w-14 bg-cover bg-center rounded-full mr-4">
                     <div class="flex flex-col justify-top">
-                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_petani ?? 'Nama Pengguna' }}</h1>
-                        <h2 class="text-sm text-gray-600 font-semibold">Petani</h1>
+                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_pemerintah ?? 'Nama Pengguna' }}</h1>
+                        <h2 class="text-sm text-gray-600 font-semibold">Pemerintah</h1>
                     </div>
                 </a>
 
@@ -78,61 +78,72 @@
         </div>
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
-        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto">
-            <h1 class="text-3xl font-bold text-green-400 mb-4">Form Pengajuan Modal</h1>
+        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto mb-2">
+            <h1 class="text-3xl font-bold text-green-400 mb-4">Beranda Petani</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
-        <div class="w-auto ml-64 min-h-screen pt-3">
+        <div class="px-8 py-0 mr-4 ml-64 flex w-auto h-auto">
             <div class="p-8 w-full">
-                <form action="{{ route('store.peminjaman') }}" method="POST" style="z-index: -1;">
-                    @csrf
-                    <div class="bg-green-50 rounded-xl shadow-lg">
-                        <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Silahkan isi data berikut dengan lengkap</h1>
-                        <hr class="border-b-2 border-green-500 my-3">
-                        <div class="px-10 py-5">
-                            <!-- Input fields -->
-                            <div class="flex items-center mb-5">
-                                <label for="jml_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Peminjaman</label>
-                                <p class="mr-4">:</p>
-                                <select id="jml_pinjam" name="jml_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
-                                    <option value="500000">500.000</option>
-                                    <option value="1000000">1.000.000</option>
-                                </select>
+                <div class="rounded-md h-48 shadow-2xl p-0 relative">
+                    <img src="{{ asset('img/Container.png') }}" class="object-fill h-full w-full object-center rounded-md" alt="img">
+                    <div class="absolute inset-0 flex items-center justify-left ml-8 mr-32">
+                        <div>
+                            <h2 class="text-2xl font-bold text-white mb-4">Welcome to Our Website</h2>
+                            <h3 class="text-sm font-regular text-white">Pertanian adalah upaya kita yang paling bijaksana, karena pada akhirnya akan memberikan kontribusi terbesar terhadap kekayaan nyata, moral yang baik, dan kebahagiaan. - Thomas Jefferson.
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4 border-b border-solid border-green-400">
+                <div class="flex w-full space-x-8">
+                    <div class="w-4/6 flex flex-col space-y-8">
+                        <div class="bg-green-50 rounded-md shadow-md">
+                            <div class="p-8">
+                                <p class="text-center mb-4">
+                                    Agrilend sebagai platform yang memudahkan petani untuk mengakses modal bagi pengembangan usaha pertanian ..
+                                </p>
+                                <div class="flex items-center justify-center space-x-4 text-green-500">
+                                    <p class="text-center font-bold">
+                                        Readmore
+                                    </p>
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
                             </div>
-                            <div class="flex items-center mb-5">
-                                <label for="jumlah_diterima" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Diterima</label>
-                                <p class="mr-4">:</p>
-                                <select id="jml_diterima" name="jml_diterima" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
-                                    <option value="500000">500.000</option>
-                                    <option value="1000000">1.000.000</option>
-                                </select>
-                            </div>
-                            <div class="flex items-center mb-5">
-                                <label for="bunga" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Bunga</label>
-                                <p class="mr-4">:</p>
-                                <input type="number" id="bunga" name="bunga" placeholder="Masukan Bunga" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
-                            </div>
-                            <div class="flex items-center mb-5">
-                                <label for="tgl_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Pinjam</label>
-                                <p class="mr-4">:</p>
-                                <input type="date" id="tgl_pinjam" name="tgl_pinjam" placeholder="Masukan Tanggal Pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
-                            </div>
-                            <div class="flex items-center mb-5">
-                                <label for="tenggat_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali</label>
-                                <p class="mr-4">:</p>
-                                <input type="date" id="tenggat_kembali" name="tenggat_kembali" placeholder="Masukan Tanggal Kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                        </div>
+                        <div class="bg-green-50 rounded-md shadow-md">
+                            <div class="p-8">
+                                <p class="text-center mb-4">
+                                    Agrilend sebagai platform yang memudahkan petani untuk mengakses modal bagi pengembangan usaha pertanian ..
+                                </p>
+                                <div class="flex items-center justify-center space-x-4 text-green-500">
+                                    <p class="text-center font-bold">
+                                        Readmore
+                                    </p>
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="text-right mt-4 mb-4">
-                        <button type="submit" name="submit" class="py-3 rounded-xl px-8 shadow-lg bg-green-600 text-white font-bold">Simpan</button>
+                    <div class="relative w-2/6 p-4 bg-fill bg-center z-0" style="background-image: url('{{ asset('img/Logo1x1.png') }}')">
+                        <img src="{{ asset('img/Rectangle 13.png') }}" class="absolute object-top z-10">
                     </div>
-                </form>
 
-
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUrl = window.location.href;
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+            sidebarLinks.forEach(link => {
+                if (link.href === currentUrl) {
+                    link.classList.add('bg-green-600', 'text-white');
+                }
+            });
+        });
+    </script>
 
 
 </body>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\DataAkunPoktan; // Model Poktan
+use App\Models\PeminjamanModal;
 
 class PoktanController extends Controller
 {
@@ -53,7 +54,11 @@ class PoktanController extends Controller
     }
     public function peminjaman()
     {
-        return view('poktan.peminjaman');
+        // Ambil semua data peminjaman modal dari database
+        $peminjaman = PeminjamanModal::with('status')->get();
+        
+        // Mengirim data ke view layout.Peminjaman
+        return view('poktan.peminjaman', ['peminjaman' => $peminjaman]);
     }
 
     public function profilPoktan()

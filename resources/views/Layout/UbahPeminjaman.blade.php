@@ -77,14 +77,14 @@
             </ul>
         </div>
     </aside>
-    <div class="w-full h-auto flex flex-col bg-gray-50">
+    <div class="w-full h-full flex flex-col bg-gray-50">
         <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto">
-            <h1 class="text-3xl font-bold text-green-400 mb-4">Form Pengajuan Modal</h1>
+            <h1 class="text-3xl font-bold text-green-400 mb-4">Form Ubah Pengajuan Modal</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
         <div class="w-auto ml-64 min-h-screen pt-3">
             <div class="p-8 w-full">
-                <form action="{{ route('store.peminjaman') }}" method="POST" style="z-index: -1;">
+                <form action="{{ route('update.peminjaman', ['id' => $ubahpeminjaman->id_pengajuan]) }}" method="POST" style="z-index: -1;">
                     @csrf
                     <div class="bg-green-50 rounded-xl shadow-lg">
                         <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Silahkan isi data berikut dengan lengkap</h1>
@@ -94,7 +94,7 @@
                             <div class="flex items-center mb-5">
                                 <label for="jml_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Peminjaman</label>
                                 <p class="mr-4">:</p>
-                                <select id="jml_pinjam" name="jml_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                <select id="jml_pinjam" value="{{ $ubahpeminjaman->jml_pinjam }}" name="jml_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                                     <option value="500000">500.000</option>
                                     <option value="1000000">1.000.000</option>
                                 </select>
@@ -102,7 +102,7 @@
                             <div class="flex items-center mb-5">
                                 <label for="jumlah_diterima" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Diterima</label>
                                 <p class="mr-4">:</p>
-                                <select id="jml_diterima" name="jml_diterima" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                <select id="jml_diterima" value="{{ $ubahpeminjaman->jml_diterima }}" name="jml_diterima" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                                     <option value="500000">500.000</option>
                                     <option value="1000000">1.000.000</option>
                                 </select>
@@ -110,30 +110,27 @@
                             <div class="flex items-center mb-5">
                                 <label for="bunga" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Bunga</label>
                                 <p class="mr-4">:</p>
-                                <input type="number" id="bunga" name="bunga" placeholder="Masukan Bunga" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input type="number" id="bunga" value="{{ $ubahpeminjaman->bunga }}" name="bunga" placeholder="Masukan Bunga" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
                                 <label for="tgl_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Pinjam</label>
                                 <p class="mr-4">:</p>
-                                <input type="date" id="tgl_pinjam" name="tgl_pinjam" placeholder="Masukan Tanggal Pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input type="date" id="tgl_pinjam" value="{{ $ubahpeminjaman->tgl_pinjam }}" name="tgl_pinjam" placeholder="Masukan Tanggal Pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
                                 <label for="tenggat_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali</label>
                                 <p class="mr-4">:</p>
-                                <input type="date" id="tenggat_kembali" name="tenggat_kembali" placeholder="Masukan Tanggal Kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input type="date" id="tenggat_kembali" value="{{ $ubahpeminjaman->tenggat_kembali }}" name="tenggat_kembali" placeholder="Masukan Tanggal Kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                         </div>
                     </div>
                     <div class="text-right mt-4 mb-4">
+                        <button type="submit" name="submit" class="py-3 rounded-xl px-8 shadow-lg bg-red-600 text-white font-bold mr-4">Batal</button>
                         <button type="submit" name="submit" class="py-3 rounded-xl px-8 shadow-lg bg-green-600 text-white font-bold">Simpan</button>
                     </div>
                 </form>
-
-
             </div>
         </div>
     </div>
-
-
 </body>
 </html>

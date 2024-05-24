@@ -56,7 +56,7 @@
             <li>
                 <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                     @csrf
-                    <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
+                    <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white w-full dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
                         <i class="fa-solid fa-arrow-right-from-bracket ml-3 mr-4"></i>
                         <span>Logout</span>
                     </button>
