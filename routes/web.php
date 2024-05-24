@@ -18,7 +18,7 @@ use App\Http\Controllers\KonfirmasiPeminjamanController;
 
 // Halaman Utama
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/landingpage');
 });
 
 // Halaman Landing
