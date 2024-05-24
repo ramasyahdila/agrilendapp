@@ -25,9 +25,7 @@ class DataAkunPoktan extends Authenticatable
         'id_desa',
         'id_pemerintah',
         'no_tlp',
-        'foto_profil',
     ];
-
     public function DataDesa()
     {
         return $this->belongsTo(DataDesa::class, 'id_desa', 'id_desa');

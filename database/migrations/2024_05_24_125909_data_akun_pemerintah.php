@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('nama_pemerintah')->nullable(false);
             $table->unsignedBigInteger('id_kota')->nullable(false);
             $table->string('no_tlp',12)->nullable(false);
-            $table->binary('foto_profil')->nullable(false);
 
             $table->foreign('id_kota')->on('data_kota')->references('id_kota');
         });

@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DataKota extends Model
+class DataMetodeBayar extends Model
 {
     use HasFactory;
-    protected $table = 'data_kota';
+    
+    protected $table = 'data_metode_bayar';
 
-    protected $primaryKey = 'id_kota';
+    protected $primaryKey = 'id_metode_bayar';
     public $timestamps = false;
     protected $fillable = [
-        'id_kota',
-        'kota',
+        'id_metode_bayar',
+        'metode_bayar',
     ];
 }

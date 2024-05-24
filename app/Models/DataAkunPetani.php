@@ -16,6 +16,7 @@ class DataAkunPetani extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
+        'id_petani',
         'username_petani',
         'password',
         'nik',
@@ -26,7 +27,6 @@ class DataAkunPetani extends Authenticatable
         'id_desa',
         'no_tlp',
         'id_poktan',
-        'foto_profil',
     ];
 
     public function DataDesa()

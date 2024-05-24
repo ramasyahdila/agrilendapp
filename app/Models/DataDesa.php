@@ -15,6 +15,11 @@ class DataDesa extends Model
 
 
     public $timestamps = false;
+    protected $fillable = [
+        'id_desa',
+        'desa',
+        'id_kota',
+    ];
     public function DataKota()
     {
         return $this->belongsTo(DataKota::class, 'id_desa', 'id_desa');

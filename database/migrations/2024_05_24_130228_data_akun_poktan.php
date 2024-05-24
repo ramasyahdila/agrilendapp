@@ -22,7 +22,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_desa')->nullable(false);
             $table->unsignedBigInteger('id_pemerintah')->nullable(false);
             $table->string('no_tlp')->nullable(false);
-            $table->binary('foto_profil')->nullable(false);
 
             $table->foreign('id_desa')->on('data_desa')->references('id_desa');
             $table->foreign('id_pemerintah')->on('data_akun_pemerintah')->references('id_pemerintah');

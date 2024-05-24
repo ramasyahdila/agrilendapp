@@ -17,14 +17,14 @@ class DataAkunPemerintah extends Authenticatable
 
     public $timestamps = false;
     protected $fillable = [
+        'id_pemerintah',
         'username_pemerintah',
         'password',
         'nama_pemerintah',
         'id_kota',
         'no_tlp',
-        'foto_profil',
     ];
-
+    
     public function DataKota()
     {
         return $this->belongsTo(DataKota::class, 'id_kota', 'id_kota');

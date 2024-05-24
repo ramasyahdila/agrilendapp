@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DataKota extends Model
+class DataLaporan extends Model
 {
     use HasFactory;
-    protected $table = 'data_kota';
+    protected $table = 'data_laporan';
 
-    protected $primaryKey = 'id_kota';
+    protected $primaryKey = 'id_laporan';
     public $timestamps = false;
     protected $fillable = [
-        'id_kota',
-        'kota',
+        'id_laporan',
+        'id_poktan',
+        'id_status_laporan',
+        'laporan',
     ];
 }
