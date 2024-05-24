@@ -55,7 +55,10 @@ class PoktanController extends Controller
     public function peminjaman()
     {
         // Ambil semua data peminjaman modal dari database
-        $peminjaman = PeminjamanModal::with('status')->get();
+        $peminjaman = PeminjamanModal::select('data_pengajuan_modal.*')
+        ->join('data_akun_petani','data_pengajuan_modal.id_petani','data_akun_petani.id_petani')
+        ->join('data_akun_poktan','data_akun_poktan.id_poktan','data_akun_petani.id_poktan')
+        ->get();
         
         // Mengirim data ke view layout.Peminjaman
         return view('poktan.peminjaman', ['peminjaman' => $peminjaman]);

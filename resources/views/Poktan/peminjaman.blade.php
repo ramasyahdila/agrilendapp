@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="flex flex-col text-right ">
-                            <h2 class="text-black font-bold text-2xl mb-8">{{ $peminjaman->updated_at }}</h2>
+                            <h2 class="text-black font-bold text-2xl mb-8">{{ $peminjaman->tgl_pinjam }}</h2>
                                 <a class="text-center justify-center h-auto w-32 bg-transparent text-green-400 px-8 py-2 rounded-md border-4 border-green-400"
                                 href="{{ route('peminjaman.detail', ['id' => $peminjaman->id_pengajuan]) }}">Lihat</a>
                             </div>
