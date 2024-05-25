@@ -69,6 +69,9 @@ class TagihanContoller extends Controller
         $validated = $request->validate([
             'id_tagihan' => 'required',
             'id_metode_bayar' => 'required|numeric',
+        ],[
+            'id_metode_bayar.required' => 'Harap pilih metode pembayaran lalu klik bayar',
+            'id_metode_bayar.numeric' => 'Harap pilih metode pembayaran lalu klik bayar'
         ]);
         return view('Layout.TidakBisaBayar',[
             'id_tagihan' => $validated['id_tagihan'],

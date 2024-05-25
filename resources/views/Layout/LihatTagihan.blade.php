@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
@@ -84,9 +85,14 @@
         </div>
         <div class="w-auto ml-64 min-h-screen pt-3">
             <div class="p-8 w-full">
+                @if ($errors->any())
+                    <div class="mt-2 mb-5 text-center bg-red-100 border-2 border-red-500 text-sm text-red-500 rounded-lg p-6 dark:bg-red-500/10" role="alert">
+                        <span class="font-bold">Peringatan!</span> {{ $errors->first() }}
+                    </div>
+                @endif
                 <form id="formTagihan" action="" method="POST" style="z-index: -1;">
                     @csrf
-                    <div class="bg-green-50 rounded-xl shadow-lg">
+                    <div class="bg-green-50 rounded-xl our-shadow">
                         <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Silahkan Pilih Metode Pembayaran Anda</h1>
                         <hr class="border-b-2 border-green-500 my-3">
                         <div class="px-10 py-5">
@@ -146,16 +152,8 @@
                         </div>
                     </div>
                     <div class="flex justify-end mt-4 gap-4">
-                        @if (isset($tagihan->id_pembayaran))
-                            <div class="flex justify-end mt-4 mr-2">
-                                <a href="{{ route('layout.Tagihan') }}">
-                                    <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
-                                        Kembali
-                                    </button>
-                                </a>
-                            </div>
-                        @else
-                            @if (now()->toDateTimeString() >= $tagihan->tgl_kembali)
+                        @if (!isset($tagihan->id_pembayaran))
+                            @if (now()->toDateTimeString() >= $tagihan->tgl_kembali && $tagihan->status_tagihan == 'Belum Bayar')
                                 <button onclick="tagihanSubmit(false)" class="h-10 bg-white text-red-400 border-2 border-red-400 px-10 shadow-lg font-semibold rounded-md" type="button">
                                     Tidak Bisa Bayar
                                 </button>
@@ -171,11 +169,17 @@
                                     </a>
                                 </div>
                             @endif
+                        @else
+                            <div class="flex justify-end mt-4 mr-2">
+                                <a href="{{ route('layout.Tagihan') }}">
+                                    <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
+                                        Kembali
+                                    </button>
+                                </a>
+                            </div>
                         @endif
                     </div>
                 </form>
-
-
             </div>
         </div>
     </div>
