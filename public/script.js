@@ -10,3 +10,10 @@ function jumlahPeminjamanClick(option) {
         document.getElementById('bunga').value = '59.000';
     }
 }
+function tglPinjamClick(input) {
+    var today = new Date(input.value);
+    today.setDate(today.getDate() + 30*4);
+    var month = today.getMonth().length > 1 ? (today.getMonth()) : ('0' + today.getMonth());
+    var next =  today.getFullYear() + '-' + month + '-' + today.getDate();
+    document.querySelector('#tgl_kembali').value = next
+}

@@ -16,6 +16,10 @@ class TagihanContoller extends Controller
         
         return view('layout.Tagihan', ['tagihan' => $tagihan]);
     }
+    public function showDetailTagihan()
+    {
+        
+    }
     public function store()
     {
         

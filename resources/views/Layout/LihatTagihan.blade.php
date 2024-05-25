@@ -78,67 +78,65 @@
         </div>
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
-        <div class="px-8 flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto mb-2">
-            <h1 class="text-3xl font-bold text-green-400 mb-4">Peminjaman</h1>
+        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto">
+            <h1 class="text-3xl font-bold text-green-400 mb-4">Detail Pengajuan Modal</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
-        @foreach ($peminjaman as $peminjaman)
-        <div class="px-8 py-0 mt-4 mr-4 ml-64 flex flex-col w-auto h-auto">
-            <div class="h-auto w-full bg-green-100 flex items-center justify-between px-16 py-8 rounded-2xl">
-                <div class="mr-4 flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 -960 960 960" width="80">
-                        <path
-                            d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80H240Zm280-560v-160H240v640h480v-440H560q-17 0-28.5-11.5T520-640ZM240-800v200-200 640-640Z" />
-                    </svg>
-                    <div class="flex flex-col ml-8">
-                        <h2 class="text-black font-bold text-2xl mb-2">Pengajuan Modal {{ $peminjaman->id_petani }}{{ $loop->iteration }}</h2>
-                        <h2 class="text-black font-regular text-lg">Status: {{ $peminjaman->status->status_pengajuan }}</h2>
+        <div class="w-auto ml-64 min-h-screen pt-3">
+            <div class="p-8 w-full">
+                <form action="" method="POST" style="z-index: -1;">
+                    <div class="bg-green-50 rounded-xl shadow-lg">
+                        <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Data Pengajuan Modal {{ $detailpeminjaman->id_petani }} </h1>
+                        <hr class="border-b-2 border-green-500 my-3">
+                        <div class="px-10 py-5">
+                            <!-- Input fields -->
+                            <div class="flex items-center mb-5">
+                                <label for="jml_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Peminjaman</label>
+                                <p class="mr-4">:</p>
+                                <input readonly value="{{ $detailpeminjaman->jml_pinjam }}" id="jml_pinjam" name="jml_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                </input>
+                            </div>
+                            <div class="flex items-center mb-5">
+                                <label for="jumlah_diterima" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Diterima</label>
+                                <p class="mr-4">:</p>
+                                <input readonly value="{{ $detailpeminjaman->jml_diterima }}" id="jml_diterima" name="jml_diterima" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                </input>
+                            </div>
+                            <div class="flex items-center mb-5">
+                                <label for="bunga" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Bunga</label>
+                                <p class="mr-4">:</p>
+                                <input readonly value="{{ $detailpeminjaman->bunga }}" type="number" id="bunga" name="bunga" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                            </div>
+                            <div class="flex items-center mb-5">
+                                <label for="tgl_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Pinjam</label>
+                                <p class="mr-4">:</p>
+                                <input readonly value="{{ $detailpeminjaman->tgl_pinjam }}" type="text" id="tgl_pinjam" name="tgl_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                            </div>
+                            <div class="flex items-center mb-5">
+                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali</label>
+                                <p class="mr-4">:</p>
+                                <input readonly value="{{ $detailpeminjaman->tgl_kembali }}" type="text" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                            </div>
+                            <div class="flex items-center mb-5">
+                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Ststus Pengajuan</label>
+                                <p class="mr-4">:</p>
+                                <input readonly value="{{ $detailpeminjaman->status->status_pengajuan }}" type="text" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="flex flex-col text-right ">
-                    <h2 class="text-black font-bold text-2xl mb-8">{{ $peminjaman->tgl_pinjam }}</h2>
-                    <div class="flex gap-4 justify-between">
-                        @if ($peminjaman->status->status_pengajuan == 'Belum Dikonfirmasi')
-                            <form action="{{ route('peminjaman.destroy', $peminjaman->id_pengajuan) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-center justify-center items-center bg-red-400 text-white px-8 py-2 rounded-md">Delete</button>
-                            </form>
-                            <a class="text-center inline-flex justify-center items-center bg-green-400 text-white px-8 py-1 rounded-md"
-                            href="{{ route('peminjaman.ubah', ['id' => $peminjaman->id_pengajuan]) }}"><p>Ubah</p></a>
-                        @else
-                        <div class=""></div>
-                        @endif
-                        <a class="text-center justify-center bg-transparent text-green-400 px-8 py-1 rounded-md border-4 border-green-400"
-                        href="{{ route('peminjamanpetani.detail', ['id' => $peminjaman->id_pengajuan]) }}">Lihat</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach
-            <div class="flex justify-end mt-4 mr-16">
-                    <a href="{{ route('layout.FormTambah') }}">
-                        <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
-                            + Buat
+                </form>
+                <div class="flex justify-end mt-4 mr-2">
+                    <a href="{{ route('layout.Peminjaman') }}">
+                        <button class="h-10 bg-red-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
+                            Kembali
                         </button>
                     </a>
                 </div>
+
+
             </div>
-    </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentUrl = window.location.href;
-            const sidebarLinks = document.querySelectorAll('.sidebar-link');
-
-            sidebarLinks.forEach(link => {
-                if (link.href === currentUrl) {
-                    link.classList.add('bg-green-600', 'text-white');
-                }
-            });
-        });
-    </script>
 
 
 </body>

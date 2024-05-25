@@ -19,7 +19,7 @@
 </head>
 <body class="flex h-screen">
     @isset($errors)
-        <script>console.log({{ $errors->first() }}); console.log('ok')</script>
+        <script>console.log({{ $errors->first() }}); console.log('error')</script>
     @endisset
 <aside class="fixed top-0 left-0 w-64 h-full" aria-label="Sidenav">
         <div class="overflow-y-auto py-5 h-full bg-green-400 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -118,12 +118,12 @@
                             <div class="flex items-center mb-5">
                                 <label for="tgl_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Pinjam</label>
                                 <p class="mr-4">:</p>
-                                <input type="date" id="tgl_pinjam" name="tgl_pinjam" placeholder="Masukan Tanggal Pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input type="date" id="tgl_pinjam" onchange="tglPinjamClick(this)" name="tgl_pinjam" placeholder="Masukan Tanggal Pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
                                 <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali</label>
                                 <p class="mr-4">:</p>
-                                <input type="date" id="tgl_kembali" name="tgl_kembali" placeholder="Masukan Tanggal Kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input type="date" readonly id="tgl_kembali" name="tgl_kembali" placeholder="Masukan Tanggal Kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                         </div>
                     </div>
