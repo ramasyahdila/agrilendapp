@@ -26,5 +26,15 @@ class DataPoktanSeeder extends Seeder
             'id_pemerintah' => 1,
             'no_tlp' => '081233333333',
         ]);
+        DataAkunPoktan::insert([
+            'id_poktan' => 2,
+            'username_poktan' => 'LMJ1234',
+            'password' => bcrypt('123'),
+            'nama_poktan' => 'Poktan Anggur',
+            'alamat_poktan' => 'JL. Anggur Desa Holywings',
+            'id_desa' => 1,
+            'id_pemerintah' => 1,
+            'no_tlp' => '081233777333',
+        ]);
     }
 }

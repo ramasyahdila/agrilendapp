@@ -23,7 +23,6 @@ class TagihanContoller extends Controller
     }
     public function showDetailTagihan($id)
     {
-        // dd(DataPembayaran::where('id_tagihan',$id)->exists());
         if(DataPembayaran::where('id_tagihan',$id)->exists()) {
             $tagihan = DataTagihan::select('data_tagihan.*','data_status_tagihan.status_tagihan','data_pengajuan_modal.*','data_pembayaran.*','data_metode_bayar.metode_bayar','data_akun_petani.*','data_akun_poktan.nama_poktan')
             ->join('data_status_tagihan','data_status_tagihan.id_status_tagihan','data_tagihan.id_status_tagihan')
@@ -44,13 +43,15 @@ class TagihanContoller extends Controller
         $metode_bayar = DataMetodeBayar::all();
 
         return view('layout.LihatTagihan', ['tagihan' => $tagihan, 'metode_bayar' => $metode_bayar]);
-
     }
     public function bayarTagihan(Request $request)
     {
         $validated = $request->validate([
             'id_tagihan' => 'required',
             'id_metode_bayar' => 'required|numeric',
+        ],[
+            'id_metode_bayar.required' => 'Harap pilih metode pembayaran lalu klik bayar',
+            'id_metode_bayar.numeric' => 'Harap pilih metode pembayaran lalu klik bayar'
         ]);
         $tagihan = DataTagihan::where('id_tagihan',$validated['id_tagihan'])->update(['id_status_tagihan' => 5]);
         if($tagihan) {
@@ -73,9 +74,13 @@ class TagihanContoller extends Controller
             'id_metode_bayar.required' => 'Harap pilih metode pembayaran lalu klik bayar',
             'id_metode_bayar.numeric' => 'Harap pilih metode pembayaran lalu klik bayar'
         ]);
+        $data_pengajuan_modal = DataPengajuanModal::select('data_pengajuan_modal.bunga')
+        ->join('data_tagihan','data_pengajuan_modal.id_pengajuan','data_tagihan.id_pengajuan')
+        ->where('id_tagihan',$validated['id_tagihan'])->first();
         return view('Layout.TidakBisaBayar',[
             'id_tagihan' => $validated['id_tagihan'],
             'id_metode_bayar' => $validated['id_metode_bayar'],
+            'bunga'=> $data_pengajuan_modal->bunga
         ]);
     }
     public function tidakBayarTagihan(Request $request)
@@ -83,12 +88,10 @@ class TagihanContoller extends Controller
         $validated = $request->validate([
             'id_tagihan' => 'required',
             'id_metode_bayar' => 'required|numeric',
+            'bunga' => 'required|numeric',
         ]);
-        $data_pengajuan_modal = DataPengajuanModal::select('data_pengajuan_modal.bunga')
-        ->join('data_tagihan','data_pengajuan_modal.id_pengajuan','data_tagihan.id_pengajuan')
-        ->where('id_tagihan',$validated['id_tagihan'])->first();
         $tidak_bisa_bayar = new DataTidakBisaBayar();
-        $tidak_bisa_bayar->bunga = $data_pengajuan_modal->bunga;
+        $tidak_bisa_bayar->bunga = $validated['bunga'];
         $tidak_bisa_bayar->id_tagihan = $validated['id_tagihan'];
         $tidak_bisa_bayar->id_metode_bayar = $validated['id_metode_bayar'];
         $tidak_bisa_bayar->save();

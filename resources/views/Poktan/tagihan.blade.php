@@ -7,11 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script> --}}
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
@@ -38,7 +36,7 @@
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Tagihan') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.tagihan') }}">
                 <i class="fa-solid fa-file ml-3 mr-5"></i>
                 <span>Pengembalian</span>
                 </a>
@@ -80,34 +78,49 @@
         </div>
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
-        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto">
+        <div class="px-8 flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto mb-2">
             <h1 class="text-3xl font-bold text-green-400 mb-4">Pengembalian Petani</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
-        <div class="w-auto ml-64 min-h-screen pt-3">
-            <div class="p-8 w-full">
-                <form id="formTidakBisaBayar" action="{{ route('tagihanpetani.tidakbayar') }}" method="POST" style="z-index: -1;">
-                    @csrf
-                    <input type="hidden" name="id_tagihan" value="{{ $id_tagihan }}" id="">
-                    <input type="hidden" name="id_metode_bayar" value="{{ $id_metode_bayar }}" id="">
-                    <input type="hidden" name="bunga" value="{{ $bunga }}" id="">
-                    <div class="text-center text-lg font-semibold our-shadow" >
-                        <div class="p-2">
-                            <p>Konfirmasi Anda Tidak Bisa Bayar</p>
-                        </div>
-                        <hr class="border-b-2 border-green-400 w-auto">
-                        <div class="flex flex-col justify-center items-center p-7">
-                            <p class="mb-7">Anda harus membayar bunga yang telah disetujui sebesar Rp{{ $bunga }}</p>
-                            <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="submit">
-                                Konfirmasi
-                            </button>
-                        </div>
+        @foreach ($tagihan as $tagihan)
+        <div class="px-8 py-0 mt-4 mr-4 ml-64 flex flex-col w-auto h-auto">
+            <div class="h-auto w-full bg-green-100 flex items-center justify-between px-16 py-8 rounded-2xl">
+                <div class="mr-4 flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 -960 960 960" width="80">
+                        <path
+                            d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80H240Zm280-560v-160H240v640h480v-440H560q-17 0-28.5-11.5T520-640ZM240-800v200-200 640-640Z" />
+                    </svg>
+                    <div class="flex flex-col ml-8">
+                        <h2 class="text-black font-bold text-2xl mb-2">Tagihan {{ $tagihan->id_petani }}{{ $loop->iteration }}</h2>
+                        <h2 class="text-black font-regular text-lg">Status: {{ $tagihan->status_tagihan }}</h2>
                     </div>
-                </form>
+                </div>
+                <div class="flex flex-col text-right ">
+                    <h2 class="text-black font-bold text-2xl mb-8">{{ $tagihan->tgl_kembali }}</h2>
+                    <div class="flex gap-4 justify-end">
+                        <a class="text-center justify-center bg-transparent text-green-400 px-8 py-1 rounded-md border-4 border-green-400"
+                        href="{{ route('tagihanpoktan.detail', ['id' => $tagihan->id_tagihan]) }}">Lihat</a>
+                    </div>
+                </div>
             </div>
         </div>
+        @endforeach
     </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUrl = window.location.href;
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
 
-<script src="{{ asset('script.js') }}"></script>
+            sidebarLinks.forEach(link => {
+                if (link.href === currentUrl) {
+                    link.classList.add('bg-green-600', 'text-white');
+                }
+            });
+        });
+    </script>
+
+    <script src="{{ asset('script.js') }}"></script>
 </body>
 </html>

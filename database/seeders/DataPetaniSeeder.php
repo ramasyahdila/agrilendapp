@@ -40,7 +40,7 @@ class DataPetaniSeeder extends Seeder
             'alamat_petani' => 'jl. jawa no3',
             'id_desa' => 1,
             'no_tlp' => '081288888888',
-            'id_poktan' => 1,
+            'id_poktan' => 2,
         ]);
     }
 }

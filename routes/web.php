@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Poktan\PoktanTagihanController;
 use App\Http\Controllers\TagihanContoller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
@@ -55,16 +56,20 @@ Route::group(['middleware' => ['auth:petani']], function () {
 });
 
 Route::group(['middleware' => ['auth:poktan']], function () {
-
     Route::get('/dashboard/poktan', function() {return view('poktan.sidebarpoktan');})->name('dashboard.poktan');
     Route::get('/dashboard/poktan', function () {return view('poktan/sidebarpoktan');})->name('poktan.sidebarpoktan');
     Route::get('/dashboard/peminjaman', [PoktanController::class, 'peminjaman'])->name('poktan.peminjaman');
     Route::get('/dashboard/profilpoktan', [PoktanController::class, 'profilPoktan'])->name('poktan.profilpoktan');
+    Route::get('/dashboard/tagihan', [PoktanTagihanController::class, 'showTagihan'])->name('poktan.tagihan');
     Route::get('/dashboard/editprofilpoktan', [PoktanController::class, 'editProfilPoktan'])->name('layout.editprofilpoktan');
     Route::post('/dashboard/editprofilpoktan', [PoktanController::class, 'updatePoktan'])->name('update.profilpoktan');
     Route::get('/peminjamanpoktan/{id}/detail', [KonfirmasiPeminjamanController::class, 'showDetailPoktan'])->name('peminjaman.detail');
     Route::post('/peminjaman/{id}/konfirmasi', [KonfirmasiPeminjamanController::class, 'konfirmasi'])->name('peminjaman.konfirmasi');
     Route::post('/peminjaman/{id}/tolak', [KonfirmasiPeminjamanController::class, 'tolak'])->name('peminjaman.tolak');
+    Route::get('/tagihan/{id}/lihat', [PoktanTagihanController::class, 'showDetailTagihan'])->name('tagihanpoktan.detail');
+    Route::post('/tagihan/konfirm', [PoktanTagihanController::class, 'konfirmTagihan'])->name('tagihanpoktan.konfirm');
+    Route::post('/tagihan/konfirm-bunga', [PoktanTagihanController::class, 'konfirmBungaTagihan'])->name('tagihanpoktan.konfirmbunga');
+    Route::post('/tagihan/konfirm-tidak', [PoktanTagihanController::class, 'konfirmTidakTagihan'])->name('tagihanpoktan.konfirmtidak');
 });
 
 Route::group(['middleware' => ['auth:pemerintah']], function () {
