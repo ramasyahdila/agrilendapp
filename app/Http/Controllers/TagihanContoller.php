@@ -90,6 +90,8 @@ class TagihanContoller extends Controller
         $tidak_bisa_bayar->id_metode_bayar = $validated['id_metode_bayar'];
         $tidak_bisa_bayar->save();
 
+        DataTagihan::where('id_tagihan',$validated['id_tagihan'])->update(['id_status_tagihan' => 3]);
+
         return redirect()->route('layout.Tagihan')->with('success', 'Bunga berhasil dibayar.');
     }
 }
