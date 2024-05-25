@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Peminjaman') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Tagihan') }}">
                 <i class="fa-solid fa-file ml-3 mr-5"></i>
                 <span>Pengembalian</span>
                 </a>
@@ -110,17 +110,17 @@
                             <div class="flex items-center mb-5">
                                 <label for="tgl_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Pinjam</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->tgl_pinjam }}" type="date" id="tgl_pinjam" name="tgl_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input readonly value="{{ $detailpeminjaman->tgl_pinjam }}" type="text" id="tgl_pinjam" name="tgl_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="tenggat_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali</label>
+                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->tenggat_kembali }}" type="date" id="tenggat_kembali" name="tenggat_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input readonly value="{{ $detailpeminjaman->tgl_kembali }}" type="text" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="tenggat_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Ststus Pengajuan</label>
+                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Ststus Pengajuan</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->status->status_pengajuan }}" type="text" name="tenggat_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input readonly value="{{ $detailpeminjaman->status->status_pengajuan }}" type="text" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                         </div>
                     </div>

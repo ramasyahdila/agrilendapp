@@ -9,9 +9,12 @@ class TagihanContoller extends Controller
 {
     public function showTagihan()
     {
-        $peminjaman = DataTagihan::with('status')->where('id_petani',auth()->id())->get();
+        $tagihan = DataTagihan::select('data_tagihan.*','data_status_tagihan.status_tagihan','data_pengajuan_modal.*')
+        ->join('data_status_tagihan','data_status_tagihan.id_status_tagihan','data_tagihan.id_status_tagihan')
+        ->join('data_pengajuan_modal','data_pengajuan_modal.id_pengajuan','data_tagihan.id_pengajuan')
+        ->where('id_petani',auth()->id())->get();
         
-        return view('layout.Peminjaman', ['peminjaman' => $peminjaman]);
+        return view('layout.Tagihan', ['tagihan' => $tagihan]);
     }
     public function store()
     {

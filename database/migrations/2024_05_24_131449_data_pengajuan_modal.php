@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('jml_pinjam')->nullable(false);
             $table->integer('bunga')->nullable(false);
             $table->integer('jml_diterima')->nullable(false);
-            $table->date('tgl_pinjam')->nullable(false);
-            $table->date('tgl_kembali')->nullable(false);
+            $table->timestamp('tgl_pinjam')->nullable(false)->useCurrent();
+            $table->timestamp('tgl_kembali')->nullable(false)->useCurrent();
 
             $table->foreign('id_petani')->on('data_akun_petani')->references('id_petani');
             $table->foreign('id_status_pengajuan')->on('data_status_pengajuan_modal')->references('id_status_pengajuan');

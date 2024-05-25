@@ -82,7 +82,7 @@
             <h1 class="text-3xl font-bold text-green-400 mb-4">Peminjaman</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
-        @foreach ($peminjaman as $peminjaman)
+        @foreach ($tagihan as $tagihan)
         <div class="px-8 py-0 mt-4 mr-4 ml-64 flex flex-col w-auto h-auto">
             <div class="h-auto w-full bg-green-100 flex items-center justify-between px-16 py-8 rounded-2xl">
                 <div class="mr-4 flex">
@@ -91,24 +91,15 @@
                             d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80H240Zm280-560v-160H240v640h480v-440H560q-17 0-28.5-11.5T520-640ZM240-800v200-200 640-640Z" />
                     </svg>
                     <div class="flex flex-col ml-8">
-                        <h2 class="text-black font-bold text-2xl mb-2">Pengajuan Modal {{ $peminjaman->id_petani }}{{ $loop->iteration }}</h2>
-                        <h2 class="text-black font-regular text-lg">Status: {{ $peminjaman->status->status_pengajuan }}</h2>
+                        <h2 class="text-black font-bold text-2xl mb-2">Tagihan {{ $tagihan->id_petani }}{{ $loop->iteration }}</h2>
+                        <h2 class="text-black font-regular text-lg">Status: {{ $tagihan->status_tagihan }}</h2>
                     </div>
                 </div>
                 <div class="flex flex-col text-right ">
-                    <h2 class="text-black font-bold text-2xl mb-8">{{ $peminjaman->updated_at }}</h2>
+                    <h2 class="text-black font-bold text-2xl mb-8">{{ $tagihan->updated_at }}</h2>
                     <div class="flex gap-4">
-                        @if ($peminjaman->status->status_pengajuan == 'Belum Dikonfirmasi')
-                            <form action="{{ route('peminjaman.destroy', $peminjaman->id_pengajuan) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-center justify-center items-center bg-red-400 text-white px-8 py-2 rounded-md">Delete</button>
-                            </form>
-                            <a class="text-center inline-flex justify-center items-center bg-green-400 text-white px-8 py-1 rounded-md"
-                            href="{{ route('peminjaman.ubah', ['id' => $peminjaman->id_pengajuan]) }}"><p>Ubah</p></a>
-                        @endif
                         <a class="text-center justify-center bg-transparent text-green-400 px-8 py-1 rounded-md border-4 border-green-400"
-                        href="{{ route('peminjamanpetani.detail', ['id' => $peminjaman->id_pengajuan]) }}">Lihat</a>
+                        href="{{ route('peminjamanpetani.detail', ['id' => $tagihan->id_pengajuan]) }}">Lihat</a>
                     </div>
                 </div>
             </div>
