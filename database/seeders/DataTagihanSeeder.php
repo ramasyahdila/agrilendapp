@@ -21,5 +21,10 @@ class DataTagihanSeeder extends Seeder
             'id_pengajuan' => 1,
             'id_status_tagihan' => 1,
         ]);
+        DataTagihan::insert([
+            'id_tagihan' => 2,
+            'id_pengajuan' => 1,
+            'id_status_tagihan' => 1,
+        ]);
     }
 }

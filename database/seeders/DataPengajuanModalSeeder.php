@@ -20,12 +20,32 @@ class DataPengajuanModalSeeder extends Seeder
         DataPengajuanModal::insert([
             'id_pengajuan' => 1,
             'id_petani' => 1,
+            'id_status_pengajuan' => 2,
+            'jml_pinjam' => 500000,
+            'bunga' => 59000,
+            'jml_diterima' => 441000,
+            'tgl_pinjam' => '2024-05-24',
+            'tgl_kembali' => '2024-05-24',
+        ]);
+        DataPengajuanModal::insert([
+            'id_pengajuan' => 2,
+            'id_petani' => 1,
+            'id_status_pengajuan' => 2,
+            'jml_pinjam' => 500000,
+            'bunga' => 59000,
+            'jml_diterima' => 441000,
+            'tgl_pinjam' => '2024-05-24',
+            'tgl_kembali' => '2024-05-24',
+        ]);
+        DataPengajuanModal::insert([
+            'id_pengajuan' => 3,
+            'id_petani' => 1,
             'id_status_pengajuan' => 1,
             'jml_pinjam' => 500000,
             'bunga' => 59000,
             'jml_diterima' => 441000,
             'tgl_pinjam' => '2024-05-24',
-            'tgl_kembali' => '2024-06-07',
+            'tgl_kembali' => '2024-05-25',
         ]);
     }
 }

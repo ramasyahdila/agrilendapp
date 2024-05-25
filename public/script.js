@@ -22,7 +22,9 @@ function tagihanSubmit(bayar) {
         form.setAttribute('action','/tagihan/bayar');
         form.submit();
     } else {
+        form.setAttribute('method','GET');
         form.setAttribute('action','/tagihan/tidak-bayar');
+        console.log(form)
         form.submit();
     }
 }

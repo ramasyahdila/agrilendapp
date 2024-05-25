@@ -79,7 +79,7 @@
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
         <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto">
-            <h1 class="text-3xl font-bold text-green-400 mb-4">Detail Pengajuan Modal</h1>
+            <h1 class="text-3xl font-bold text-green-400 mb-4">Pengembalian Petani</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
         <div class="w-auto ml-64 min-h-screen pt-3">
@@ -87,7 +87,7 @@
                 <form id="formTagihan" action="" method="POST" style="z-index: -1;">
                     @csrf
                     <div class="bg-green-50 rounded-xl shadow-lg">
-                        <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Data Pengajuan Modal {{ $tagihan->id_petani }} </h1>
+                        <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Silahkan Pilih Metode Pembayaran Anda</h1>
                         <hr class="border-b-2 border-green-500 my-3">
                         <div class="px-10 py-5">
                             <!-- Input fields -->
@@ -155,7 +155,7 @@
                                 </a>
                             </div>
                         @else
-                            @if ($tagihan->tgl_kembali >= now()->toDateTimeString())
+                            @if (now()->toDateTimeString() >= $tagihan->tgl_kembali)
                                 <button onclick="tagihanSubmit(false)" class="h-10 bg-white text-red-400 border-2 border-red-400 px-10 shadow-lg font-semibold rounded-md" type="button">
                                     Tidak Bisa Bayar
                                 </button>

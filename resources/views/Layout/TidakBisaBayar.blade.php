@@ -78,57 +78,33 @@
         </div>
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
-        <div class="px-8 flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto mb-2">
+        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto">
             <h1 class="text-3xl font-bold text-green-400 mb-4">Pengembalian Petani</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
-        @foreach ($tagihan as $tagihan)
-        <div class="px-8 py-0 mt-4 mr-4 ml-64 flex flex-col w-auto h-auto">
-            <div class="h-auto w-full bg-green-100 flex items-center justify-between px-16 py-8 rounded-2xl">
-                <div class="mr-4 flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 -960 960 960" width="80">
-                        <path
-                            d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80H240Zm280-560v-160H240v640h480v-440H560q-17 0-28.5-11.5T520-640ZM240-800v200-200 640-640Z" />
-                    </svg>
-                    <div class="flex flex-col ml-8">
-                        <h2 class="text-black font-bold text-2xl mb-2">Tagihan {{ $tagihan->id_petani }}{{ $loop->iteration }}</h2>
-                        <h2 class="text-black font-regular text-lg">Status: {{ $tagihan->status_tagihan }}</h2>
+        <div class="w-auto ml-64 min-h-screen pt-3">
+            <div class="p-8 w-full">
+                <form id="formTidakBisaBayar" action="{{ route('tagihanpetani.tidakbayar') }}" method="POST" style="z-index: -1;">
+                    @csrf
+                    <input type="hidden" name="id_tagihan" value="{{ $id_tagihan }}" id="">
+                    <input type="hidden" name="id_metode_bayar" value="{{ $id_metode_bayar }}" id="">
+                    <div class="text-center text-lg font-semibold" style="box-shadow: 0 0 0.3rem 0.2rem rgba(0,0,0,0.1);">
+                        <div class="p-2">
+                            <p>Konfirmasi Anda Tidak Bisa Bayar</p>
+                        </div>
+                        <hr class="border-b-2 border-green-400 w-auto">
+                        <div class="flex flex-col justify-center items-center p-7">
+                            <p class="mb-7">Anda harus membayar bunga yang telah disetujui sebesar Rp.10.000</p>
+                            <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="submit">
+                                Konfirmasi
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="flex flex-col text-right ">
-                    <h2 class="text-black font-bold text-2xl mb-8">{{ $tagihan->tgl_kembali }}</h2>
-                    <div class="flex gap-4 justify-end">
-                        <a class="text-center justify-center bg-transparent text-green-400 px-8 py-1 rounded-md border-4 border-green-400"
-                        href="{{ route('tagihanpetani.detail', ['id' => $tagihan->id_tagihan]) }}">Lihat</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
-        @endforeach
-            <div class="flex justify-end mt-4 mr-16">
-                    <a href="{{ route('layout.FormTambah') }}">
-                        <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
-                            + Buat
-                        </button>
-                    </a>
-                </div>
-            </div>
     </div>
-        </div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentUrl = window.location.href;
-            const sidebarLinks = document.querySelectorAll('.sidebar-link');
 
-            sidebarLinks.forEach(link => {
-                if (link.href === currentUrl) {
-                    link.classList.add('bg-green-600', 'text-white');
-                }
-            });
-        });
-    </script>
-
-    <script src="{{ asset('script.js') }}"></script>
+<script src="{{ asset('script.js') }}"></script>
 </body>
 </html>

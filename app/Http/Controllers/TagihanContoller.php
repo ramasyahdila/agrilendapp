@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\DataMetodeBayar;
 use App\Models\DataPembayaran;
+use App\Models\DataPengajuanModal;
 use App\Models\DataTagihan;
+use App\Models\DataTidakBisaBayar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class TagihanContoller extends Controller
 {
@@ -61,8 +64,32 @@ class TagihanContoller extends Controller
         }
         return redirect()->route('layout.Tagihan')->withErrors(['error' => 'Tagihan gagal dibayar.']);
     }
-    public function tidakBayar()
+    public function showTidakBayarTagihan(Request $request)
     {
-        
+        $validated = $request->validate([
+            'id_tagihan' => 'required',
+            'id_metode_bayar' => 'required|numeric',
+        ]);
+        return view('Layout.TidakBisaBayar',[
+            'id_tagihan' => $validated['id_tagihan'],
+            'id_metode_bayar' => $validated['id_metode_bayar'],
+        ]);
+    }
+    public function tidakBayarTagihan(Request $request)
+    {
+        $validated = $request->validate([
+            'id_tagihan' => 'required',
+            'id_metode_bayar' => 'required|numeric',
+        ]);
+        $data_pengajuan_modal = DataPengajuanModal::select('data_pengajuan_modal.bunga')
+        ->join('data_tagihan','data_pengajuan_modal.id_pengajuan','data_tagihan.id_pengajuan')
+        ->where('id_tagihan',$validated['id_tagihan'])->first();
+        $tidak_bisa_bayar = new DataTidakBisaBayar();
+        $tidak_bisa_bayar->bunga = $data_pengajuan_modal->bunga;
+        $tidak_bisa_bayar->id_tagihan = $validated['id_tagihan'];
+        $tidak_bisa_bayar->id_metode_bayar = $validated['id_metode_bayar'];
+        $tidak_bisa_bayar->save();
+
+        return redirect()->route('layout.Tagihan')->with('success', 'Bunga berhasil dibayar.');
     }
 }

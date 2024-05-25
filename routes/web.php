@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth:petani']], function () {
     Route::post('/peminjaman/{id}', [PeminjamanController::class, 'update'])->name('update.peminjaman');
     Route::get('/tagihan/{id}/detail', [TagihanContoller::class, 'showDetailTagihan'])->name('tagihanpetani.detail');
     Route::post('/tagihan/bayar', [TagihanContoller::class, 'bayarTagihan'])->name('tagihanpetani.bayar');
+    Route::get('/tagihan/tidak-bayar', [TagihanContoller::class, 'showTidakBayarTagihan'])->name('tagihanpetani.settidakbayar');
     Route::post('/tagihan/tidak-bayar', [TagihanContoller::class, 'tidakBayarTagihan'])->name('tagihanpetani.tidakbayar');
 });
 
