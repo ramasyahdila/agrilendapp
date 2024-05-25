@@ -84,60 +84,77 @@
         </div>
         <div class="w-auto ml-64 min-h-screen pt-3">
             <div class="p-8 w-full">
-                <form action="" method="POST" style="z-index: -1;">
+                <form id="formTagihan" action="" method="POST" style="z-index: -1;">
+                    @csrf
                     <div class="bg-green-50 rounded-xl shadow-lg">
-                        <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Data Pengajuan Modal {{ $detailpeminjaman->id_petani }} </h1>
+                        <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Data Pengajuan Modal {{ $tagihan->id_petani }} </h1>
                         <hr class="border-b-2 border-green-500 my-3">
                         <div class="px-10 py-5">
                             <!-- Input fields -->
+                            <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}" id="">
                             <div class="flex items-center mb-5">
-                                <label for="jml_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Peminjaman</label>
+                                <label for="nama_petani" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Nama Petani</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->jml_pinjam }}" id="jml_pinjam" name="jml_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                <input readonly value="{{ $tagihan->nama_petani }}" id="nama_petani" name="nama_petani" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                                 </input>
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="jumlah_diterima" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Diterima</label>
+                                <label for="alamat_petani" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Alamat Petani</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->jml_diterima }}" id="jml_diterima" name="jml_diterima" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                <input readonly value="{{ $tagihan->alamat_petani }}" id="alamat_petani" name="alamat_petani" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                                 </input>
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="bunga" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Bunga</label>
+                                <label for="nama_poktan" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Nama Poktan</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->bunga }}" type="number" id="bunga" name="bunga" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input readonly value="{{ $tagihan->nama_poktan }}" id="nama_poktan" name="nama_poktan" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                </input>
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="tgl_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Pinjam</label>
+                                <label for="jml_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Kembali</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->tgl_pinjam }}" type="text" id="tgl_pinjam" name="tgl_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input readonly value="{{ $tagihan->jml_pinjam }}" id="jml_pinjam" name="jml_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                </input>
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali</label>
+                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Status Tagihan</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->tgl_kembali }}" type="text" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input readonly value="{{ $tagihan->tgl_kembali }}" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                </input>
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Ststus Pengajuan</label>
+                                <label for="id_metode_bayar" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Metode Bayar</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->status->status_pengajuan }}" type="text" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <select id="id_metode_bayar" name="id_metode_bayar" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                    <option selected="">Pilih metode</option>
+                                    @foreach ($metode_bayar as $metode)
+                                    <option value="{{ $metode->id_metode_bayar }}">{{ $metode->metode_bayar }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="flex items-center mb-5">
+                                <label for="status_tagihan" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tenggat Kembali</label>
+                                <p class="mr-4">:</p>
+                                <input readonly value="{{ $tagihan->status_tagihan }}" id="status_tagihan" name="status_tagihan" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                </input>
                             </div>
                         </div>
                     </div>
-                </form>
-                <div class="flex justify-end mt-4 mr-2">
-                    <a href="{{ route('layout.Peminjaman') }}">
-                        <button class="h-10 bg-red-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
-                            Kembali
+                    <div class="flex justify-end mt-4 gap-4">
+                        <button onclick="tagihanSubmit(false)" class="h-10 bg-white text-red-400 border-2 border-red-400 px-10 shadow-lg font-semibold rounded-md" type="button">
+                            Tidak Bisa Bayar
                         </button>
-                    </a>
-                </div>
+                        <button onclick="tagihanSubmit(true)" class="h-10 bg-red-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
+                            Bayar
+                        </button>
+                    </div>
+                </form>
 
 
             </div>
         </div>
     </div>
 
-
+<script src="{{ asset('script.js') }}"></script>
 </body>
 </html>

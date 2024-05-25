@@ -17,3 +17,14 @@ function tglPinjamClick(input) {
     var next =  today.getFullYear() + '-' + month + '-' + today.getDate();
     document.querySelector('#tgl_kembali').value = next
 }
+
+function tagihanSubmit(bayar) {
+    const form = document.getElementById('formTagihan')
+    if(bayar) {
+        form.setAttribute('action','/tagihan/bayar');
+        form.submit();
+    } else {
+        form.setAttribute('action','/tagihan/tidak-bayar');
+        form.submit();
+    }
+}

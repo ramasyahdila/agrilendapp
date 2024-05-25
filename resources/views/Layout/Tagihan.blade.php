@@ -99,7 +99,7 @@
                     <h2 class="text-black font-bold text-2xl mb-8">{{ $tagihan->tgl_pinjam }}</h2>
                     <div class="flex gap-4 justify-end">
                         <a class="text-center justify-center bg-transparent text-green-400 px-8 py-1 rounded-md border-4 border-green-400"
-                        href="{{ route('peminjamanpetani.detail', ['id' => $tagihan->id_pengajuan]) }}">Lihat</a>
+                        href="{{ route('tagihanpetani.detail', ['id' => $tagihan->id_tagihan]) }}">Lihat</a>
                     </div>
                 </div>
             </div>
@@ -129,6 +129,6 @@
         });
     </script>
 
-
+    <script src="{{ asset('script.js') }}"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@ class DataPembayaran extends Model
     public $timestamps = false;
     protected $fillable = [
         'id_pembayaran',
-        'tgl_kembali',
+        'tgl_pembayaran',
         'id_tagihan',
         'id_metode_bayar',
     ];
