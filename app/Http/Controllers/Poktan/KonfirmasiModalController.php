@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Poktan;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataPengajuanModal;
+use App\Models\DataTagihan;
 use Illuminate\Http\Request;
-use App\Models\PengajuanModal;
 
 
 class KonfirmasiModalController extends Controller
 {
     public function index()
     {
-        $pengajuanmodals = PengajuanModal::all();
+        $pengajuanmodals = DataPengajuanModal::all();
 
         return view('poktan.pages.konfirmasi_pengajuan.index', compact('pengajuanmodals'));
     }
@@ -30,7 +31,7 @@ class KonfirmasiModalController extends Controller
     
     public function show($id)
     {
-        $pengajuanmodals = PengajuanModal::where('id', $id)->first();
+        $pengajuanmodals = DataPengajuanModal::where('id', $id)->first();
 
         return view('poktan.pages.konfirmasi_pengajuan.detail', compact('pengajuanmodals'));
     }
@@ -48,13 +49,12 @@ class KonfirmasiModalController extends Controller
     }
 
     public function confirm(Request $request, $id){
-        $pengajuanModal = PengajuanModal::find($id);
+        $pengajuanModal = DataPengajuanModal::find($id);
     
         if($pengajuanModal){
             $pengajuanModal->status = "Sudah Dikonfirmasi";
             
             $pengajuanModal->save();
-    
             return redirect()->route('poktan.konfirmasi')->with('success', 'Data pengajuan modal berhasil dikonfirmasi.');
         } else {
             return redirect()->back()->with('error', 'Pengajuan tidak ditemukan');

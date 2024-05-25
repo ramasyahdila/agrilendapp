@@ -21,10 +21,10 @@ class DataPengajuanModalSeeder extends Seeder
             'id_petani' => 1,
             'id_status_pengajuan' => 1,
             'jml_pinjam' => 500000,
-            'bunga' => 5000,
-            'jml_diterima' => 500000,
+            'bunga' => 59000,
+            'jml_diterima' => 441000,
             'tgl_pinjam' => '2024-05-24',
-            'tenggat_kembali' => '2024-06-07',
+            'tgl_kembali' => '2024-06-07',
         ]);
     }
 }

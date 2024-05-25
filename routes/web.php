@@ -35,6 +35,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth:petani']], function () {
     Route::get('/dashboard/petani', function() {return view('layout.sidebarpetani');})->name('dashboard.petani');
     Route::get('/dashboard/Peminjaman', [PeminjamanController::class, 'showPeminjaman'])->name('layout.Peminjaman');
+    Route::get('/dashboard/Tagihan', [PeminjamanController::class, 'showPeminjaman'])->name('layout.Peminjaman');
     Route::get('/dashboard/FormTambah', [PetaniController::class, 'showFormTambah'])->name('layout.FormTambah');
     Route::get('/dashboard/LihatPeminjaman', [PeminjamanController::class, 'showFormLihatPengajuan'])->name('layout.LihatPeminjaman');
     Route::get('/dashboard/profilpetani', [PetaniController::class, 'showProfilPetani'])->name('layout.profilpetani');

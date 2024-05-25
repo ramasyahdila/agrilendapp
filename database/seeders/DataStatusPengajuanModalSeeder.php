@@ -17,7 +17,7 @@ class DataStatusPengajuanModalSeeder extends Seeder
     {
         DataStatusPengajuanModal::insert([
             'id_status_pengajuan' => 1,
-            'status_pengajuan' => 'Belum dikonfirmasi',
+            'status_pengajuan' => 'Belum Dikonfirmasi',
         ]);
         DataStatusPengajuanModal::insert([
             'id_status_pengajuan' => 2,

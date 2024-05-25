@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataTagihan;
 use Illuminate\Http\Request;
 use App\Models\PeminjamanModal;
 use App\Models\DataAkunPetani;
@@ -21,6 +22,11 @@ class KonfirmasiPeminjamanController extends Controller
         $peminjaman = PeminjamanModal::findOrFail($id);
         $peminjaman->id_status_pengajuan = 2; // Status untuk Konfirmasi
         $peminjaman->save();
+
+        DataTagihan::insert([
+            'id_pengajuan' => $peminjaman->id_pengajuan,
+            'id_status_tagihan' => 1,
+        ]);
 
         return redirect()->route('poktan.peminjaman')->with('success', 'Pengajuan berhasil dikonfirmasi.');
     }

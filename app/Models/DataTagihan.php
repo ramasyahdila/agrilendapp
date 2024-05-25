@@ -14,10 +14,6 @@ class DataTagihan extends Model
     public $timestamps = false;
     protected $fillable = [
         'id_tagihan',
-        'jml_kembali',
-        'jml_pinjam',
-        'tenggat_kembali',
-        'id_petani',
         'id_pengajuan',
         'id_status_tagihan',
     ];

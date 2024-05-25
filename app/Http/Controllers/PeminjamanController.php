@@ -40,7 +40,7 @@ class PeminjamanController extends Controller
         $peminjaman->bunga = str_replace('.','',$request->input('bunga'));
         $peminjaman->jml_diterima = $request->input('jml_diterima'); // Menghitung jumlah diterima
         $peminjaman->tgl_pinjam = $request->input('tgl_pinjam');
-        $peminjaman->tenggat_kembali = $request->input('tenggat_kembali');
+        $peminjaman->tgl_kembali = $request->input('tgl_kembali');
         $peminjaman->id_status_pengajuan = 1; // Set status pengajuan, misalnya 1 untuk sedang diajukan
 
         $peminjaman->save();
