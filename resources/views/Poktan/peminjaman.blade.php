@@ -96,17 +96,14 @@
                                 <h2 class="text-black font-regular text-lg">Status: {{ $peminjaman->status->status_pengajuan }}</h2>
                             </div>
                         </div>
-                        <div class="flex justify-end">
+                        <div class="flex flex-col items-end">
                             <h2 class="text-black font-bold text-2xl mb-8">{{ $peminjaman->tgl_pinjam }}</h2>
-                                <a class="text-center justify-center h-auto w-32 bg-transparent text-green-400 px-8 py-2 rounded-md border-4 border-green-400"
-                                href="{{ route('peminjaman.detail', ['id' => $peminjaman->id_pengajuan]) }}">Lihat</a>
-                            </div>
+                            <a class="text-center justify-center flex items-center h-auto w-32 bg-transparent text-green-400 px-8 py-2 rounded-md border-4 border-green-400"
+                            href="{{ route('peminjaman.detail', ['id' => $peminjaman->id_pengajuan]) }}"><p>Lihat</p></a>
                         </div>
                     </div>
                 </div>
             @endforeach
-        </div>
-    </div>
         </div>
     </div>
     <script>

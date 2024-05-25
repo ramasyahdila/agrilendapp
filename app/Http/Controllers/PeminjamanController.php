@@ -21,13 +21,14 @@ class PeminjamanController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         // Validasi input
         $request->validate([
             'jml_pinjam' => 'required',
             'jml_diterima' => 'required',
             'bunga' => 'required',
             'tgl_pinjam' => 'required|date',
-            'tenggat_kembali' => 'required|date|after:tgl_pinjam',
+            'tgl_kembali' => 'required|date|after:tgl_pinjam',
         ]);
         
         // Mendapatkan data akun petani yang sedang login
@@ -39,11 +40,10 @@ class PeminjamanController extends Controller
         $peminjaman->jml_pinjam = $request->input('jml_pinjam');
         $peminjaman->bunga = str_replace('.','',$request->input('bunga'));
         $peminjaman->jml_diterima = $request->input('jml_diterima'); // Menghitung jumlah diterima
-        $peminjaman->tgl_pinjam = $request->input('tgl_pinjam');
         $peminjaman->tgl_kembali = $request->input('tgl_kembali');
         $peminjaman->id_status_pengajuan = 1; // Set status pengajuan, misalnya 1 untuk sedang diajukan
-
-        $peminjaman->save();
+        
+        $ok = $peminjaman->save();
 
         // Redirect ke halaman peminjaman dengan pesan sukses
         return redirect()->route('layout.Peminjaman')->with('success', 'Peminjaman berhasil diajukan.');
@@ -102,7 +102,6 @@ class PeminjamanController extends Controller
         $ubahpeminjaman->jml_pinjam = $request->input('jml_pinjam');
         $ubahpeminjaman->bunga = $request->input('bunga');
         $ubahpeminjaman->jml_diterima = $request->input('jml_diterima');
-        $ubahpeminjaman->tgl_pinjam = $request->input('tgl_pinjam');
         $ubahpeminjaman->tenggat_kembali = $request->input('tenggat_kembali');
 
         // Simpan perubahan

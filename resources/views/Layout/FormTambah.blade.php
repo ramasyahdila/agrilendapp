@@ -18,9 +18,9 @@
 
 </head>
 <body class="flex h-screen">
-    @isset($errors)
-        <script>console.log({{ $errors->first() }}); console.log('error')</script>
-    @endisset
+    @if($errors->any())
+        <script>alert({{ $errors->first() }});</script>
+    @endif
 <aside class="fixed top-0 left-0 w-64 h-full" aria-label="Sidenav">
         <div class="overflow-y-auto py-5 h-full bg-green-400 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <img src="{{ asset('img/AgrilendLogo.png') }}" alt="Logo" class="w-auto h-auto">
@@ -98,6 +98,7 @@
                                 <label for="jml_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Peminjaman</label>
                                 <p class="mr-4">:</p>
                                 <select id="jml_pinjam" onchange="jumlahPeminjamanClick(this)" name="jml_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                    <option>Pilih peminjaman</option>
                                     <option value="500000" >500.000</option>
                                     <option value="1000000">1.000.000</option>
                                 </select>
@@ -105,10 +106,7 @@
                             <div class="flex items-center mb-5">
                                 <label for="jml_diterima" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Jumlah Diterima</label>
                                 <p class="mr-4">:</p>
-                                <select id="jml_diterima" name="jml_diterima" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
-                                    <option value="441000">441.000</option>
-                                    <option value="906000">906.000</option>
-                                </select>
+                                <input type="text" readonly id="jml_diterima" name="jml_diterima" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
                                 <label for="bunga" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Bunga</label>

@@ -117,7 +117,7 @@
                                 </input>
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Status Tagihan</label>
+                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tenggat Kembali</label>
                                 <p class="mr-4">:</p>
                                 <input readonly value="{{ $tagihan->tgl_kembali }}" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                                 </input>
@@ -125,15 +125,20 @@
                             <div class="flex items-center mb-5">
                                 <label for="id_metode_bayar" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Metode Bayar</label>
                                 <p class="mr-4">:</p>
-                                <select id="id_metode_bayar" name="id_metode_bayar" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
-                                    <option selected="">Pilih metode</option>
-                                    @foreach ($metode_bayar as $metode)
-                                    <option value="{{ $metode->id_metode_bayar }}">{{ $metode->metode_bayar }}</option>
-                                    @endforeach
-                                </select>
+                                @if (isset($tagihan->id_pembayaran))
+                                    <input readonly value="{{ $tagihan->metode_bayar }}" id="id_metode_bayar" name="id_metode_bayar" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                @else
+                                    <select id="id_metode_bayar" name="id_metode_bayar" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                        <option selected="">Pilih metode</option>
+                                        @foreach ($metode_bayar as $metode)
+                                        <option value="{{ $metode->id_metode_bayar }}">{{ $metode->metode_bayar }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                                
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="status_tagihan" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tenggat Kembali</label>
+                                <label for="status_tagihan" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Status Tagihan</label>
                                 <p class="mr-4">:</p>
                                 <input readonly value="{{ $tagihan->status_tagihan }}" id="status_tagihan" name="status_tagihan" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                                 </input>
@@ -141,12 +146,32 @@
                         </div>
                     </div>
                     <div class="flex justify-end mt-4 gap-4">
-                        <button onclick="tagihanSubmit(false)" class="h-10 bg-white text-red-400 border-2 border-red-400 px-10 shadow-lg font-semibold rounded-md" type="button">
-                            Tidak Bisa Bayar
-                        </button>
-                        <button onclick="tagihanSubmit(true)" class="h-10 bg-red-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
-                            Bayar
-                        </button>
+                        @if (isset($tagihan->id_pembayaran))
+                            <div class="flex justify-end mt-4 mr-2">
+                                <a href="{{ route('layout.Tagihan') }}">
+                                    <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
+                                        Kembali
+                                    </button>
+                                </a>
+                            </div>
+                        @else
+                            @if ($tagihan->tgl_kembali >= now()->toDateTimeString())
+                                <button onclick="tagihanSubmit(false)" class="h-10 bg-white text-red-400 border-2 border-red-400 px-10 shadow-lg font-semibold rounded-md" type="button">
+                                    Tidak Bisa Bayar
+                                </button>
+                                <button onclick="tagihanSubmit(true)" class="h-10 bg-red-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
+                                    Bayar
+                                </button>
+                            @else
+                                <div class="flex justify-end mt-4 mr-2">
+                                    <a href="{{ route('layout.Tagihan') }}">
+                                        <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
+                                            Kembali
+                                        </button>
+                                    </a>
+                                </div>
+                            @endif
+                        @endif
                     </div>
                 </form>
 

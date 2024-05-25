@@ -20,13 +20,24 @@ class TagihanContoller extends Controller
     }
     public function showDetailTagihan($id)
     {
-        $tagihan = DataTagihan::select('data_tagihan.*','data_status_tagihan.status_tagihan','data_pengajuan_modal.*','data_akun_petani.nama_petani','data_akun_petani.alamat_petani','data_akun_poktan.nama_poktan')
-        ->join('data_status_tagihan','data_status_tagihan.id_status_tagihan','data_tagihan.id_status_tagihan')
-        ->join('data_pengajuan_modal','data_pengajuan_modal.id_pengajuan','data_tagihan.id_pengajuan')
-        ->join('data_akun_petani','data_pengajuan_modal.id_petani','data_akun_petani.id_petani')
-        ->join('data_akun_poktan','data_akun_poktan.id_poktan','data_akun_petani.id_poktan')
-        ->where('id_tagihan',$id)->first();
-
+        // dd(DataPembayaran::where('id_tagihan',$id)->exists());
+        if(DataPembayaran::where('id_tagihan',$id)->exists()) {
+            $tagihan = DataTagihan::select('data_tagihan.*','data_status_tagihan.status_tagihan','data_pengajuan_modal.*','data_pembayaran.*','data_metode_bayar.metode_bayar','data_akun_petani.*','data_akun_poktan.nama_poktan')
+            ->join('data_status_tagihan','data_status_tagihan.id_status_tagihan','data_tagihan.id_status_tagihan')
+            ->join('data_pengajuan_modal','data_pengajuan_modal.id_pengajuan','data_tagihan.id_pengajuan')
+            ->join('data_akun_petani','data_pengajuan_modal.id_petani','data_akun_petani.id_petani')
+            ->join('data_akun_poktan','data_akun_poktan.id_poktan','data_akun_petani.id_poktan')
+            ->join('data_pembayaran','data_tagihan.id_tagihan','data_pembayaran.id_tagihan')
+            ->join('data_metode_bayar','data_metode_bayar.id_metode_bayar','data_pembayaran.id_metode_bayar')
+            ->where('data_tagihan.id_tagihan',$id)->first();
+        } else {
+            $tagihan = DataTagihan::select('data_tagihan.*','data_status_tagihan.status_tagihan','data_pengajuan_modal.*','data_akun_petani.*','data_akun_poktan.nama_poktan')
+            ->join('data_status_tagihan','data_status_tagihan.id_status_tagihan','data_tagihan.id_status_tagihan')
+            ->join('data_pengajuan_modal','data_pengajuan_modal.id_pengajuan','data_tagihan.id_pengajuan')
+            ->join('data_akun_petani','data_pengajuan_modal.id_petani','data_akun_petani.id_petani')
+            ->join('data_akun_poktan','data_akun_poktan.id_poktan','data_akun_petani.id_poktan')
+            ->where('data_tagihan.id_tagihan',$id)->first();
+        }
         $metode_bayar = DataMetodeBayar::all();
 
         return view('layout.LihatTagihan', ['tagihan' => $tagihan, 'metode_bayar' => $metode_bayar]);
@@ -36,17 +47,22 @@ class TagihanContoller extends Controller
     {
         $validated = $request->validate([
             'id_tagihan' => 'required',
-            'id_metode_bayar' => 'required',
+            'id_metode_bayar' => 'required|numeric',
         ]);
         $tagihan = DataTagihan::where('id_tagihan',$validated['id_tagihan'])->update(['id_status_tagihan' => 5]);
         if($tagihan) {
             $pembayaran = new DataPembayaran();
-            $pembayaran->tgl_pembayaran = now();
+            $pembayaran->tgl_pembayaran = now()->toDateTimeString();
             $pembayaran->id_tagihan = $validated['id_tagihan'];
             $pembayaran->id_metode_bayar = $validated['id_metode_bayar'];
             $pembayaran->save();
 
             return redirect()->route('layout.Tagihan')->with('success', 'Tagihan berhasil dibayar.');
         }
+        return redirect()->route('layout.Tagihan')->withErrors(['error' => 'Tagihan gagal dibayar.']);
+    }
+    public function tidakBayar()
+    {
+        
     }
 }

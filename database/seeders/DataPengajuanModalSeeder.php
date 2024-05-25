@@ -16,6 +16,7 @@ class DataPengajuanModalSeeder extends Seeder
     public function run()
     {
         $this->call([DataStatusPengajuanModalSeeder::class, DataPetaniSeeder::class]);
+        $this->call([DataMetodeBayarSeeder::class, DataStatusLaporanSeeder::class, DataStatusTagihanSeeder::class]);
         DataPengajuanModal::insert([
             'id_pengajuan' => 1,
             'id_petani' => 1,

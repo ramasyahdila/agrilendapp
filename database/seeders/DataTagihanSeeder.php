@@ -15,7 +15,7 @@ class DataTagihanSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([DataMetodeBayarSeeder::class, DataStatusLaporanSeeder::class, DataStatusTagihanSeeder::class]);
+        $this->call(DataPengajuanModalSeeder::class);
         DataTagihan::insert([
             'id_tagihan' => 1,
             'id_pengajuan' => 1,

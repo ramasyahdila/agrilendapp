@@ -115,17 +115,17 @@
                             <div class="flex items-center mb-5">
                                 <label for="tgl_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Pinjam</label>
                                 <p class="mr-4">:</p>
-                                <input type="date" id="tgl_pinjam" value="{{ $ubahpeminjaman->tgl_pinjam }}" name="tgl_pinjam" placeholder="Masukan Tanggal Pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input type="date" id="tgl_pinjam" value="{{ date($ubahpeminjaman->tgl_pinjam) }}" name="tgl_pinjam" placeholder="Masukan Tanggal Pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
                                 <label for="tenggat_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali</label>
                                 <p class="mr-4">:</p>
-                                <input type="date" id="tenggat_kembali" value="{{ $ubahpeminjaman->tenggat_kembali }}" name="tenggat_kembali" placeholder="Masukan Tanggal Kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input type="date" id="tgl_kembali" value="{{ date($ubahpeminjaman->tenggat_kembali) }}" name="tenggat_kembali" placeholder="Masukan Tanggal Kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                         </div>
                     </div>
                     <div class="text-right mt-4 mb-4">
-                        <button type="submit" name="submit" class="py-3 rounded-xl px-8 shadow-lg bg-red-600 text-white font-bold mr-4">Batal</button>
+                        <a href="{{ route('layout.Peminjaman') }}" class="py-3 rounded-xl px-8 shadow-lg bg-red-600 text-white font-bold mr-4">Batal</a>
                         <button type="submit" name="submit" class="py-3 rounded-xl px-8 shadow-lg bg-green-600 text-white font-bold">Simpan</button>
                     </div>
                 </form>
