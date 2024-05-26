@@ -125,4 +125,5 @@ class TagihanContoller extends Controller
 
         return back()->with('success', 'Bunga berhasil dibayar.');
     }
+
 }

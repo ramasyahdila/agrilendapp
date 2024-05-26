@@ -95,14 +95,26 @@
                         <span class="font-bold">Pemberitahuan!</span> {{ Session::get('success') }}
                     </div>
                 @endif
+                <div class="flex font-thin gap-4 items-center mb-5">
+                    <p>Unduh Tagihan:</p>
+                    <form action="{{ route('download.tagihan') }}" method="POST">
+                        <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}" id="">
+                        <button class="inline-flex bg-white p-2 gap-4 our-shadow rounded-md">
+                            <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 0C1.34531 0 0 1.34531 0 3V21C0 22.6547 1.34531 24 3 24H15C16.6547 24 18 22.6547 18 21V7.5H12C11.1703 7.5 10.5 6.82969 10.5 6V0H3ZM12 0V6H18L12 0ZM10.125 10.875V15.6609L11.5781 14.2078C12.0188 13.7672 12.7312 13.7672 13.1672 14.2078C13.6031 14.6484 13.6078 15.3609 13.1672 15.7969L9.79219 19.1719C9.35156 19.6125 8.63906 19.6125 8.20312 19.1719L4.82812 15.7969C4.3875 15.3562 4.3875 14.6438 4.82812 14.2078C5.26875 13.7719 5.98125 13.7672 6.41719 14.2078L7.87031 15.6609V10.875C7.87031 10.2516 8.37187 9.75 8.99531 9.75C9.61875 9.75 10.1203 10.2516 10.1203 10.875H10.125Z" fill="black"/>
+                                </svg>
+                            <span>Unduh</span>                            
+                        </button>
+                    </form>
+                </div>
                 <div id="formTagihan" style="z-index: -1;">
                     @csrf
                     <div class="bg-green-50 rounded-xl our-shadow">
                         @if (in_array($tagihan->id_status_tagihan,[2,3,4]) )
                         <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Detail Tagihan Tidak Bisa Bayar</h1>
-                    @else
-                    <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Detail Tagihan</h1>
-                    @endif
+                        @else
+                        <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Detail Tagihan</h1>
+                        @endif
                         <hr class="border-b-2 border-green-500 my-3">
                         <div class="px-10 py-5">
                             <!-- Input fields -->
@@ -160,7 +172,7 @@
                     <div class="flex justify-end mt-4 gap-4">
                         @if (isset($tagihan->status_tagihan) && $tagihan->id_status_tagihan == 2)
                         <form action="{{ route('tagihanpoktan.konfirmtidak') }}" method="post" class="mt-4">
-                            <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}" id=""> 
+                            <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}" id="idTagihan"> 
                             <input type="hidden" name="id_metode_bayar" value="{{ $tagihan->id_metode_bayar }}" id="">
                             @csrf
                                 <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="submit">
@@ -195,7 +207,7 @@
                             </div>
                         @endif
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

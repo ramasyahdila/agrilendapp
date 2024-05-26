@@ -3,7 +3,6 @@
 use App\Http\Controllers\Poktan\PoktanTagihanController;
 use App\Http\Controllers\TagihanContoller;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\PemerintahController;
 use App\Http\Controllers\PoktanController;
 use App\Http\Controllers\PetaniController;
@@ -102,3 +101,5 @@ Route::get('/registerpemerintah', [PemerintahController::class, 'register'])->na
 Route::post('/registerpemerintah', [PemerintahController::class, 'store'])->name('register.store');
 Route::get('/register', [PetaniController::class, 'register'])->name('register');
 Route::post('/register', [PetaniController::class, 'store'])->name('petani.store');
+
+Route::post('/download-tagihan',[PoktanTagihanController::class,'download'])->name('download.tagihan');
