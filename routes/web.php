@@ -79,6 +79,10 @@ Route::group(['middleware' => ['auth:poktan']], function () {
     Route::post('/laporan/ubah', [LaporanController::class, 'ubahLaporan'])->name('poktan.editlaporan');
     Route::get('/laporan/{id}/lihat', [LaporanController::class, 'showDetailLaporan'])->name('poktan.detaillaporan');
     Route::get('/laporan/{id}/ubah', [LaporanController::class, 'showUbahLaporan'])->name('poktan.ubahlaporan');
+    Route::get('/poktan-pemerintah', [PoktanController::class, 'showPemerintah'])->name('poktan.pemerintah');
+    Route::get('/poktan-pemerintah-detail', [PoktanController::class, 'showDetailPemerintah'])->name('poktan.detailpemerintah');
+    Route::get('/poktan-petani', [PoktanController::class, 'showPetani'])->name('poktan.petani');
+    Route::get('/poktan-petani-detail', [PoktanController::class, 'showDetailPetani'])->name('poktan.detailpetani');
 });
 
 Route::group(['middleware' => ['auth:pemerintah']], function () {

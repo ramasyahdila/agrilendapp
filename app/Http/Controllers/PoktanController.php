@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataAkunPemerintah;
+use App\Models\DataAkunPetani;
 use App\Models\DataDesa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -120,5 +121,47 @@ class PoktanController extends Controller
 
     // Redirect ke halaman profil petani dengan pesan sukses
     return redirect()->route('poktan.profilpoktan')->with('success', 'Profil berhasil diperbarui.');
+    }
+
+    public function showPemerintah()
+    {
+        $pemerintahs = DataAkunPemerintah::select('data_akun_pemerintah.*','data_kota.kota')
+        ->join('data_akun_poktan','data_akun_poktan.id_pemerintah','data_akun_pemerintah.id_pemerintah')
+        ->join('data_kota','data_kota.id_kota','data_akun_pemerintah.id_kota')
+        ->where('id_poktan',auth()->id())
+        ->first();
+        return view('Poktan.pemerintah',['pemerintah' => $pemerintahs]);
+    }
+    public function showDetailPemerintah(Request $request)
+    {
+        $pemerintahs = DataAkunPemerintah::select('data_akun_pemerintah.*','data_kota.kota')
+        ->join('data_akun_poktan','data_akun_poktan.id_pemerintah','data_akun_pemerintah.id_pemerintah')
+        ->join('data_kota','data_kota.id_kota','data_akun_pemerintah.id_kota')
+        ->where('data_akun_pemerintah.id_pemerintah',$request->id)
+        ->first();
+        return view('Poktan.lihatpemerintah',['pemerintah' => $pemerintahs]);
+    }
+    public function showPetani()
+    {
+        $petanis = DataAkunPetani::select('data_akun_petani.*','data_akun_poktan.*','data_akun_pemerintah.*','data_desa.desa','data_kota.kota')
+        ->join('data_akun_poktan','data_akun_poktan.id_poktan','data_akun_petani.id_poktan')
+        ->join('data_akun_pemerintah','data_akun_poktan.id_pemerintah','data_akun_pemerintah.id_pemerintah')
+        ->join('data_desa','data_akun_petani.id_desa','data_desa.id_desa')
+        ->join('data_kota','data_kota.id_kota','data_desa.id_kota')
+        ->where('data_akun_poktan.id_poktan',auth()->id())
+        ->get();
+        return view('Poktan.petani',['petanis' => $petanis]);
+    }
+    public function showDetailPetani(Request $request)
+    {
+        $petani = DataAkunPetani::select('data_akun_petani.*','data_akun_poktan.*','data_akun_pemerintah.*','data_desa.desa','data_kota.kota')
+        ->join('data_akun_poktan','data_akun_poktan.id_poktan','data_akun_petani.id_poktan')
+        ->join('data_akun_pemerintah','data_akun_poktan.id_pemerintah','data_akun_pemerintah.id_pemerintah')
+        ->join('data_desa','data_akun_petani.id_desa','data_desa.id_desa')
+        ->join('data_kota','data_kota.id_kota','data_desa.id_kota')
+        ->where('data_akun_petani.id_petani',$request->id)
+        ->first();
+        // dd($request->id_petani);
+        return view('Poktan.lihatpetani',['petani' => $petani]);
     }
 }

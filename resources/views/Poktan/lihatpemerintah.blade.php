@@ -46,23 +46,22 @@
                     <i class="fa-solid fa-file ml-3 mr-5"></i>
                     <span>Laporan</span>
                 </a>
-            </li>
-            <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.pemerintah') }}">
-                    <i class="fa-solid fa-gear ml-3 mr-4"></i>
-                    <span>Pemerintah</span>
-                </a>
-            </li>
-            <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.petani') }}">
-                    <i class="fa-solid fa-gear ml-3 mr-4"></i>
-                    <span>Petani</span>
-                </a>
-            </li>
+                <li>
+                    <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.pemerintah') }}">
+                        <i class="fa-solid fa-gear ml-3 mr-4"></i>
+                        <span>Pemerintah</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.petani') }}">
+                        <i class="fa-solid fa-gear ml-3 mr-4"></i>
+                        <span>Petani</span>
+                    </a>
+                </li>
             <li>
                 <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                     @csrf
-                    <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white w-full dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
+                    <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
                         <i class="fa-solid fa-arrow-right-from-bracket ml-3 mr-4"></i>
                         <span>Logout</span>
                     </button>
@@ -83,48 +82,50 @@
             </ul>
         </div>
     </aside>
-    <div class="w-full h-auto flex flex-col bg-gray-50">
+    <div class="w-full h-full flex flex-col bg-gray-50">
         <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto mb-2">
-            <h1 class="text-3xl font-bold text-green-400 mb-4">Peminjaman</h1>
+            <h1 class="text-3xl font-bold text-green-400 mb-4">Profil Pemerintah</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
-        <div class="py-0 mt-4  flex flex-col w-auto h-auto">
-            @foreach ($peminjaman as $peminjaman)
-                <div class="px-8 py-0 mt-4 mr-4 ml-64 flex flex-col w-auto h-auto">
-                    <div class="h-auto w-full bg-green-100 flex items-center justify-between px-16 py-8 rounded-2xl">
-                        <div class="mr-4 flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 -960 960 960" width="80">
-                                <path
-                                    d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80H240Zm280-560v-160H240v640h480v-440H560q-17 0-28.5-11.5T520-640ZM240-800v200-200 640-640Z" />
-                            </svg>
-                            <div class="flex flex-col ml-8">
-                                <h2 class="text-black font-bold text-2xl mb-2">Pengajuan Modal {{ $peminjaman->id_petani }}{{ $loop->iteration }}</h2>
-                                <h2 class="text-black font-regular text-lg">Status: {{ $peminjaman->status->status_pengajuan }}</h2>
-                            </div>
-                        </div>
-                        <div class="flex flex-col items-end">
-                            <h2 class="text-black font-bold text-2xl mb-8">{{ $peminjaman->tgl_pinjam }}</h2>
-                            <a class="text-center justify-center flex items-center h-auto w-32 bg-transparent text-green-400 px-8 py-2 rounded-md border-4 border-green-400"
-                            href="{{ route('peminjaman.detail', ['id' => $peminjaman->id_pengajuan]) }}"><p>Lihat</p></a>
-                        </div>
+
+        <div class="flex h-full w-auto mt-8 ml-64">
+            <div class="flex flex-col mx-24 w-full items-right">
+                @if(session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4 alert-dismiss" role="alert">
+                        <strong class="font-bold">Sukses!</strong>
+                        <span class="block sm:inline">{{ session('success') }}</span>
                     </div>
+                @endif
+                <form class="w-full">
+                    <div class="flex mb-8">
+                        <label for="nama_poktan" class="block text-gray-900 font-bold w-1/3">Nama Pemerintah</label>
+                        <input type="text" id="nama_poktan" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Siapa Gituu" value="{{ $pemerintah->nama_pemerintah }}" readonly>
+                    </div>
+                    <div class="flex mb-8">
+                        <label for="alamat_poktan" class="block text-gray-900 font-bold w-1/3">Kota</label>
+                        <input type="text" id="alamat_poktan" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="alamat" value="{{$pemerintah->kota}}" readonly>
+                    </div>
+                    <div class="flex mb-8">
+                        <label for="no_telp" class="block text-gray-900 font-bold w-1/3">No. Telepon</label>
+                        <input type="text" id="no_telp" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Poktan Melati" value="{{$pemerintah->no_tlp}}" readonly>
+                    </div>
+                </form>
+                <div class="flex justify-end mt-4 mr-2">
+                    <a href="{{ route('poktan.pemerintah') }}">
+                        <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
+                            Kembali
+                        </button>
+                    </a>
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentUrl = window.location.href;
-            const sidebarLinks = document.querySelectorAll('.sidebar-link');
-
-            sidebarLinks.forEach(link => {
-                if (link.href === currentUrl) {
-                    link.classList.add('bg-green-600', 'text-white');
-                }
-            });
-        });
+        // Mencari elemen dengan kelas 'alert-dismiss' dan menyembunyikannya setelah 3 detik
+        setTimeout(function() {
+            document.querySelector('.alert-dismiss').style.display = 'none';
+        }, 3000);
     </script>
-
-
 </body>
 </html>

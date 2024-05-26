@@ -84,7 +84,7 @@
     </aside>
     <div class="w-full h-full flex flex-col bg-gray-50">
         <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto mb-2">
-            <h1 class="text-3xl font-bold text-green-400 mb-4">Profil Anda</h1>
+            <h1 class="text-3xl font-bold text-green-400 mb-4">Profil Petani</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
 
@@ -92,12 +92,11 @@
         <div class="flex w-full">
             <div class="flex flex-col mt-8 mx-24 w-full justify-center items-center">
                 {{-- <h1>{{  dd($dataPoktan) }}</h1> --}}
-                <img src="{{ asset('storage/' . $dataPoktan->foto_profil) }}" class="w-96 h-48 bg-transparent rounded-lg border-4 border-dashed border-green-400 object-cover" alt="Foto Profil">
             </div>
         </div>
     </div>
 
-        <div class="flex h-full w-auto mt-16 ml-64">
+        <div class="flex h-full w-auto  ml-64">
             <div class="flex flex-col mx-24 w-full items-right">
                 @if(session('success'))
                     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4 alert-dismiss" role="alert">
@@ -107,24 +106,50 @@
                 @endif
                 <form class="w-full">
                     <div class="flex mb-8">
+                        <label for="nama_petani" class="block text-gray-900 font-bold w-1/3">Nama</label>
+                        <input type="text" id="nama_petani" name="nama_petani" value="{{ $petani->nama_petani }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Nama Lengkap">
+                    </div>
+                    <!-- Tempat Tanggal Lahir -->
+                    <div class="flex mb-8">
+                        <label for="ttl_petani" class="block text-gray-900 font-bold w-1/3">Tempat Tanggal Lahir</label>
+                        <input type="text" id="ttl_petani" name="ttl_petani" value="{{ $petani->ttl_petani }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Tempat, Tanggal Lahir">
+                    </div>
+                    <div class="flex mb-8">
+                        <label for="no_tlp" class="block text-gray-900 font-bold w-1/3">No telepon</label>
+                        <input type="text" id="no_tlp" name="no_tlp" value="{{ $petani->no_tlp }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="No tlp">
+                    </div>
+                    <!-- NIK -->
+                    <div class="flex mb-8">
+                        <label for="nik" class="block text-gray-900 font-bold w-1/3">NIK</label>
+                        <input type="text" id="nik" name="nik" value="{{ $petani->nik }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Nomor Induk Kependudukan">
+                    </div>
+                    <!-- Pekerjaan -->
+                    <div class="flex mb-8">
+                        <label for="pekerjaan" class="block text-gray-900 font-bold w-1/3">Pekerjaan</label>
+                        <input type="text" id="pekerjaan" name="pekerjaan" value="{{ $petani->pekerjaan }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Pekerjaan">
+                    </div>
+                    <!-- Alamat -->
+                    <div class="flex mb-8">
+                        <label for="alamat_petani" class="block text-gray-900 font-bold w-1/3">Alamat</label>
+                        <input type="text" id="alamat_petani" name="alamat_petani" value="{{ $petani->alamat_petani }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Alamat Lengkap">
+                    </div>
+                    <!-- Nama Desa -->
+                    <div class="flex mb-8">
+                        <label for="nama_desa" class="block text-gray-900 font-bold w-1/3">Nama Desa</label>
+                        <input type="text" id="nama_desa" name="nama_desa" value="{{ $petani->desa }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Nama Desa">
+                    </div>
+                    <!-- Nama Poktan -->
+                    <div class="flex mb-8">
                         <label for="nama_poktan" class="block text-gray-900 font-bold w-1/3">Nama Poktan</label>
-                        <input type="text" id="nama_poktan" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Siapa Gituu" value="{{ $dataPoktan->nama_poktan }}" readonly>
-                    </div>
-                    <div class="flex mb-8">
-                        <label for="alamat_poktan" class="block text-gray-900 font-bold w-1/3">Alamat Poktan</label>
-                        <input type="text" id="alamat_poktan" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="alamat" value="{{$dataPoktan->alamat_poktan}}" readonly>
-                    </div>
-                    <div class="flex mb-8">
-                        <label for="no_telp" class="block text-gray-900 font-bold w-1/3">No. Telepon</label>
-                        <input type="text" id="no_telp" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Poktan Melati" value="{{$dataPoktan->no_tlp}}" readonly>
-                    </div>
-                    <div class="flex mb-8">
-                        <label for="Pemerintah" class="block text-gray-900 font-bold w-1/3">Nama Pemerintah</label>
-                        <input type="nama_pemerintah" id="nama_pemerintah" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Jl. Melati No.05 Lumajang" value="{{ $dataPemerintah->nama_pemerintah}}" readonly>
+                        <input type="text" id="nama_poktan" name="nama_poktan" value="{{ $petani->nama_poktan }}" readonly class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Nama Poktan">
                     </div>
                 </form>
-                <div class="text-right object-right mb-8">
-                    <a type="submit" class="py-3 rounded-xl shadow px-8 bg-green-400 text-white font-bold" style="z-index: 5;" href="{{ route('layout.editprofilpoktan') }}">Edit Profile</a>
+                <div class="flex justify-end mt-4 mr-2">
+                    <a href="{{ route('poktan.petani') }}">
+                        <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
+                            Kembali
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

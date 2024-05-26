@@ -48,13 +48,13 @@
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.pemerintah') }}">
                     <i class="fa-solid fa-gear ml-3 mr-4"></i>
                     <span>Pemerintah</span>
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.petani') }}">
                     <i class="fa-solid fa-gear ml-3 mr-4"></i>
                     <span>Petani</span>
                 </a>
@@ -85,7 +85,7 @@
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
         <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto mb-2">
-            <h1 class="text-3xl font-bold text-green-400 mb-4">Beranda Petani</h1>
+            <h1 class="text-3xl font-bold text-green-400 mb-4">Beranda Poktan</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
         <div class="px-8 py-0 mr-4 ml-64 flex w-auto h-auto">
