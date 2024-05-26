@@ -48,9 +48,9 @@
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('pemerintah.poktan') }}">
                     <i class="fa-solid fa-gear ml-3 mr-4"></i>
-                    <span>Pengaturan</span>
+                    <span>Poktan</span>
                 </a>
             </li>
             <li>

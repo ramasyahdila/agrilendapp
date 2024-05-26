@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataAkunPoktan;
 use Illuminate\Http\Request;
 use App\Models\DataKota;
 use App\Models\DataAkunPemerintah;
@@ -49,7 +50,26 @@ class PemerintahController extends Controller
     // Redirect dengan pesan sukses
     return redirect()->route('login')->with('success', 'Registrasi Pemerintah berhasil!');
 }
-
+public function showPoktan()
+{
+    $poktans = DataAkunPoktan::select('data_akun_poktan.*','data_akun_pemerintah.*','data_desa.desa','data_kota.kota')
+    ->join('data_akun_pemerintah','data_akun_poktan.id_pemerintah','data_akun_pemerintah.id_pemerintah')
+    ->join('data_desa','data_akun_poktan.id_desa','data_desa.id_desa')
+    ->join('data_kota','data_kota.id_kota','data_desa.id_kota')
+    ->where('data_akun_pemerintah.id_pemerintah',auth()->id())
+    ->get();
+    return view('Pemerintah.poktan',['poktans' => $poktans]);
+}
+public function showDetailPoktan(Request $request)
+{
+    $poktan = DataAkunPoktan::select('data_akun_poktan.*','data_akun_pemerintah.*','data_desa.desa','data_kota.kota')
+    ->join('data_akun_pemerintah','data_akun_poktan.id_pemerintah','data_akun_pemerintah.id_pemerintah')
+    ->join('data_desa','data_akun_poktan.id_desa','data_desa.id_desa')
+    ->join('data_kota','data_kota.id_kota','data_desa.id_kota')
+    ->where('data_akun_poktan.id_poktan',$request->id)
+    ->first();
+    return view('Pemerintah.lihatpoktan',['poktan' => $poktan]);
+}
 
 
 }
