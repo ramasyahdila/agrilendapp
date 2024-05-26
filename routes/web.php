@@ -87,6 +87,7 @@ Route::group(['middleware' => ['auth:pemerintah']], function () {
     })->name('dashboard.pemerintah');
     Route::get('/laporan/pemerintah', [PemerintahLaporanController::class, 'showLaporan'])->name('pemerintah.laporan');
     Route::get('/laporan/detail-pemerintah', [PemerintahLaporanController::class, 'showDetailLaporan'])->name('pemerintah.detaillaporan');
+    Route::post('/laporan/konfirm-pemerintah', [PemerintahLaporanController::class, 'konfirmLaporan'])->name('pemerintah.konfirm');
 });
 
 

@@ -127,7 +127,6 @@
                     <div class="relative w-2/6 p-4 bg-fill bg-center z-0" style="background-image: url('{{ asset('img/Logo1x1.png') }}')">
                         <img src="{{ asset('img/Rectangle 13.png') }}" class="absolute object-top z-10">
                     </div>
-
                 </div>
             </div>
         </div>
