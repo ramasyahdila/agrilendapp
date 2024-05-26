@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PemerintahLaporanController;
 use App\Http\Controllers\Poktan\LaporanController;
 use App\Http\Controllers\Poktan\PoktanTagihanController;
 use App\Http\Controllers\TagihanContoller;
@@ -84,6 +85,8 @@ Route::group(['middleware' => ['auth:pemerintah']], function () {
     Route::get('/dashboard/pemerintah', function() {
         return view('pemerintah.BerandaPemerintah'); // Ganti dengan view dashboard pemerintah
     })->name('dashboard.pemerintah');
+    Route::get('/laporan/pemerintah', [PemerintahLaporanController::class, 'showLaporan'])->name('pemerintah.laporan');
+    Route::get('/laporan/detail-pemerintah', [PemerintahLaporanController::class, 'showDetailLaporan'])->name('pemerintah.detaillaporan');
 });
 
 

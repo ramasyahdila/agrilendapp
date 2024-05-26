@@ -24,24 +24,29 @@
             <hr class="mt-6 border-2 border-green-50"></hr>
             <ul class="space-y-2 mt-8 sidebar-link">
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('dashboard.petani') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('dashboard.pemerintah') }}">
                 <i class="fa-solid fa-home ml-3 mr-3"></i>
                 <span>Beranda</span>
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Peminjaman') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
                 <i class="fa-solid fa-file ml-3 mr-5"></i>
                 <span>Peminjaman</span>
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Tagihan') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
                 <i class="fa-solid fa-file ml-3 mr-5"></i>
                 <span>Pengembalian</span>
                 </a>
             </li>
- 
+            <li class="mb-4">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('pemerintah.laporan') }}">
+                    <i class="fa-solid fa-file ml-3 mr-5"></i>
+                    <span>Laporan</span>
+                </a>
+            </li>
             <li>
                 <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
                     <i class="fa-solid fa-gear ml-3 mr-4"></i>
@@ -63,8 +68,8 @@
                 <a class="flex items-center p-2 rounded-full mx-4 mt-4 bg-green-50 h-18 text-base font-normal text-white dark:text-white group" href="{{ route('layout.profilpetani') }}">
                     <img src="{{ asset('img/Rama.jpg') }}" class="h-14 w-14 bg-cover bg-center rounded-full mr-4">
                     <div class="flex flex-col justify-top">
-                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_petani ?? 'Nama Pengguna' }}</h1>
-                        <h2 class="text-sm text-gray-600 font-semibold">Petani</h1>
+                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_pemerintah ?? 'Nama Pengguna'}}</h1>
+                        <h2 class="text-sm text-gray-600 font-semibold">Pemerintah</h1>
                     </div>
                 </a>
 
@@ -74,10 +79,22 @@
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
         <div class="px-8 flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto mb-2">
-            <h1 class="text-3xl font-bold text-green-400 mb-4">Peminjaman</h1>
+            <h1 class="text-3xl font-bold text-green-400 mb-4">Laporan Pemerintah</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
-        @foreach ($peminjaman as $peminjaman)
+        <div class="px-8 py-0 mt-4 mr-4 ml-64 flex flex-col w-auto h-auto">
+            @if ($errors->any())
+            <div class="mt-2 mb-5 text-center bg-red-100 border-2 border-red-500 text-sm text-red-500 rounded-lg p-6 dark:bg-red-500/10" role="alert">
+                <span class="font-bold">Peringatan!</span> {{ $errors->first() }}
+            </div>
+            @endif
+            @if (session('success'))
+                <div class="mt-2 mb-5 text-center bg-green-100 border-2 border-green-500 text-sm text-green-500 rounded-lg p-6 dark:bg-red-500/10" role="alert">
+                    <span class="font-bold">Pemberitahuan!</span> {{ Session::get('success') }}
+                </div>
+            @endif
+        </div>
+        @foreach ($laporan as $laporan)
         <div class="px-8 py-0 mt-4 mr-4 ml-64 flex flex-col w-auto h-auto">
             <div class="h-auto w-full bg-green-100 flex items-center justify-between px-16 py-8 rounded-2xl">
                 <div class="mr-4 flex">
@@ -86,39 +103,19 @@
                             d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80H240Zm280-560v-160H240v640h480v-440H560q-17 0-28.5-11.5T520-640ZM240-800v200-200 640-640Z" />
                     </svg>
                     <div class="flex flex-col ml-8">
-                        <h2 class="text-black font-bold text-2xl mb-2">Pengajuan Modal {{ $peminjaman->id_petani }}{{ $loop->iteration }}</h2>
-                        <h2 class="text-black font-regular text-lg">Status: {{ $peminjaman->status->status_pengajuan }}</h2>
+                        <h2 class="text-black font-bold text-2xl mb-2">Laporan {{ $laporan->id_poktan }}{{ $loop->iteration }}</h2>
+                        <h2 class="text-black font-regular text-lg">Status: {{ $laporan->status_laporan }}</h2>
                     </div>
                 </div>
                 <div class="flex flex-col text-right ">
-                    <h2 class="text-black font-bold text-2xl mb-8">{{ $peminjaman->tgl_pinjam }}</h2>
-                    <div class="flex gap-4 justify-between">
-                        @if ($peminjaman->status->status_pengajuan == 'Belum Dikonfirmasi')
-                            <form action="{{ route('peminjaman.destroy', $peminjaman->id_pengajuan) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-center justify-center items-center bg-red-400 text-white px-8 py-2 rounded-md">Delete</button>
-                            </form>
-                            <a class="text-center inline-flex justify-center items-center bg-green-400 text-white px-8 py-1 rounded-md"
-                            href="{{ route('peminjaman.ubah', ['id' => $peminjaman->id_pengajuan]) }}"><p>Ubah</p></a>
-                        @else
-                        <div class=""></div>
-                        @endif
+                    <div class="flex gap-4 justify-end">
                         <a class="text-center justify-center bg-transparent text-green-400 px-8 py-1 rounded-md border-4 border-green-400"
-                        href="{{ route('peminjamanpetani.detail', ['id' => $peminjaman->id_pengajuan]) }}">Lihat</a>
+                        href="{{ route('pemerintah.detaillaporan', ['id' => $laporan->id_laporan]) }}">Lihat</a>
                     </div>
                 </div>
             </div>
         </div>
         @endforeach
-            <div class="flex justify-end mt-4 mr-16">
-                    <a href="{{ route('layout.FormTambah') }}">
-                        <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
-                            + Buat
-                        </button>
-                    </a>
-                </div>
-            </div>
     </div>
         </div>
     </div>
@@ -135,6 +132,6 @@
         });
     </script>
 
-
+    <script src="{{ asset('script.js') }}"></script>
 </body>
 </html>

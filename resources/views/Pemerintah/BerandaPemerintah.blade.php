@@ -24,27 +24,27 @@
             <hr class="mt-6 border-2 border-green-50"></hr>
             <ul class="space-y-2 mt-8 sidebar-link">
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('dashboard.petani') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('dashboard.pemerintah') }}">
                 <i class="fa-solid fa-home ml-3 mr-3"></i>
                 <span>Beranda</span>
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Peminjaman') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
                 <i class="fa-solid fa-file ml-3 mr-5"></i>
                 <span>Peminjaman</span>
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Peminjaman') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
                 <i class="fa-solid fa-file ml-3 mr-5"></i>
                 <span>Pengembalian</span>
                 </a>
             </li>
             <li class="mb-4">
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
-                    <i class="fa-solid fa-bell ml-3 mr-5"></i>
-                    <span>Notifikasi</span>
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('pemerintah.laporan') }}">
+                    <i class="fa-solid fa-file ml-3 mr-5"></i>
+                    <span>Laporan</span>
                 </a>
             </li>
             <li>
@@ -78,7 +78,7 @@
         </div>
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
-        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto mb-2">
+        <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto mb-2">
             <h1 class="text-3xl font-bold text-green-400 mb-4">Beranda Petani</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
