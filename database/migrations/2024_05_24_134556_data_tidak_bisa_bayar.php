@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('data_tidak_bisa_bayar', function (Blueprint $table) {
             $table->unsignedBigInteger('id_tidak_bisa_bayar')->autoIncrement();
-            $table->timestamp('tgl_pembayaran')->nullable(false)->useCurrent();
+            $table->timestamp('tgl_kembali_bunga')->nullable();
             $table->integer('bunga')->nullable(false);
             $table->unsignedBigInteger('id_tagihan')->nullable(false);
             $table->unsignedBigInteger('id_metode_bayar')->nullable(false);

@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth:petani']], function () {
     Route::post('/tagihan/bayar', [TagihanContoller::class, 'bayarTagihan'])->name('tagihanpetani.bayar');
     Route::get('/tagihan/tidak-bayar', [TagihanContoller::class, 'showTidakBayarTagihan'])->name('tagihanpetani.settidakbayar');
     Route::post('/tagihan/tidak-bayar', [TagihanContoller::class, 'tidakBayarTagihan'])->name('tagihanpetani.tidakbayar');
+    Route::post('/tagihan/bayar-tidak-bayar', [TagihanContoller::class, 'bayarTidakBayarTagihan'])->name('tagihanpetani.bayartidakbayar');
 });
 
 Route::group(['middleware' => ['auth:poktan']], function () {

@@ -25,13 +25,13 @@
             <hr class="mt-6 border-2 border-green-50"></hr>
             <ul class="space-y-2 mt-8 sidebar-link">
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('dashboard.petani') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.sidebarpoktan') }}">
                 <i class="fa-solid fa-home ml-3 mr-3"></i>
                 <span>Beranda</span>
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Peminjaman') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.peminjaman') }}">
                 <i class="fa-solid fa-file ml-3 mr-5"></i>
                 <span>Peminjaman</span>
                 </a>
@@ -91,14 +91,18 @@
                     </div>
                 @endif
                 @if (session('success'))
-                    <div class="mt-2 mb-5 text-center bg-red-100 border-2 border-red-500 text-sm text-red-500 rounded-lg p-6 dark:bg-red-500/10" role="alert">
+                    <div class="mt-2 mb-5 text-center bg-green-100 border-2 border-green-500 text-sm text-green-500 rounded-lg p-6 dark:bg-red-500/10" role="alert">
                         <span class="font-bold">Pemberitahuan!</span> {{ Session::get('success') }}
                     </div>
                 @endif
                 <div id="formTagihan" style="z-index: -1;">
                     @csrf
                     <div class="bg-green-50 rounded-xl our-shadow">
-                        <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Silahkan Pilih Metode Pembayaran Anda</h1>
+                        @if (in_array($tagihan->id_status_tagihan,[2,3,4]) )
+                        <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Detail Tagihan Tidak Bisa Bayar</h1>
+                    @else
+                    <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Detail Tagihan</h1>
+                    @endif
                         <hr class="border-b-2 border-green-500 my-3">
                         <div class="px-10 py-5">
                             <!-- Input fields -->
@@ -130,18 +134,25 @@
                             <div class="flex items-center mb-5">
                                 <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tenggat Kembali</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $tagihan->tgl_kembali }}" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                <input readonly value="{{ explode(' ',$tagihan->tgl_kembali)[0] }}" type="date" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                                 </input>
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="id_metode_bayar" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Metode Bayar</label>
+                                <label class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Metode Bayar</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $tagihan->metode_bayar }}" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                <input readonly type="text" value="{{ $tagihan->metode_bayar ?? 'Belum ada' }}" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                             </div>
+                            @if(in_array($tagihan->id_status_tagihan,[2,3,4]))
+                                <div class="flex items-center mb-5">
+                                    <label class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali Bunga</label>
+                                    <p class="mr-4">:</p>
+                                    <input readonly type="date" value="{{ explode(' ',$tagihan->tgl_kembali_bunga)[0] ?? 'Belum ada' }}" id="tgl_kembali_bunga" name="tgl_kembali_bunga" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                </div>
+                            @endisset
                             <div class="flex items-center mb-5">
                                 <label for="status_tagihan" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Status Tagihan</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $tagihan->status_tagihan }}" id="status_tagihan" name="status_tagihan" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                <input readonly type="text" value="{{ $tagihan->status_tagihan }}" id="status_tagihan" name="status_tagihan" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                                 </input>
                             </div>
                         </div>
@@ -149,7 +160,8 @@
                     <div class="flex justify-end mt-4 gap-4">
                         @if (isset($tagihan->status_tagihan) && $tagihan->id_status_tagihan == 2)
                         <form action="{{ route('tagihanpoktan.konfirmtidak') }}" method="post" class="mt-4">
-                            <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}" id="">    
+                            <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}" id=""> 
+                            <input type="hidden" name="id_metode_bayar" value="{{ $tagihan->id_metode_bayar }}" id="">
                             @csrf
                                 <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="submit">
                                     Konfirmasi
@@ -157,7 +169,8 @@
                             </form>
                         @elseif (isset($tagihan->status_tagihan) && $tagihan->id_status_tagihan == 4)
                         <form action="{{ route('tagihanpoktan.konfirmbunga') }}" method="post" class="mt-4">
-                            <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}" id="">    
+                            <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}" id=""> 
+                            <input type="hidden" name="id_metode_bayar" value="{{ $tagihan->id_metode_bayar }}" id="">
                             @csrf    
                                 <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="submit">
                                     Konfirmasi
@@ -165,7 +178,8 @@
                             </form>
                         @elseif (isset($tagihan->status_tagihan) && $tagihan->id_status_tagihan == 5)
                         <form action="{{ route('tagihanpoktan.konfirm') }}" method="post" class="mt-4">
-                            <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}" id="">    
+                            <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}" id=""> 
+                            <input type="hidden" name="id_metode_bayar" value="{{ $tagihan->id_metode_bayar }}" id="">
                             @csrf    
                                 <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="submit">
                                     Konfirmasi

@@ -17,7 +17,7 @@ class DataStatusLaporanSeeder extends Seeder
     {
         DataStatusLaporan::insert([
             'id_status_laporan' => 1,
-            'status_laporan' => 'Belum Diterima',
+            'status_laporan' => 'Belum Terkonfirmasi',
         ]);
         DataStatusLaporan::insert([
             'id_status_laporan' => 2,
