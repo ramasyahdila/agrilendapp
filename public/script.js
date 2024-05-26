@@ -1,4 +1,6 @@
-
+function fileAnnounce(file) {
+    document.querySelector('#boxLaporan > div > p').innerText = file.files[0].name
+}
 function jumlahPeminjamanClick(option) {
     let value = option.value;
     if(value == '1000000') {

@@ -42,9 +42,9 @@
                 </a>
             </li>
             <li class="mb-4">
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
-                    <i class="fa-solid fa-bell ml-3 mr-5"></i>
-                    <span>Notifikasi</span>
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.laporan') }}">
+                    <i class="fa-solid fa-file ml-3 mr-5"></i>
+                    <span>Laporan</span>
                 </a>
             </li>
             <li>
@@ -79,7 +79,7 @@
     </aside>
     <div class="w-full h-auto flex flex-col bg-gray-50">
         <div class="px-8 flex-col py-4 mt-4 mr-4 ml-64 flex w-auto h-auto mb-2">
-            <h1 class="text-3xl font-bold text-green-400 mb-4">Pengembalian Petani</h1>
+            <h1 class="text-3xl font-bold text-green-400 mb-4">Pengembalian Poktan</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
         @foreach ($tagihan as $tagihan)

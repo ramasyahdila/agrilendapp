@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Poktan\LaporanController;
 use App\Http\Controllers\Poktan\PoktanTagihanController;
 use App\Http\Controllers\TagihanContoller;
 use Illuminate\Support\Facades\Route;
@@ -71,6 +72,12 @@ Route::group(['middleware' => ['auth:poktan']], function () {
     Route::post('/tagihan/konfirm', [PoktanTagihanController::class, 'konfirmTagihan'])->name('tagihanpoktan.konfirm');
     Route::post('/tagihan/konfirm-bunga', [PoktanTagihanController::class, 'konfirmBungaTagihan'])->name('tagihanpoktan.konfirmbunga');
     Route::post('/tagihan/konfirm-tidak', [PoktanTagihanController::class, 'konfirmTidakTagihan'])->name('tagihanpoktan.konfirmtidak');
+    Route::get('/laporan/poktan', [LaporanController::class, 'showLaporan'])->name('poktan.laporan');
+    Route::get('/laporan/buat-laporan', [LaporanController::class, 'showBuatLaporan'])->name('poktan.buatlapor');
+    Route::post('/laporan/buat-laporan', [LaporanController::class, 'buatLaporan'])->name('poktan.upload');
+    Route::post('/laporan/ubah', [LaporanController::class, 'ubahLaporan'])->name('poktan.editlaporan');
+    Route::get('/laporan/{id}/lihat', [LaporanController::class, 'showDetailLaporan'])->name('poktan.detaillaporan');
+    Route::get('/laporan/{id}/ubah', [LaporanController::class, 'showUbahLaporan'])->name('poktan.ubahlaporan');
 });
 
 Route::group(['middleware' => ['auth:pemerintah']], function () {
@@ -104,3 +111,6 @@ Route::get('/register', [PetaniController::class, 'register'])->name('register')
 Route::post('/register', [PetaniController::class, 'store'])->name('petani.store');
 
 Route::post('/download-tagihan',[PoktanTagihanController::class,'download'])->name('download.tagihan');
+Route::get('/download-laporan/{file_name}', function(string $file_name){
+    return Storage::disk('public')->download('/laporans/' . $file_name);
+})->name('download.laporan');
