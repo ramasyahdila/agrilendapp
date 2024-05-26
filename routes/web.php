@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth:petani']], function () {
     Route::post('/dashboard/editprofilpetani', [PetaniController::class, 'updatePetani'])->name('update.profilpetani');
     Route::get('/dashboard/peminjaman', [PoktanController::class, 'peminjaman'])->name('poktan.peminjaman');
     Route::post('/store-peminjaman', [PeminjamanController::class, 'store'])->name('store.peminjaman');
+    Route::post('/peminjaman/konfirm-terima', [PeminjamanController::class, 'konfirmDiterima'])->name('update.konfirmterima');
     Route::delete('/peminjaman/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
     Route::get('/peminjaman/{id}/detail', [PeminjamanController::class, 'showDetailPetani'])->name('peminjamanpetani.detail');
     Route::get('/peminjaman/{id}/ubah', [PeminjamanController::class, 'showUbah'])->name('peminjaman.ubah');

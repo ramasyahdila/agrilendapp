@@ -57,10 +57,11 @@ class TagihanContoller extends Controller
     {
         $validated = $request->validate([
             'id_tagihan' => 'required',
-            'metode_bayar' => 'required',
+            'metode_bayar' => 'required|numeric',
         ],[
             'id_tagihan.required' => 'Harap pilih metode pembayaran lalu klik bayar',
             'metode_bayar.required' => 'Harap pilih metode pembayaran lalu klik bayar',
+            'metode_bayar.numeric' => 'Harap pilih metode pembayaran lalu klik bayar',
         ]);
         $tagihan = DataTagihan::where('id_tagihan',$validated['id_tagihan'])->update(['id_status_tagihan' => 5]);
         if($tagihan) {
@@ -98,6 +99,9 @@ class TagihanContoller extends Controller
             'id_tagihan' => 'required',
             'id_metode_bayar' => 'required|numeric',
             'bunga' => 'required|numeric',
+        ],[
+            'metode_bayar.required' => 'Harap pilih metode pembayaran lalu klik bayar',
+            'metode_bayar.numeric' => 'Harap pilih metode pembayaran lalu klik bayar',
         ]);
         $tidak_bisa_bayar = new DataTidakBisaBayar();
         $tidak_bisa_bayar->bunga = $validated['bunga'];

@@ -69,8 +69,8 @@
                 <a class="flex items-center p-2 rounded-full mx-4 mt-4 bg-green-50 h-18 text-base font-normal text-white dark:text-white group" href="{{ route('layout.profilpetani') }}">
                     <img src="{{ asset('img/Rama.jpg') }}" class="h-14 w-14 bg-cover bg-center rounded-full mr-4">
                     <div class="flex flex-col justify-top">
-                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_petani ?? 'Nama Pengguna' }}</h1>
-                        <h2 class="text-sm text-gray-600 font-semibold">Petani</h1>
+                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_poktan ?? 'Nama Pengguna'}}</h1>
+                        <h2 class="text-sm text-gray-600 font-semibold">Poktan</h1>
                     </div>
                 </a>
 
@@ -95,6 +95,7 @@
                         <span class="font-bold">Pemberitahuan!</span> {{ Session::get('success') }}
                     </div>
                 @endif
+                @if ($tagihan->id_status_tagihan == 6)
                 <div class="flex font-thin gap-4 items-center mb-5">
                     <p>Unduh Tagihan:</p>
                     <form action="{{ route('download.tagihan') }}" method="POST">
@@ -107,6 +108,7 @@
                         </button>
                     </form>
                 </div>
+                @endif
                 <div id="formTagihan" style="z-index: -1;">
                     @csrf
                     <div class="bg-green-50 rounded-xl our-shadow">

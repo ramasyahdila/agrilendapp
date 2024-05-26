@@ -30,7 +30,7 @@
                 <img src="{{ asset('img/Daun.png') }}" alt="Gambar Kanan Bawah" class="w-80 h-80">
             </div>
             <div class="w-2/3 bg-transparent p-8 m-auto rounded-lg z-10">
-                <h2 class="text-4xl font-bold mb-4 text-center text-white mb-8">Silahkan isi form registrasi berikut</h2>
+                <h2 class="text-4xl font-bold text-center text-white mb-8">Silahkan isi form registrasi berikut</h2>
                 <hr class="border-2 border-white mb-8"></hr>
 
                  <!-- Menampilkan pesan sukses -->

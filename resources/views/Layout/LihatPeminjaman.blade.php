@@ -83,7 +83,17 @@
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
         <div class="w-auto ml-64 min-h-screen pt-3">
-            <div class="p-8 w-full">
+                <div class="p-8 w-full">
+                    @if ($errors->any())
+                    <div class="mt-2 mb-5 text-center bg-red-100 border-2 border-red-500 text-sm text-red-500 rounded-lg p-6 dark:bg-red-500/10" role="alert">
+                        <span class="font-bold">Peringatan!</span> {{ $errors->first() }}
+                    </div>
+                @endif
+                @if (session('success'))
+                    <div class="mt-2 mb-5 text-center bg-green-100 border-2 border-green-500 text-sm text-green-500 rounded-lg p-6 dark:bg-red-500/10" role="alert">
+                        <span class="font-bold">Pemberitahuan!</span> {{ Session::get('success') }}
+                    </div>
+                @endif
                 <form action="" method="POST" style="z-index: -1;">
                     <div class="bg-green-50 rounded-xl shadow-lg">
                         <h1 class="text-2xl pt-4 font-semibold justify-center flex mb-4">Data Pengajuan Modal {{ $detailpeminjaman->id_petani }} </h1>
@@ -118,20 +128,30 @@
                                 <input readonly value="{{ $detailpeminjaman->tgl_kembali }}" type="text" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
-                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Ststus Pengajuan</label>
+                                <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Status Pengajuan</label>
                                 <p class="mr-4">:</p>
                                 <input readonly value="{{ $detailpeminjaman->status->status_pengajuan }}" type="text" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                         </div>
                     </div>
                 </form>
-                <div class="flex justify-end mt-4 mr-2">
-                    <a href="{{ route('layout.Peminjaman') }}">
-                        <button class="h-10 bg-red-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
-                            Kembali
+                @if ($detailpeminjaman->status->id_status_pengajuan == 2)
+                    <form action="{{ route('update.konfirmterima') }}" method="POST" class="flex justify-end mt-4 mr-2">
+                        @csrf
+                        <input type="hidden" name="id_pengajuan" value="{{ $detailpeminjaman->id_pengajuan }}" id="">
+                        <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="submit">
+                            Konfirmasi
                         </button>
-                    </a>
-                </div>
+                    </form>
+                @else
+                    <div class="flex justify-end mt-4 mr-2">
+                        <a href="{{ route('layout.Peminjaman') }}">
+                            <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
+                                Kembali
+                            </button>
+                        </a>
+                    </div>
+                @endif
 
 
             </div>

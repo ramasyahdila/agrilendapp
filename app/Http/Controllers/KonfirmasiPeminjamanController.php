@@ -23,11 +23,6 @@ class KonfirmasiPeminjamanController extends Controller
         $peminjaman->id_status_pengajuan = 2; // Status untuk Konfirmasi
         $peminjaman->save();
 
-        DataTagihan::insert([
-            'id_pengajuan' => $peminjaman->id_pengajuan,
-            'id_status_tagihan' => 1,
-        ]);
-
         return redirect()->route('poktan.peminjaman')->with('success', 'Pengajuan berhasil dikonfirmasi.');
     }
 

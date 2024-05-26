@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataTagihan;
 use Illuminate\Http\Request;
 use App\Models\PeminjamanModal; // Import model PeminjamanModal
 use App\Models\DataAkunPetani;
@@ -111,4 +112,20 @@ class PeminjamanController extends Controller
         return redirect()->route('layout.Peminjaman')->with('success', 'Peminjaman berhasil diperbarui.');
     }
     // Fungsi lainnya jika diperlukan
+
+    public function konfirmDiterima(Request $request)
+    {
+        // dd($request->all());
+        $request->validate(['id_pengajuan' => 'required']);
+        $peminjaman = PeminjamanModal::findOrFail($request->id_pengajuan);
+        $peminjaman->id_status_pengajuan = 3; // Diterima
+        $peminjaman->save();
+
+        DataTagihan::insert([
+            'id_pengajuan' => $peminjaman->id_pengajuan,
+            'id_status_tagihan' => 1,
+        ]);
+
+        return back()->with('success', 'Pengajuan berhasil dikonfirmasi.');
+    }
 }

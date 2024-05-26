@@ -30,9 +30,9 @@
                         <h1 class="mb-2 text-3xl font-bold text-white">AGRILEND</h1>
                         <p class="mb-6 text-white">Agrilend memudahkan akses modal untuk pengembangan usaha pertanian dan mendorong pertumbuhan sektor pertanian secara berkelanjutan</p>
                         <div class="flex justify-start space-x-5">
-                            <a href="{{ route('login') }}" class="btn flex bg-green-600 text-white font-bold items-center justify-center gap-1 rounded-lg px-4 w-32 py-2 font-semibold">LOGIN</a>
+                            <a href="{{ route('login') }}" class="btn flex bg-green-600 text-white items-center justify-center gap-1 rounded-lg px-4 w-32 py-2 font-semibold">LOGIN</a>
 
-                            <a href="{{ route('pilihaktor') }}" class="flex items-center text-green-600 font-bold justify-center gap-2 rounded-lg bg-white px-4 w-32 py-2 font-semibold">
+                            <a href="{{ route('pilihaktor') }}" class="flex items-center text-green-600 justify-center gap-2 rounded-lg bg-white px-4 w-32 py-2 font-semibold">
                                 REGISTER
                             </a>
                         </div>
