@@ -95,6 +95,8 @@ Route::group(['middleware' => ['auth:pemerintah']], function () {
     Route::get('/pemerintah-poktan', [PemerintahController::class, 'showPoktan'])->name('pemerintah.poktan');
     Route::get('/pemerintah-poktan-detail', [PemerintahController::class, 'showDetailPoktan'])->name('pemerintah.detailpoktan');
     Route::get('/pemerintah-profile', [PemerintahController::class, 'showProfile'])->name('pemerintah.profile');
+    Route::get('/pemerintah-ubah-profile', [PemerintahController::class, 'showEditProfile'])->name('pemerintah.ubahprofile');
+    Route::post('/pemerintah-ubah-profile', [PemerintahController::class, 'editProfile'])->name('pemerintah.ubahbeneran');
 });
 
 

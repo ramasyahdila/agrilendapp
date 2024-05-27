@@ -84,7 +84,7 @@
         </div>
 
         <div class="flex h-full w-auto mt-8 ml-64">
-            <div class="flex flex-col mx-24 w-full items-right">
+            <form action="{{ route('pemerintah.ubahprofile') }}" method="post" class="flex flex-col mx-24 w-full items-right">
                 @if ($errors->any())
                 <div class="mt-2 mb-5 text-center bg-red-100 border-2 border-red-500 text-sm text-red-500 rounded-lg p-6 dark:bg-red-500/10" role="alert">
                     <span class="font-bold">Peringatan!</span> {{ $errors->first() }}
@@ -95,24 +95,36 @@
                         <span class="font-bold">Pemberitahuan!</span> {{ Session::get('success') }}
                     </div>
                 @endif
-                <form class="w-full">
+                <div class="w-full">
+                    @csrf
                     <div class="flex mb-8">
-                        <label for="nama_poktan" class="block text-gray-900 font-bold w-1/3">Nama Pemerintah</label>
-                        <input type="text" id="nama_poktan" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Siapa Gituu" value="{{ $pemerintah->nama_pemerintah }}" readonly>
+                        <label for="nama_pemerintah" class="block text-gray-900 font-bold w-1/3">Nama Pemerintah</label>
+                        <input type="text" name="nama_pemerintah" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Siapa Gituu" value="{{ $pemerintah->nama_pemerintah }}">
                     </div>
                     <div class="flex mb-8">
-                        <label for="alamat_poktan" class="block text-gray-900 font-bold w-1/3">Kota</label>
-                        <input type="text" id="alamat_poktan" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="alamat" value="{{$pemerintah->kota}}" readonly>
+                        <label for="kota" class="block text-gray-900 font-bold w-1/3">Kota</label>
+                        <select id="kota" name="kota" class="border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" >
+                            @foreach ($kota as $kot)
+                            <option @if ($kot->kota == $pemerintah->kota)
+                                @selected(true)
+                            @endif value="{{ $kot->kota }}">{{ $kot->kota }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="flex mb-8">
                         <label for="no_telp" class="block text-gray-900 font-bold w-1/3">No. Telepon</label>
-                        <input type="text" id="no_telp" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Poktan Melati" value="{{$pemerintah->no_tlp}}" readonly>
+                        <input type="text" name="no_telp" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Poktan Melati" value="{{$pemerintah->no_tlp}}">
                     </div>
-                </form>
-                <div class="text-right object-right mb-8">
-                    <a type="submit" class="py-3 rounded-xl shadow px-8 bg-green-400 text-white font-bold" style="z-index: 5;" href="{{ route('pemerintah.ubahprofile') }}">Edit Profile</a>
                 </div>
-            </div>
+                <div class="flex text-right justify-center space-x-8">
+                    <div class="text-right object-right mb-7 mt-3">
+                        <a href="{{ route('pemerintah.profile') }}" class="py-3 rounded-xl shadow px-8 bg-red-400 text-white font-bold" style="z-index: 5;">Batal</a>
+                    </div>
+                    <div class="text-right object-right mb-8">
+                        <button type="submit" class="py-3 rounded-xl shadow px-8 bg-green-400 text-white font-bold" style="z-index: 5;">Simpan</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -124,3 +136,4 @@
     </script>
 </body>
 </html>
+

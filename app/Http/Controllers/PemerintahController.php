@@ -79,6 +79,35 @@ public function showProfile()
     ->first();
     return view('Pemerintah.lihatdiriku',['pemerintah' => $pemerintah]);
 }
+public function showEditProfile()
+{
+    $pemerintah = DataAkunPemerintah::select('data_akun_pemerintah.*','data_kota.kota')
+    ->join('data_akun_poktan','data_akun_poktan.id_pemerintah','data_akun_pemerintah.id_pemerintah')
+    ->join('data_kota','data_kota.id_kota','data_akun_pemerintah.id_kota')
+    ->where('data_akun_pemerintah.id_pemerintah',auth()->id())
+    ->first();
+    $kota = DataKota::all();
+    return view('Pemerintah.ubahdirikubg',['pemerintah' => $pemerintah, 'kota' => $kota]);
+}
+public function editProfile(Request $request)
+{
+    // dd($request->all());
+    $validated = $request->validate([
+        'nama_pemerintah' => 'required',
+        'no_telp' => 'required|numeric',
+        'kota' => 'required',
+    ]);
+    $id_kota = DataKota::where('kota',$validated['kota'])->first();
+    if(DataAkunPemerintah::where('id_pemerintah',auth()->id())->update([
+        'nama_pemerintah' => $validated['nama_pemerintah'],
+        'no_tlp' => $validated['no_telp'],
+        'id_kota' => $id_kota->id_kota,
+    ])) {
+        return redirect()->route('pemerintah.profile')->with('success', 'Ubah profil berhasil!');
+    }
+    return back()->withErrors(['failed' => 'Gagal ubah profil!']);
+    
+}
 
 
 }
