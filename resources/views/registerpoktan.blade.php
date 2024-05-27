@@ -26,9 +26,6 @@
         <div class="w-1/3 h-full bg-cover bg-center" style="background-image: url('{{ asset('img/LoginPage.jpg') }}')"></div>
         <div class="w-2/3 flex h-full items-center justify-center bg-green-400">
             <!-- Gambar kanan bawah -->
-            <div class="absolute -bottom-96 right-0 z-0">
-                <img src="{{ asset('img/Daun.png') }}" alt="Gambar Kanan Bawah" class="w-80 h-80">
-            </div>
             <div class="w-2/3 bg-transparent p-8 m-auto rounded-lg z-10">
                 <h2 class="text-4xl font-bold text-center text-white mb-8">Silahkan isi form registrasi berikut</h2>
                 <hr class="border-2 border-white mb-8"></hr>
@@ -68,15 +65,6 @@
 
                 <form action="{{ route('poktan.store') }}" method="post" enctype="multipart/form-data" class="flex flex-col items-center">
                     @csrf
-                    <div class="bg-transparent border-dashed border-4 border-white rounded-md w-80 h-40 mb-8 flex flex-col items-center justify-center upload-link cursor-pointer">
-                        <!-- Preview gambar yang diunggah -->
-                        <img src="#" alt="Preview" class="image-preview  hidden">
-                        <i class="fas fa-image text-4xl mb-2 text-white"></i>
-                        <span class="text-white">Upload Foto Anda</span>
-                    </div>
-
-                    <input type="file" id="foto" name="foto" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden">
-
                     <div class="mb-4 w-full">
                         <label for="username_poktan" class="block text-white font-bold mb-2">Username Poktan</label>
                         <input type="text" id="username_poktan" name="username_poktan" class="shadow-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan username poktan">

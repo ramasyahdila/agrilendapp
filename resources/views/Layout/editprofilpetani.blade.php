@@ -18,56 +18,50 @@
 
 </head>
 <body class="flex h-screen">
-    <aside class="fixed top-0 left-0 w-64 h-full" aria-label="Sidenav">
+<aside class="fixed top-0 left-0 w-64 h-full" aria-label="Sidenav">
         <div class="overflow-y-auto py-5 h-full bg-green-400 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <img src="{{ asset('img/AgrilendLogo.png') }}" alt="Logo" class="w-auto h-auto">
             <hr class="mt-6 border-2 border-green-50"></hr>
             <ul class="space-y-2 mt-8 sidebar-link">
-                <li>
-                    <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('dashboard.petani') }}">
-                    <i class="fa-solid fa-home ml-3 mr-3"></i>
-                    <span>Beranda</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Peminjaman') }}">
-                    <i class="fa-solid fa-file ml-3 mr-5"></i>
-                    <span>Peminjaman</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Tagihan') }}">
-                    <i class="fa-solid fa-file ml-3 mr-5"></i>
-                    <span>Pengembalian</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
-                        <i class="fa-solid fa-gear ml-3 mr-4"></i>
-                        <span>Pengaturan</span>
-                    </a>
-                </li>
-                <li>
-                    <form action="{{ route('logout') }}" method="POST" class="flex items-center">
-                        @csrf
-                        <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
-                            <i class="fa-solid fa-arrow-right-from-bracket ml-3 mr-4"></i>
-                            <span>Logout</span>
-                        </button>
-                    </form>
-                </li>
-                <li class="flex h-44"></li>
-                <hr></hr>
-                <li>
-                    <a class="flex items-center p-2 rounded-full mx-4 mt-4 bg-green-50 h-18 text-base font-normal text-white dark:text-white group" href="{{ route('layout.profilpetani') }}">
-                        <img src="{{ asset('img/Rama.jpg') }}" class="h-14 w-14 bg-cover bg-center rounded-full mr-4">
-                        <div class="flex flex-col justify-top">
-                            <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->username_petani ?? 'Nama Pengguna' }}</h1>
-                            <h2 class="text-sm text-gray-600 font-semibold">Petani</h1>
-                        </div>
-                    </a>
+            <li>
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('dashboard.petani') }}">
+                <i class="fa-solid fa-home ml-3 mr-3"></i>
+                <span>Beranda</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Peminjaman') }}">
+                <i class="fa-solid fa-file ml-3 mr-5"></i>
+                <span>Peminjaman</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Tagihan') }}">
+                <i class="fa-solid fa-file ml-3 mr-5"></i>
+                <span>Pengembalian</span>
+                </a>
+            </li>
+            <li>
+                <form action="{{ route('logout') }}" method="POST" class="flex items-center">
+                    @csrf
+                    <button type="submit" class="flex bg-red-400 items-center p-2 text-base font-normal text-white w-full dark:text-white hover:bg-red-600 dark:hover:bg-red-600 group">
+                        <i class="fa-solid fa-arrow-right-from-bracket ml-3 mr-4"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            </li>
+            <li class="flex h-44"></li>
+            <hr></hr>
+            <li>
+                <a class="flex items-center p-2 rounded-full mx-4 mt-4 bg-green-50 h-18 text-base font-normal text-white dark:text-white group" href="{{ route('layout.profilpetani') }}">
+                    <i class="fa-solid fa-user fa-2x ml-3 mr-4 text-green-800"></i>
+                    <div class="flex flex-col justify-top">
+                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_petani ?? 'Nama Pengguna' }}</h1>
+                        <h2 class="text-sm text-gray-600 font-semibold">Petani</h1>
+                    </div>
+                </a>
 
-                </li>
+            </li>
             </ul>
         </div>
     </aside>
@@ -75,23 +69,6 @@
         <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto mb-2">
             <h1 class="text-3xl font-bold text-green-400 mb-4">Profil Anda</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
-        </div>
-
-
-        <div class="flex flex-col -full">
-            <!-- Bagian untuk menampilkan gambar yang diunggah -->
-            <div class="flex w-full">
-                <div class="flex flex-col mt-8 mx-24 w-full justify-center items-center">
-                    <span class="text-green-500 text-2xl font-semibold">Upload Foto Anda</span>
-
-                    <label for="foto" class="flex flex-col w-96 h-48 bg-transparent rounded-lg border-4 border-dashed border-green-400 items-center justify-center cursor-pointer">
-                        {{-- <input type="file" id="foto" name="foto" class="hidden" accept="image/*"> --}}
-                        <!-- Preview gambar yang diunggah -->
-                        <img id="preview"  src="{{ asset('storage/' . $akunPetani->foto_profil) }}" class="w-full h-full object-cover" src="#" alt="Preview">
-                    </label>
-                </div>
-            </div>
-
         </div>
 
         <div class="flex h-full w-auto mt-16 ml-64">

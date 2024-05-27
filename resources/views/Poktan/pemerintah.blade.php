@@ -48,14 +48,14 @@
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.pemerintah') }}">
-                    <i class="fa-solid fa-gear ml-3 mr-4"></i>
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white bg-green-800 group" href="{{ route('poktan.pemerintah') }}">
+                    <i class="fa-solid fa-user ml-3 mr-4"></i>
                     <span>Pemerintah</span>
                 </a>
             </li>
             <li>
                 <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.petani') }}">
-                    <i class="fa-solid fa-gear ml-3 mr-4"></i>
+                    <i class="fa-solid fa-user ml-3 mr-4"></i>
                     <span>Petani</span>
                 </a>
             </li>
@@ -72,9 +72,9 @@
             <hr></hr>
             <li>
                 <a class="flex items-center p-2 rounded-full mx-4 mt-4 bg-green-50 h-18 text-base font-normal text-white dark:text-white group" href="{{ route('poktan.profilpoktan') }}">
-                    <img src="{{ asset('img/Rama.jpg') }}" class="h-14 w-14 bg-cover bg-center rounded-full mr-4">
+                    <i class="fa-solid fa-user fa-2x ml-3 mr-4 text-green-800"></i>
                     <div class="flex flex-col justify-top">
-                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_poktan ?? 'Nama Pengguna'}}</h1>
+                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_poktan ?? 'Nama Pengguna' }}</h1>
                         <h2 class="text-sm text-gray-600 font-semibold">Poktan</h1>
                     </div>
                 </a>
@@ -88,25 +88,12 @@
             <h1 class="text-3xl font-bold text-green-400 mb-4">Pemerintah</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
-        <div class="px-8 py-0 mt-4 mr-4 ml-64 flex flex-col w-auto h-auto">
-            <div class="h-auto w-full bg-green-100 flex items-center justify-between px-16 py-8 rounded-2xl">
-                <div class="mr-4 flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 -960 960 960" width="80">
-                        <path
-                            d="M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80H240Zm280-560v-160H240v640h480v-440H560q-17 0-28.5-11.5T520-640ZM240-800v200-200 640-640Z" />
-                    </svg>
-                    <div class="flex flex-col ml-8">
-                        <h2 class="text-black font-bold text-2xl mb-2">{{ $pemerintah->nama_pemerintah }}</h2>
-                        <h2 class="text-black font-regular text-lg">{{ $pemerintah->kota }}</h2>
-                    </div>
-                </div>
-                <div class="flex flex-col text-right ">
-                    <div class="flex gap-4 justify-end">
-                        <a class="text-center justify-center bg-transparent text-green-400 px-8 py-1 rounded-md border-4 border-green-400"
-                        href="{{ route('poktan.detailpemerintah', ['id' => $pemerintah->id_pemerintah]) }}">Lihat</a>
-                    </div>
-                </div>
-            </div>
+        <div class="px-8 py-32 mt-4 mr-4 ml-64 flex flex-col w-auto h-screen items-center justify center object-center">
+            <i class="fa-solid fa-address-card fa-8x ml-3 mr-4 text-green-800"></i>
+            <h1 class="text-green-800 font-bold text-4xl mb-8">{{ $pemerintah->nama_pemerintah }}</h1>
+            <a class="w-40 rounded-lg bg-green-400 px-4 py-2 text-center font-bold text-white"
+            href="{{ route('poktan.detailpemerintah', ['id' => $pemerintah->id_pemerintah]) }}">Lihat Detail>>></a>
+
         </div>
     </div>
         </div>

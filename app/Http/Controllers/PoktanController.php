@@ -25,7 +25,6 @@ class PoktanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'username_poktan' => 'required|string|max:255',
             'nama_poktan' => 'required|string|max:255',
             'alamat_poktan' => 'required|string|max:255',
@@ -48,7 +47,6 @@ class PoktanController extends Controller
         $poktan->id_desa = $request->id_desa;
         $poktan->id_pemerintah = $request->id_pemerintah;
         $poktan->password = Hash::make($request->password);
-        $poktan->foto_profil = $path;
         $poktan->save();
 
         return redirect()->route('login')->with('success', 'Registrasi Poktan berhasil!');

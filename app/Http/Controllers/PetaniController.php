@@ -32,15 +32,9 @@ class PetaniController extends Controller
             'id_desa' => 'required|exists:data_desa,id_desa',
             'id_poktan' => 'required|exists:data_akun_poktan,id_poktan',
             'password' => 'required|string|min:6|confirmed',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Proses penyimpanan file gambar
-        if ($request->hasFile('foto')) {
-            $fotoPath = $request->file('foto')->store('fotos', 'public');
-        } else {
-            return redirect()->back()->withErrors(['foto_profil' => 'File foto harus diunggah.']);
-        }
 
         // Simpan data petani ke database
         $petani = new DataAkunPetani();
@@ -54,7 +48,6 @@ class PetaniController extends Controller
         $petani->id_desa = $request->input('id_desa');
         $petani->id_poktan = $request->input('id_poktan');
         $petani->password = Hash::make($request->input('password'));
-        $petani->foto_profil = $fotoPath;
 
         $petani->save();
 

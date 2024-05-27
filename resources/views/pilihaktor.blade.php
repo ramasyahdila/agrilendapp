@@ -26,9 +26,6 @@
         <div class="w-1/3 h-full bg-cover bg-center" style="background-image: url(img/LoginPage.jpg)"></div>
         <div class="w-2/3 flex h-full items-center justify-center bg-green-400">
             <!-- Gambar kanan bawah -->
-            <div class="absolute -bottom-20 right-0 z-0">
-                <img src="img/Daun.png" alt="Gambar Kanan Bawah" class="w-80h-80">
-            </div>
             <div class="w-2/3 bg-transparent p-8 m-auto rounded-lg z-10">
                 <h2 class="text-4xl font-bold mb-4 text-center text-white mb-16">Silahkan Pilih Role Anda</h2>
                 <form action="#" method="post" class="flex justify-between space-x-8 items-center">

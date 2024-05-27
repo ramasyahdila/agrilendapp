@@ -47,7 +47,7 @@
                     <span>Laporan</span>
                 </a>
                 <li>
-                    <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('poktan.pemerintah') }}">
+                    <a class="flex items-center p-2 text-base font-normal text-white dark:text-white bg-green-800 group" href="{{ route('poktan.pemerintah') }}">
                         <i class="fa-solid fa-gear ml-3 mr-4"></i>
                         <span>Pemerintah</span>
                     </a>

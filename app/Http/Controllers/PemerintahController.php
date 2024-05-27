@@ -27,15 +27,9 @@ class PemerintahController extends Controller
         'nama_pemerintah' => 'required|string|max:255',
         'id_kota' => 'required|exists:data_kota,id_kota',
         'no_tlp' => 'required|string|max:15',
-        'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
     // Proses penyimpanan file gambar
-    if ($request->hasFile('foto')) {
-        $fotoPath = $request->file('foto')->store('fotos', 'public');
-    } else {
-        return redirect()->back()->withErrors(['foto' => 'File foto harus diunggah.']);
-    }
 
     // Simpan data ke database
     $pemerintah = new DataAkunPemerintah();
@@ -44,7 +38,6 @@ class PemerintahController extends Controller
     $pemerintah->nama_pemerintah = $request->nama_pemerintah;
     $pemerintah->id_kota = $request->id_kota;
     $pemerintah->no_tlp = $request->no_tlp;
-    $pemerintah->foto_profil = $fotoPath;
     $pemerintah->save();
 
     // Redirect dengan pesan sukses

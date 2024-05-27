@@ -24,21 +24,9 @@
             <hr class="mt-6 border-2 border-green-50"></hr>
             <ul class="space-y-2 mt-8 sidebar-link">
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('dashboard.pemerintah') }}">
+                <a class="flex items-center p-2 text-base font-normal bg-green-800 text-white dark:text-white group" href="{{ route('dashboard.pemerintah') }}">
                 <i class="fa-solid fa-home ml-3 mr-3"></i>
                 <span>Beranda</span>
-                </a>
-            </li>
-            <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
-                <i class="fa-solid fa-file ml-3 mr-5"></i>
-                <span>Peminjaman</span>
-                </a>
-            </li>
-            <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
-                <i class="fa-solid fa-file ml-3 mr-5"></i>
-                <span>Pengembalian</span>
                 </a>
             </li>
             <li class="mb-4">
@@ -49,7 +37,7 @@
             </li>
             <li>
                 <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('pemerintah.poktan') }}">
-                    <i class="fa-solid fa-gear ml-3 mr-4"></i>
+                    <i class="fa-solid fa-user ml-3 mr-4"></i>
                     <span>Poktan</span>
                 </a>
             </li>
@@ -66,7 +54,7 @@
             <hr></hr>
             <li>
                 <a class="flex items-center p-2 rounded-full mx-4 mt-4 bg-green-50 h-18 text-base font-normal text-white dark:text-white group" href="{{ route('pemerintah.profile') }}">
-                    <img src="{{ asset('img/Rama.jpg') }}" class="h-14 w-14 bg-cover bg-center rounded-full mr-4">
+                    <i class="fa-solid fa-user fa-2x ml-3 mr-4 text-green-800"></i>
                     <div class="flex flex-col justify-top">
                         <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_pemerintah ?? 'Nama Pengguna' }}</h1>
                         <h2 class="text-sm text-gray-600 font-semibold">Pemerintah</h1>

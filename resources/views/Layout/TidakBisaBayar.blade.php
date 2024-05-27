@@ -38,16 +38,9 @@
                 </a>
             </li>
             <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="{{ route('layout.Tagihan') }}">
+                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white bg-green-800 group" href="{{ route('layout.Tagihan') }}">
                 <i class="fa-solid fa-file ml-3 mr-5"></i>
                 <span>Pengembalian</span>
-                </a>
-            </li>
-      
-            <li>
-                <a class="flex items-center p-2 text-base font-normal text-white dark:text-white hover:bg-green-600 dark:hover:bg-gray-700 group" href="#">
-                    <i class="fa-solid fa-gear ml-3 mr-4"></i>
-                    <span>Pengaturan</span>
                 </a>
             </li>
             <li>
@@ -63,7 +56,7 @@
             <hr></hr>
             <li>
                 <a class="flex items-center p-2 rounded-full mx-4 mt-4 bg-green-50 h-18 text-base font-normal text-white dark:text-white group" href="{{ route('layout.profilpetani') }}">
-                    <img src="{{ asset('img/Rama.jpg') }}" class="h-14 w-14 bg-cover bg-center rounded-full mr-4">
+                    <i class="fa-solid fa-user fa-2x ml-3 mr-4 text-green-800"></i>
                     <div class="flex flex-col justify-top">
                         <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_petani ?? 'Nama Pengguna' }}</h1>
                         <h2 class="text-sm text-gray-600 font-semibold">Petani</h1>
@@ -73,8 +66,7 @@
             </li>
             </ul>
         </div>
-    </aside>
-    <div class="w-full h-auto flex flex-col bg-gray-50">
+    </aside>    <div class="w-full h-auto flex flex-col bg-gray-50">
         <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto">
             <h1 class="text-3xl font-bold text-green-400 mb-4">Pengembalian Petani</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
