@@ -120,7 +120,7 @@ class TagihanContoller extends Controller
             'id_metode_bayar' => 'required|numeric',
             'bunga' => 'required|numeric',
         ]);
-        $tidak_bisa_bayar = DataTidakBisaBayar::find($validated['id_tagihan']);
+        $tidak_bisa_bayar = DataTidakBisaBayar::where('id_tagihan',$validated['id_tagihan'])->first();
         $tidak_bisa_bayar->bunga = $validated['bunga'];
         $tidak_bisa_bayar->tgl_kembali_bunga = now()->toDateTimeString();
         $tidak_bisa_bayar->save();

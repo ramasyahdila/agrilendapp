@@ -68,7 +68,7 @@
                 <a class="flex items-center p-2 rounded-full mx-4 mt-4 bg-green-50 h-18 text-base font-normal text-white dark:text-white group" href="{{ route('pemerintah.profile') }}">
                     <img src="{{ asset('img/Rama.jpg') }}" class="h-14 w-14 bg-cover bg-center rounded-full mr-4">
                     <div class="flex flex-col justify-top">
-                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_pemerintah ?? 'Nama Pengguna' }}</h1>
+                        <h1 class="text-2x1 text-gray-600 font-bold">{{ Auth::user()->nama_pemerintah ?? 'Nama Pengguna'}}</h1>
                         <h2 class="text-sm text-gray-600 font-semibold">Pemerintah</h1>
                     </div>
                 </a>
@@ -77,73 +77,50 @@
             </ul>
         </div>
     </aside>
-    <div class="w-full h-auto flex flex-col bg-gray-50">
+    <div class="w-full h-full flex flex-col bg-gray-50">
         <div class="px-8 flex flex-col py-4 mt-4 mr-4 ml-64 w-auto h-auto mb-2">
-            <h1 class="text-3xl font-bold text-green-400 mb-4">Beranda Petani</h1>
+            <h1 class="text-3xl font-bold text-green-400 mb-4">Profil Anda</h1>
             <hr class="border-b-4 border-green-400 w-auto mt-2">
         </div>
-        <div class="px-8 py-0 mr-4 ml-64 flex w-auto h-auto">
-            <div class="p-8 w-full">
-                <div class="rounded-md h-48 shadow-2xl p-0 relative">
-                    <img src="{{ asset('img/Container.png') }}" class="object-fill h-full w-full object-center rounded-md" alt="img">
-                    <div class="absolute inset-0 flex items-center justify-left ml-8 mr-32">
-                        <div>
-                            <h2 class="text-2xl font-bold text-white mb-4">Welcome to Our Website</h2>
-                            <h3 class="text-sm font-regular text-white">Pertanian adalah upaya kita yang paling bijaksana, karena pada akhirnya akan memberikan kontribusi terbesar terhadap kekayaan nyata, moral yang baik, dan kebahagiaan. - Thomas Jefferson.
-                            </h3>
-                        </div>
+
+        <div class="flex h-full w-auto mt-8 ml-64">
+            <div class="flex flex-col mx-24 w-full items-right">
+                @if(session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4 alert-dismiss" role="alert">
+                        <strong class="font-bold">Sukses!</strong>
+                        <span class="block sm:inline">{{ session('success') }}</span>
                     </div>
-                </div>
-                <hr class="my-4 border-b border-solid border-green-400">
-                <div class="flex w-full space-x-8">
-                    <div class="w-4/6 flex flex-col space-y-8">
-                        <div class="bg-green-50 rounded-md shadow-md">
-                            <div class="p-8">
-                                <p class="text-center mb-4">
-                                    Agrilend sebagai platform yang memudahkan petani untuk mengakses modal bagi pengembangan usaha pertanian ..
-                                </p>
-                                <div class="flex items-center justify-center space-x-4 text-green-500">
-                                    <p class="text-center font-bold">
-                                        Readmore
-                                    </p>
-                                    <i class="fas fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-green-50 rounded-md shadow-md">
-                            <div class="p-8">
-                                <p class="text-center mb-4">
-                                    Agrilend sebagai platform yang memudahkan petani untuk mengakses modal bagi pengembangan usaha pertanian ..
-                                </p>
-                                <div class="flex items-center justify-center space-x-4 text-green-500">
-                                    <p class="text-center font-bold">
-                                        Readmore
-                                    </p>
-                                    <i class="fas fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
+                @endif
+                <form class="w-full">
+                    <div class="flex mb-8">
+                        <label for="nama_poktan" class="block text-gray-900 font-bold w-1/3">Nama Pemerintah</label>
+                        <input type="text" id="nama_poktan" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Siapa Gituu" value="{{ $pemerintah->nama_pemerintah }}" readonly>
                     </div>
-                    <div class="relative w-2/6 p-4 bg-fill bg-center z-0" style="background-image: url('{{ asset('img/Logo1x1.png') }}')">
-                        <img src="{{ asset('img/Rectangle 13.png') }}" class="absolute object-top z-10">
+                    <div class="flex mb-8">
+                        <label for="alamat_poktan" class="block text-gray-900 font-bold w-1/3">Kota</label>
+                        <input type="text" id="alamat_poktan" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="alamat" value="{{$pemerintah->kota}}" readonly>
                     </div>
+                    <div class="flex mb-8">
+                        <label for="no_telp" class="block text-gray-900 font-bold w-1/3">No. Telepon</label>
+                        <input type="text" id="no_telp" class="appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight shadow-md focus:outline-none focus:shadow-outline" placeholder="Poktan Melati" value="{{$pemerintah->no_tlp}}" readonly>
+                    </div>
+                </form>
+                <div class="flex justify-end mt-4 mr-2">
+                    <a href="{{ route('poktan.pemerintah') }}">
+                        <button class="h-10 bg-green-400 px-10 shadow-lg font-semibold rounded-md text-white" type="button">
+                            Kembali
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentUrl = window.location.href;
-            const sidebarLinks = document.querySelectorAll('.sidebar-link');
-
-            sidebarLinks.forEach(link => {
-                if (link.href === currentUrl) {
-                    link.classList.add('bg-green-600', 'text-white');
-                }
-            });
-        });
+        // Mencari elemen dengan kelas 'alert-dismiss' dan menyembunyikannya setelah 3 detik
+        setTimeout(function() {
+            document.querySelector('.alert-dismiss').style.display = 'none';
+        }, 3000);
     </script>
-
-
 </body>
 </html>

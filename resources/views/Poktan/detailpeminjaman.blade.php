@@ -140,12 +140,12 @@
                             <div class="flex items-center mb-5">
                                 <label for="tgl_pinjam" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Pinjam</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->tgl_pinjam }}" type="text" id="tgl_pinjam" name="tgl_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input readonly value="{{ explode(' ',$detailpeminjaman->tgl_pinjam)[0] }}" type="date" id="tgl_pinjam" name="tgl_pinjam" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
                                 <label for="tenggat_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ $detailpeminjaman->tgl_kembali }}" type="text" id="tenggat_kembali" name="tenggat_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
+                                <input readonly value="{{ explode(' ',$detailpeminjaman->tgl_kembali)[0] }}" type="date" id="tenggat_kembali" name="tenggat_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 text-gray-600 placeholder-gray-400 shadow-md outline-none">
                             </div>
                             <div class="flex items-center mb-5">
                                 <label for="tenggat_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Ststus Pengajuan</label>

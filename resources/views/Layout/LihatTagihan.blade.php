@@ -129,12 +129,12 @@
                             <div class="flex items-center mb-5">
                                 <label for="tgl_kembali" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tenggat Kembali</label>
                                 <p class="mr-4">:</p>
-                                <input readonly value="{{ explode(' ',$tagihan->tgl_kembali)[0] }}" type="date" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                <input readonly value="{{ explode(' ',$tagihan->tgl_kembali)[0] ?? 'Belum ada' }}" type="date" id="tgl_kembali" name="tgl_kembali" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                             </div>
                             <div class="flex items-center mb-5">
                                 <label for="metode_bayar" class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Metode Bayar</label>
                                 <p class="mr-4">:</p>
-                                @if (in_array($tagihan->id_status_tagihan,[2,3,4,6]))
+                                @if (in_array($tagihan->id_status_tagihan,[2,3,4,5,6]))
                                     <input readonly value="{{ $tagihan->metode_bayar }}" id="metode_bayar" name="metode_bayar" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                                 @else
                                     <select id="metode_bayar" name="metode_bayar" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
@@ -150,7 +150,7 @@
                             <div class="flex items-center mb-5">
                                 <label class="inline-block w-1/3 mr-5 text-left font-bold text-gray-600">Tanggal Kembali Bunga</label>
                                 <p class="mr-4">:</p>
-                                <input readonly type="date" value="{{ explode(' ',$tagihan->tgl_kembali_bunga)[0] ?? 'Belum ada' }}" id="tgl_kembali_bunga" name="tgl_kembali_bunga" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
+                                <input readonly type="date" value="{{ explode(' ',$tagihan->tgl_kembali_bunga)[0] }}" id="tgl_kembali_bunga" name="tgl_kembali_bunga" class="flex-1 py-2 px-2 rounded-xl focus:border-green-400 justify-between text-gray-600 placeholder-gray-400 shadow-md outline-none" >
                             </div>
                             @endisset
                             <div class="flex items-center mb-5">

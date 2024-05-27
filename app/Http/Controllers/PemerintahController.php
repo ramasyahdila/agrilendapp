@@ -70,6 +70,15 @@ public function showDetailPoktan(Request $request)
     ->first();
     return view('Pemerintah.lihatpoktan',['poktan' => $poktan]);
 }
+public function showProfile()
+{
+    $pemerintah = DataAkunPemerintah::select('data_akun_pemerintah.*','data_kota.kota')
+    ->join('data_akun_poktan','data_akun_poktan.id_pemerintah','data_akun_pemerintah.id_pemerintah')
+    ->join('data_kota','data_kota.id_kota','data_akun_pemerintah.id_kota')
+    ->where('data_akun_pemerintah.id_pemerintah',auth()->id())
+    ->first();
+    return view('Pemerintah.lihatdiriku',['pemerintah' => $pemerintah]);
+}
 
 
 }
